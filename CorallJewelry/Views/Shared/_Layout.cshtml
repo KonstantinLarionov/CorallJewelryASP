@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/fontawesome/css/font-awesome.css">
+</head>
+<body style="overflow-x: hidden; scroll-behavior: smooth;">
+    <section class="" id="priceOff">
+        <div>
+            <div class="row w-100 ml-0 shadow1dp" style="background-image: url(@Url.Content("~/images/header-back.png")); height: 80px;">
+                <div class="col">
+                    <div class="row align-items-center justify-content-center mt-4 font-weight-bold">
+                        <div class="col text-center ml-4">
+                            <a style="text-decoration: none; color: brown;" href="~/Home/PriceList"><h4>Цены</h4></a>
+                        </div>
+                        <div class="col text-center ml-4">
+                            <a style="text-decoration: none; color: brown;" href="#aboutService"><h4>Услуги</h4></a>
+                        </div>
+                        <div class="col text-center ml-4">
+                            <a style="text-decoration: none; color: brown;" href="~/Home/Catalogs"><h4>Каталоги</h4></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row justify-content-center" style="margin-top: -1px;">
+                        <a href="~/Home/Index"><img src="~/images/vimpel-header.png"></a>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row align-items-center justify-content-center mt-4 font-weight-bold" style="color: brown;">
+                        <div class="col text-center">
+                            <a style="text-decoration: none; color: brown;" href="~/Home/Works"><h4>Наши работы</h4></a>
+                        </div>
+                        <div class="col text-center">
+                            <a style="text-decoration: none; color: brown;" href="~/Home/Contact"><h4>Контакты</h4></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl" style="font-size: 20px; margin-top: 30px; margin-left: 10px;">
+                <div class="row justify-content-center">
+                    <span><i class="fa fa-envelope"></i></span>
+                    <span class="ml-4">korallJewelry@yandex.ru</span>
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <!--                <span><i class="fa fa-clock-o"></i></span>-->
+                    <span>Без выходных с 10:00 до 20:00</span>
+                </div>
+            </div>
+            <div class="col-xl" style="font-size: 20px; margin-top: 30px; margin-left: 10px;">
+                <div class="row justify-content-center">
+                    <span><i class="fa fa-phone"></i></span>
+                    <span class="ml-4">8 (901) 098-43-97</span>
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <a class="btn btn-outline-danger" href="#aboutWork" style="border-radius: 0; text-decoration: none; ">Как сделать заказ?</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @RenderBody()
+    <section class="" id="footer" style="background-image: url('@Url.Content("~/images/header-back.png")');">
+        <div class="row justify-content-center align-items-center mt-5 mb-5" style="padding-top: 30px;">
+            <img src="~/images/header-logo.png" width="100" height="100" />
+            <h4 class="ml-3" style="color: brown;">Corall Jewelry</h4>
+        </div>
+
+        <div class="bord-line"></div>
+        <div class="row justify-content-around">
+            <a style="text-decoration: none; color: brown;"><h4>Цены</h4></a>
+            <a style="text-decoration: none; color: brown;"><h4>Услуги</h4></a>
+            <a style="text-decoration: none; color: brown;"><h4>Каталоги</h4></a>
+            <a style="text-decoration: none; color: brown;"><h4>Наши работы</h4></a>
+            <a style="text-decoration: none; color: brown;"><h4>Контакты</h4></a>
+        </div>
+        <div class="bord-line"></div>
+        <div class="row mb-3">
+            <div class="col-xl-6 pl-5">
+                <div class="row ml-5 pt-5">
+                    <i class="fa fa-building"></i>
+                    <a style="margin-left: 10px;"> Город: Оренбург</a>
+                </div>
+                <div class="row ml-5 mt-2">
+                    <i class="fa fa-street-view"></i>
+                    <a style="margin-left: 10px;"> Улица: Ленинская 61</a>
+                </div>
+                <div class="row ml-5 mt-2">
+                    <i class="fa fa-clock-o"></i>
+                    <a style="margin-left: 10px;"> Без выходных с 10:00 до 20:00</a>
+                </div>
+                <div class="row ml-5 mt-2">
+                    <i class="fa fa-envelope-open"></i>
+                    <a style="margin-left: 10px;">  korallJewelry@yandex.ru</a>
+                </div>
+                <div class="row ml-5 mt-2">
+                    <i class="fa fa-phone"></i>
+                    <a style="margin-left: 10px;"> 8 (901) 098-43-97</a>
+                </div>
+            </div>
+            <div class="col-xl-3 mt-5">
+                <a href ="~/Home/Contact">Задайте нам вопрос</a><br>
+                <a href ="#aboutWork">Как сделать заказ?</a><br>
+            </div>
+            <div class="col-xl-3 mt-5">
+                <div class="row justify-content-around">
+                    <a href="#" style="color: #c33"><i class="fa fa-vk fa-2x"></i></a>
+                    <a href="#" style="color: #c33"><i class="fa fa-odnoklassniki fa-2x"></i></a>
+                    <a href="#" style="color: #c33"><i class="fa fa-instagram fa-2x"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="bord-line"></div>
+        <div class="row justify-content-center align-items-center text-center mt-5 pb-5">
+            Обращаем Ваше внимание на то, что информация на сайте несет исключительно информационный характер и ни при каких условиях не является публичной офертой, определяемой положениями Статьи 437 (2) Гражданского кодекса Российской Федерации
+        </div>
+        <div class="row justify-content-center align-items-center text-center mb-3">
+            Все права защищены &nbsp<i class="fa fa-copyright"></i>&nbsp Создано в &nbsp <a href="https://afcstudio.ru"> AFCStudio</a>
+        </div>
+        <div class="row justify-content-center align-items-center mt-5 ">
+            <img src="~/images/reviews-bg2.png" />
+        </div>
+    </section>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://use.fontawesome.com/ab77088c83.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/main.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
