@@ -22,8 +22,23 @@ namespace CorallJewelry.Controllers
         {
             return View();
         }
-
         public IActionResult Contact()
+        {
+            return View();
+        }
+        public IActionResult Pricelist()
+        {
+            return View();
+        }
+        public IActionResult Product()
+        {
+            return View();
+        }
+        public IActionResult Products()
+        {
+            return View();
+        }
+        public IActionResult Service()
         {
             return View();
         }
