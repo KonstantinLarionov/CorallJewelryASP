@@ -38,6 +38,7 @@ namespace CorallJewelry.Controllers
         {
             return View();
         }
+       
         public IActionResult Service()
         {
             return View();
@@ -47,6 +48,37 @@ namespace CorallJewelry.Controllers
         {
             return View();
         }
+
+        #region Service
+        public IActionResult Create()
+        {
+            return View("Service/Create");
+        }
+        public IActionResult Clearproducts()
+        {
+            return View("Service/Clearproducts");
+        }
+        public IActionResult Createchain()
+        {
+            return View("Service/Createchain");
+        }
+        public IActionResult Createcopy()
+        {
+            return View("Service/Createcopy");
+        }
+        public IActionResult Repair()
+        {
+            return View("Service/Repair");
+        }
+        public IActionResult Repairbeads()
+        {
+            return View("Service/Repairbeads");
+        }
+        public IActionResult Setstone()
+        {
+            return View("Service/Setstone");
+        }
+        #endregion
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
