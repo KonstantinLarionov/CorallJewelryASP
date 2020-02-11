@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\admin\.idea\deployment.xml" />
+    <Content Include="wwwroot\admin\.idea\misc.xml" />
+    <Content Include="wwwroot\admin\.idea\modules.xml" />
+    <Content Include="wwwroot\admin\.idea\workspace.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
@@ -12,6 +19,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\admin\.idea\chameleon-admin-master.iml" />
+    <None Include="wwwroot\admin\src\scss\bootstrap-extended\.sass-cache\b161be96449978188ab92f1e37bbeda94f2952ce\buttons.scssc" />
   </ItemGroup>
 
 </Project>
