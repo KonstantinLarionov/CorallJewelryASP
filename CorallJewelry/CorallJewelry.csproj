@@ -26,4 +26,9 @@
     <None Include="wwwroot\admin\src\scss\bootstrap-extended\.sass-cache\b161be96449978188ab92f1e37bbeda94f2952ce\buttons.scssc" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\Executors\Home\" />
+    <Folder Include="wwwroot\products\" />
+  </ItemGroup>
+
 </Project>

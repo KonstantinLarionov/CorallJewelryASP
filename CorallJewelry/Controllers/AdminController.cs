@@ -6,23 +6,61 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CorallJewelry.Models;
+using CorallJewelry.Entitys;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
+using CorallJewelry.Controllers.Executors.Admin;
 
 namespace CorallJewelry.Controllers
 {
     public class AdminController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        private BackendContext db { get; set; }
         public AdminController(ILogger<HomeController> logger)
         {
+            db = new BackendContext(new DbContextOptions<BackendContext>());
             _logger = logger;
+
+            if (!db.Users.Any(x=>x.Login == "adminCoral" && x.Password == "adminCoralJewelry202056"))
+            {
+                db.Users.Add(new Models.User() { Login = "adminCoral", Password = "adminCoralJewelry202056", Type = TypeUser.Admin, LastSession = DateTime.Now });
+                db.SaveChanges();
+            }
+        }
+        private bool Auth(string login = "", string password = "")
+        {
+            if (login == "" && password == "")
+            {
+                login = HttpContext.Session.GetString("login");
+                password = HttpContext.Session.GetString("password");
+            }
+            var admin = db.Users.Where(u => u.Login == login && u.Password == password && u.Type == TypeUser.Admin ).ToList();
+            if (admin.Count != 0)
+            {
+                HttpContext.Session.SetString("login", login);
+                HttpContext.Session.SetString("password", password);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-
+        #region Get
         public IActionResult Products()
         {
+            if (!Auth())
+            {
+                return View("Login");
+            }
+
             return View();
+
         }
+
         public IActionResult Chats()
         {
             return View();
@@ -45,37 +83,20 @@ namespace CorallJewelry.Controllers
         {
             return View();
         }
+        #endregion
 
-
-
-        #region Service
-        public IActionResult Create()
+        #region Post
+        [HttpPost]
+        public IActionResult Login(string login, string password)
         {
-            return View("Service/Create");
-        }
-        public IActionResult Clearproducts()
-        {
-            return View("Service/Clearproducts");
-        }
-        public IActionResult Createchain()
-        {
-            return View("Service/Createchain");
-        }
-        public IActionResult Createcopy()
-        {
-            return View("Service/Createcopy");
-        }
-        public IActionResult Repair()
-        {
-            return View("Service/Repair");
-        }
-        public IActionResult Repairbeads()
-        {
-            return View("Service/Repairbeads");
-        }
-        public IActionResult Setstone()
-        {
-            return View("Service/Setstone");
+            if (AllExecutors.LoginExecutor.OnAuth(login, password, HttpContext))
+            {
+                return View("Products");
+            }
+            else 
+            {
+                return View();
+            }
         }
         #endregion
 

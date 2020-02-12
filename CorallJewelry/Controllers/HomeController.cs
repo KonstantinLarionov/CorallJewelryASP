@@ -6,18 +6,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CorallJewelry.Models;
+using CorallJewelry.Entitys;
+using Microsoft.EntityFrameworkCore;
 
 namespace CorallJewelry.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private FrontendContext db { get; set; }
 
         public HomeController(ILogger<HomeController> logger)
         {
+            db = new FrontendContext(new DbContextOptions<FrontendContext>());
             _logger = logger;
         }
-
+        public IActionResult Login()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
             return View();

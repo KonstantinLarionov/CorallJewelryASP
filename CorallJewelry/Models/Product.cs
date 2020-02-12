@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 
 namespace CorallJewelry.Models
 {
+    public enum TypeProduct
+    {
+        Кольца, Цепи, Кресты, Запонки, Брелки, Браслеты, Значки, Печатки, Подвески, Серьги
+    }
     public class Product
     {
         public int Id { get; set; }
@@ -14,6 +18,7 @@ namespace CorallJewelry.Models
         public string Weight { get; set; }
         public string Stone { get; set; }
         public string Metall { get; set; }
-        public List<string> Images { get; set; }
+        public string Type { get; set; }
+        public List<Image> Images { get; set; }
     }
 }
