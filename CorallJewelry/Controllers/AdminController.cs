@@ -23,7 +23,7 @@ namespace CorallJewelry.Controllers
             db = new BackendContext(new DbContextOptions<BackendContext>());
             _logger = logger;
 
-            if (!db.Users.Any(x=>x.Login == "adminCoral" && x.Password == "adminCoralJewelry202056"))
+            if (!db.Users.Any(x => x.Login == "adminCoral" && x.Password == "adminCoralJewelry202056"))
             {
                 db.Users.Add(new Models.User() { Login = "adminCoral", Password = "adminCoralJewelry202056", Type = TypeUser.Admin, LastSession = DateTime.Now });
                 db.SaveChanges();
@@ -36,7 +36,7 @@ namespace CorallJewelry.Controllers
                 login = HttpContext.Session.GetString("login");
                 password = HttpContext.Session.GetString("password");
             }
-            var admin = db.Users.Where(u => u.Login == login && u.Password == password && u.Type == TypeUser.Admin ).ToList();
+            var admin = db.Users.Where(u => u.Login == login && u.Password == password && u.Type == TypeUser.Admin).ToList();
             if (admin.Count != 0)
             {
                 HttpContext.Session.SetString("login", login);
@@ -50,34 +50,33 @@ namespace CorallJewelry.Controllers
         }
 
         #region Get
-        public IActionResult Products()
+        public IActionResult Products(string type = "all")
         {
             if (!Auth())
             {
                 return View("Login");
             }
-
-            return View();
-
+            var model = AllExecutors.ProductsExecutor.GetProducts(type);
+            return View(model);
         }
-
         public IActionResult Chats()
         {
             return View();
         }
-
         public IActionResult Contacts()
         {
-            return View();
+            var cont = AllExecutors.ContactExecutor.GetContact();
+            return View(cont);
         }
-
         public IActionResult Prices()
         {
-            return View();
+            var price = AllExecutors.PriceExecutor.GetAllPriceLists();
+            return View(price);
         }
         public IActionResult Requests()
         {
-            return View();
+            var req = AllExecutors.RequestExecutor.GetRequest();
+            return View(req);
         }
         public IActionResult Login()
         {
@@ -85,18 +84,51 @@ namespace CorallJewelry.Controllers
         }
         #endregion
 
-        #region Post
+        #region PostProduct
         [HttpPost]
         public IActionResult Login(string login, string password)
         {
             if (AllExecutors.LoginExecutor.OnAuth(login, password, HttpContext))
             {
-                return View("Products");
+                var model = AllExecutors.ProductsExecutor.GetProducts("all");
+                return View("Products",model);
             }
-            else 
+            else
             {
                 return View();
             }
+        }
+        [HttpPost]
+        public IActionResult AddProduct(List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type)
+        {
+            AllExecutors.ProductsExecutor.AddProducts(images, name, about, price, weight, stone, metall, type);
+            var model = AllExecutors.ProductsExecutor.GetProducts("all");
+            return View("Products", model);
+        }
+        [HttpPost]
+        public IActionResult EditProducts(int id, List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type,string action)
+        {
+            if (action == "edit")
+            {
+
+                AllExecutors.ProductsExecutor.EditProduct(id, images, name, about, price, weight, stone, metall, type);
+            }
+            else if (action == "delete")
+            {
+                AllExecutors.ProductsExecutor.DeleteProduct(id);
+            }
+            var model = AllExecutors.ProductsExecutor.GetProducts("all");
+            return View("Products", model);
+        }
+        #endregion
+
+        #region PostPrice
+        [HttpPost]
+        public IActionResult EditContacts(string EmailInfo, string PhoneInfo, string VKLink, string OKLink, string InstagramLink, string addressT, string addressS)
+        {
+            AllExecutors.ContactExecutor.EditContact(EmailInfo,PhoneInfo,VKLink,OKLink,InstagramLink,addressT,addressS);
+            var model = AllExecutors.ContactExecutor.GetContact();
+            return View("Contacts", model);
         }
         #endregion
 

@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace CorallJewelry.Models
 {
-    public class Request
+    public class Request 
     {
         public int Id { get; set; }
         public string Contact { get; set; }
         public string Message { get; set; }
+        public DateTime Date { get; set; }
     }
 }

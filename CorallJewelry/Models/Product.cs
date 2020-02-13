@@ -9,7 +9,7 @@ namespace CorallJewelry.Models
     {
         Кольца, Цепи, Кресты, Запонки, Брелки, Браслеты, Значки, Печатки, Подвески, Серьги
     }
-    public class Product
+    public class Product 
     {
         public int Id { get; set; }
         public string Name { get; set; }

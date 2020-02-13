@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CorallJewelry.Models
 {
-    public class PriceList
+    public class PriceList 
     {
         public int Id { get; set; }
         public string Category { get; set; }

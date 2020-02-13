@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Executors\Home\" />
     <Folder Include="wwwroot\products\" />
   </ItemGroup>
 

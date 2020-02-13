@@ -50,13 +50,30 @@
         </div><a class="btn btn-danger btn-block btn-glow btn-upgrade-pro mx-1" href="~/Home/Index" target="_blank">Corall Jewelry</a>
         <div class="navigation-background"></div>
     </div>
-    @RenderBody()
+    <div class="app-content content">
+        <div class="content-wrapper">
+            <div class="content-wrapper-before"></div>
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- Chart -->
+                @*<div class="row match-height">
+                        <div class="col-12">
+                            <div class="">
+                                <div id="gradient-line-chart1" class="height-250 GradientlineShadow1"></div>
+                            </div>
+                        </div>
+                    </div>*@
+                @RenderBody()
+            </div>
+        </div>
+    </div>
     <footer class="footer footer-static footer-light navbar-border navbar-shadow">
         <div class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2">
             <span class="float-md-left d-block d-md-inline-block">2020  &copy; Copyright</span>
             <ul class="list-inline float-md-right d-block d-md-inline-blockd-none d-lg-block mb-0">
-            
-                <li class="list-inline-item"><a class="my-1"  target="_blank"> Сделано в </a></li>
+
+                <li class="list-inline-item"><a class="my-1" target="_blank"> Сделано в </a></li>
                 <li class="list-inline-item"><a class="my-1" href="https://afcstudio.ru" target="_blank"> AFCStudio</a></li>
             </ul>
         </div>

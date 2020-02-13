@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace CorallJewelry.Models
 {
+
     public class Contacts
     {
         public int Id { get; set; }
