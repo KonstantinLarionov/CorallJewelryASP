@@ -12,40 +12,40 @@
                             @*  <li><a data-action="collapse"><i class="ft-minus"></i></a></li>*@
                             @*<li><a data-action="reload" href="/Admin/Contacts"><i class="ft-rotate-cw"></i></a></li>*@
                             @*<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                <li><a data-action="close"><i class="ft-x"></i></a></li>*@
+                    <li><a data-action="close"><i class="ft-x"></i></a></li>*@
                         </ul>
                     </div>
                 </div>
                 @for (int i = 0; i < Model.Count; i++)
                 {
-                <div class="card-content collapse show">
-                    <div class="card-body">
-                        <p>@Model[i].Category</p>
-                    </div>
-                    <div class="table-responsive">
-                        <form action="/Admin/EditPrices" method="post">
-                            <table class="table">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">Название</th>
-                                        <th scope="col">Цена</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @for (int i = 0; i < Model[i].Prices.Count; i++)
-                                    {
+                    <div class="card-content collapse show">
+                        <div class="card-body">
+                            <p>@Model[i].Category</p>
+                        </div>
+                        <div class="table-responsive">
+                            <form action="/Admin/EditPrices" method="post">
+                                <table class="table">
+                                    <thead class="thead-dark">
                                         <tr>
-                                            <td><input type="text" name="" class="form-control" value="@Model[i].Prices" /></td>
-                                            <td><input type="text" name="" class="form-control" value="@Model.Email" /></td>
-                                            <td><input type="text" name="" class="form-control" value="@Model.Email" /></td>
+                                            <th scope="col">Название</th>
+                                            <th scope="col">Цена</th>
                                         </tr>
-                                    }
-                                </tbody>
-                            </table>
-                            <button type="submit" class="btn mb-1 btn-primary btn-lg btn-block">Редактировать контакты</button>
-                        </form>
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = 0; i < Model[i].Prices.Count; i++)
+                                        {
+                                            <tr>
+                                                <td><input type="text" name="" class="form-control" value="@Model[i].Prices" /></td>
+                                                <td><input type="text" name="" class="form-control" value="@Model.Email" /></td>
+                                                <td><input type="text" name="" class="form-control" value="@Model.Email" /></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <button type="submit" class="btn mb-1 btn-primary btn-lg btn-block">Редактировать контакты</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
                 }
             </div>
         </div>
