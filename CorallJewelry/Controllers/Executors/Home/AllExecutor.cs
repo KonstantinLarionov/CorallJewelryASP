@@ -1,5 +1,6 @@
 ﻿using CorallJewelry.Entitys;
 using CorallJewelry.Models;
+using CorallJewelry.Models.FrontModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,7 +14,7 @@ namespace CorallJewelry.Controllers.Executors.Home
     public static class AllExecutors
     {
         private static FrontendContext db { get; set; } = new FrontendContext(new DbContextOptions<FrontendContext>());
-        public static class ProductsExecutor
+        public static class IndexExecutor
         {
             public static List<Product> GetProducts(string type)
             {
@@ -25,6 +26,19 @@ namespace CorallJewelry.Controllers.Executors.Home
             {
                 var prod = db.Products.Where(x => x.Id == id).Include(x => x.Images).FirstOrDefault();
                 return prod;
+            }
+
+            private static Contacts GetContact()
+            {
+                var conts = db.Contacts.ToList();
+                return conts.Count != 0 ? conts.Last() : new Contacts();
+            }
+            public static IndexModel GetIndex()
+            {
+                IndexModel index = new IndexModel();
+                index.Contacts = GetContact();
+                index.Products = db.Products.OrderByDescending(x => x.Id).Include(x=>x.Images).Take(6).ToList();
+                return index;
             }
         }
         public static class PriceExecutor 

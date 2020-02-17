@@ -9,17 +9,18 @@ using CorallJewelry.Models;
 using CorallJewelry.Entitys;
 using Microsoft.EntityFrameworkCore;
 using CorallJewelry.Models.FrontModel;
+using CorallJewelry.Controllers.Executors.Home;
 
 namespace CorallJewelry.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private FrontendContext db { get; set; }
+        /*private FrontendContext db { get; set; }*/
 
         public HomeController(ILogger<HomeController> logger)
         {
-            db = new FrontendContext(new DbContextOptions<FrontendContext>());
+            /*db = new FrontendContext(new DbContextOptions<FrontendContext>());*/
             _logger = logger;
         }
         public IActionResult Login()
@@ -28,10 +29,8 @@ namespace CorallJewelry.Controllers
         }
         public IActionResult Index()
         {
-            IndexModel IndexModel = new IndexModel();
-            IndexModel.Contacts = db.Contacts.ToList().Last();
-            IndexModel.Products = db.Products.ToList();
-            return View(IndexModel);
+            var index = AllExecutors.IndexExecutor.GetIndex();
+            return View(index);
         }
         public IActionResult Contact()
         {
