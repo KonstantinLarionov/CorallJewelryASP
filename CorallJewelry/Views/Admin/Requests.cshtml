@@ -1,3 +1,56 @@
-﻿@{
-    Layout = "_LayoutAdmin";
-}
+﻿@{ Layout = "_LayoutAdmin"; }
+@model List<Request>
+<section>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Таблица всех Заявок на <a href="">Corall Jewelry</a></h4>
+                    <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            @*  <li><a data-action="collapse"><i class="ft-minus"></i></a></li>*@
+                            @*<li><a data-action="reload" href="/Admin/Contacts"><i class="ft-rotate-cw"></i></a></li>*@
+                            @*<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                <li><a data-action="close"><i class="ft-x"></i></a></li>*@
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                    </div>
+                    <div class="table-responsive">
+
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Контакт</th>
+                                    <th scope="col">Сообщение</th>
+                                    <th scope="col">Дата</th>
+                                    <th scope="col">Действие</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.Count; i++)
+                                {
+                                    <form action="/Admin/DeleteReq" method="post">
+                                        <tr>
+                                            <td><input type="text" name="contact" class="form-control" value="@Model[i].Contact" /></td>
+                                            <td><input type="text" name="message" class="form-control" value="@Model[i].Message" /></td>
+                                            <td><input type="text" name="date" class="form-control" value="@Model[i].Date" /></td>
+                                            <td>
+                                                <input type="hidden" name="id" class="form-control" value="@Model[i].Id" />
+                                                <button type="submit" class="btn mb-1 btn-primary btn-lg btn-block"><i class="ft-delete"></i></button>
+                                            </td>
+                                        </tr>
+                                    </form>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

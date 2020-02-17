@@ -16,6 +16,7 @@ namespace CorallJewelry.Controllers
 {
     public class AdminController : Controller
     {
+        #region Header
         private readonly ILogger<HomeController> _logger;
         private BackendContext db { get; set; }
         public AdminController(ILogger<HomeController> logger)
@@ -48,6 +49,7 @@ namespace CorallJewelry.Controllers
                 return false;
             }
         }
+        #endregion
 
         #region Get
         public IActionResult Products(string type = "all")
@@ -122,13 +124,54 @@ namespace CorallJewelry.Controllers
         }
         #endregion
 
-        #region PostPrice
+        #region PostContact
         [HttpPost]
         public IActionResult EditContacts(string EmailInfo, string PhoneInfo, string VKLink, string OKLink, string InstagramLink, string addressT, string addressS)
         {
             AllExecutors.ContactExecutor.EditContact(EmailInfo,PhoneInfo,VKLink,OKLink,InstagramLink,addressT,addressS);
             var model = AllExecutors.ContactExecutor.GetContact();
             return View("Contacts", model);
+        }
+        #endregion
+
+        #region PostPrice
+        [HttpPost]
+        public IActionResult AddPriceList(string namePrice)
+        {
+            AllExecutors.PriceExecutor.CreateList(namePrice);
+            var model = AllExecutors.PriceExecutor.GetAllPriceLists();
+            return View("Prices", model);
+        }
+        public IActionResult AddPrice(string name, string price, int idList)
+        {
+            AllExecutors.PriceExecutor.AddPrice(idList,name,price);
+            var model = AllExecutors.PriceExecutor.GetAllPriceLists();
+            return View("Prices", model);
+        }
+
+        [HttpPost]
+        public IActionResult EditPrices(string action, int idlist, string name, string price, int idprice)
+        {
+            if (action == "edit")
+            {
+                AllExecutors.PriceExecutor.EditPrice(idprice, name, price);
+            }
+            else if (action == "delete")
+            {
+                AllExecutors.PriceExecutor.DeletePrice(idprice);
+            }
+            var model = AllExecutors.PriceExecutor.GetAllPriceLists();
+            return View("Prices", model);
+        }
+        #endregion
+
+        #region PostRequest
+        [HttpPost]
+        public IActionResult DeleteReq(int id)
+        {
+            AllExecutors.RequestExecutor.DeleteRequest(id);
+            var model = AllExecutors.RequestExecutor.GetRequest();
+            return View("Requests",model);
         }
         #endregion
 

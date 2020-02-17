@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Таблица редактирования контактов на <a href="">Corall Jewelry</a></h4>
+                    <h4 class="card-title">Таблица редактирования Прайс-листа на <a href="">Corall Jewelry</a></h4>
                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
@@ -16,36 +16,102 @@
                         </ul>
                     </div>
                 </div>
+
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <p>Добавить новый Прайс-лист</p>
+                    </div>
+                    <div class="table-responsive">
+                        <form action="/Admin/AddPriceList" method="post">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Название</th>
+                                        <th scope="col">Действие</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" name="namePrice" class="form-control" value="" /></td>
+                                        <td>
+                                            <button name="action" value="add" type="submit" class="btn btn-icon btn-success mr-1"><i class="ft-check"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+
                 @for (int i = 0; i < Model.Count; i++)
                 {
-                    <div class="card-content collapse show">
-                        <div class="card-body">
-                            <p>@Model[i].Category</p>
-                        </div>
-                        <div class="table-responsive">
-                            <form action="/Admin/EditPrices" method="post">
-                                <table class="table">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col">Название</th>
-                                            <th scope="col">Цена</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @for (int i = 0; i < Model[i].Prices.Count; i++)
-                                        {
-                                            <tr>
-                                                <td><input type="text" name="" class="form-control" value="@Model[i].Prices" /></td>
-                                                <td><input type="text" name="" class="form-control" value="@Model.Email" /></td>
-                                                <td><input type="text" name="" class="form-control" value="@Model.Email" /></td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                                <button type="submit" class="btn mb-1 btn-primary btn-lg btn-block">Редактировать контакты</button>
-                            </form>
-                        </div>
+                    
+            <div class="card-content collapse show">
+                <div class="card-body">
+                    <p><h3>@Model[i].Category</h3></p>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <p>Добавить новую позицию</p>
                     </div>
+                    <div class="table-responsive">
+                        <form action="/Admin/AddPrice" method="post">
+                            <input type="hidden" name="idList" class="form-control" value="@Model[i].Id" />
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Название</th>
+                                        <th scope="col">Цена</th>
+                                        <th scope="col">Действие</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" name="name" class="form-control" value="" /></td>
+                                        <td><input type="text" name="price" class="form-control" value="" /></td>
+                                        <td>
+                                            <button name="action" value="add" type="submit" class="btn btn-icon btn-success mr-1"><i class="ft-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                  
+                        <input type="hidden" name="idlist" class="form-control" value="@Model[i].Id" />
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Название</th>
+                                    <th scope="col">Цена</th>
+                                    <th scope="col">Действие</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int j = 0; j < Model[i].Prices.Count; j++)
+                                {
+                                <form action="/Admin/EditPrices" method="post">
+                                    <tr>
+
+                                        <td><input type="text" name="name" class="form-control" value="@Model[i].Prices[j].Name" /></td>
+                                        <td><input type="text" name="price" class="form-control" value="@Model[i].Prices[j].Money" /></td>
+                                        <td>
+                                            <input type="hidden" name="idprice" class="form-control" value="@Model[i].Prices[j].Id" />
+                                            <button name="action" value="edit" type="submit" class="btn btn-icon btn-warning mr-1"><i class="ft-edit"></i></button>
+                                            <button name="action" value="delete" type="submit" class="btn btn-icon btn-danger mr-1"><i class="ft-delete"></i></button>
+                                        </td>
+                                    </tr>
+
+                                </form>
+                                }
+                                </tbody>
+                        </table>
+                   
+                </div>
+            </div>
                 }
             </div>
         </div>
