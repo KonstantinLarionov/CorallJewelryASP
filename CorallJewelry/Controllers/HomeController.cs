@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using CorallJewelry.Models;
 using CorallJewelry.Entitys;
 using Microsoft.EntityFrameworkCore;
+using CorallJewelry.Models.FrontModel;
 
 namespace CorallJewelry.Controllers
 {
@@ -27,7 +28,10 @@ namespace CorallJewelry.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            IndexModel IndexModel = new IndexModel();
+            IndexModel.Contacts = db.Contacts.ToList().Last();
+            IndexModel.Products = db.Products.ToList();
+            return View(IndexModel);
         }
         public IActionResult Contact()
         {
