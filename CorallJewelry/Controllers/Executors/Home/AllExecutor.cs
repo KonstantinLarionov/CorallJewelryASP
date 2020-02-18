@@ -33,36 +33,89 @@ namespace CorallJewelry.Controllers.Executors.Home
                 var conts = db.Contacts.ToList();
                 return conts.Count != 0 ? conts.Last() : new Contacts();
             }
-            public static IndexModel GetIndex()
+            public static IndexModel GetModel()
             {
                 IndexModel index = new IndexModel();
                 index.Contacts = GetContact();
-                index.Products = db.Products.OrderByDescending(x => x.Id).Include(x=>x.Images).Take(6).ToList();
+                index.Products = db.Products.OrderByDescending(x => x.Id).Include(x => x.Images).Take(6).ToList();
                 return index;
             }
         }
-        public static class PriceExecutor 
+        public static class PriceExecutor
         {
-            public static List<PriceList> GetAllPriceLists()
+            private static List<PriceList> GetAllPriceLists()
             {
                 var list = db.PriceLists.Include(a => a.Prices).ToList();
                 return list;
             }
-        }
-        public static class RequestExecutor 
-        {
-            public static void SendRequest(string cont, string text)
+            private static Contacts GetContact()
             {
-                db.Requests.Add(new Request() { Contact = cont, Message = text, Date = DateTime.Now }) ;
-                db.SaveChanges();
+                var conts = db.Contacts.ToList();
+                return conts.Count != 0 ? conts.Last() : new Contacts();
+            }
+            public static PriceModel GetModel()
+            {
+                PriceModel priceModel = new PriceModel();
+                priceModel.PriceLists = GetAllPriceLists();
+                priceModel.Contacts = GetContact();
+                return priceModel;
             }
         }
         public static class ContactExecutor
         {
-            public static Contacts GetContact()
+            private static Contacts GetContact()
             {
-                var contacts = db.Contacts.OrderByDescending(x => x.Id).FirstOrDefault();
-                return contacts;
+                var conts = db.Contacts.ToList();
+                return conts.Count != 0 ? conts.Last() : new Contacts();
+            }
+            public static BaseFrontend GetModel()
+            {
+                BaseFrontend index = new BaseFrontend();
+                index.Contacts = GetContact();
+                return index;
+            }
+            public static void SendRequest(string contact, string message)
+            {
+                Request request = new Request();
+                request.Contact = contact;
+                request.Date = DateTime.Now;
+                request.Message = message;
+                db.Requests.Add(request);
+                db.SaveChanges();
+            }
+        }
+        public static class ProductsExecutor
+        {
+            private static Contacts GetContact()
+            {
+                var conts = db.Contacts.ToList();
+                return conts.Count != 0 ? conts.Last() : new Contacts();
+            }
+            private static List<Product> GetProducts(string type)
+            {
+               
+                    var prod = db.Products.Where(x => x.Type == type).Include(x => x.Images).OrderByDescending(x => x.Id).ToList();
+                    return prod;
+                
+            }
+            public static ProductsModel GetModel(string type)
+            {
+                ProductsModel products = new ProductsModel();
+                products.Products = GetProducts(type);
+                products.Contacts = GetContact();
+                return products;
+            }
+            private static Product GetProduct(int id)
+            {
+                var prod = db.Products.Where(x => x.Id == id).Include(x => x.Images).FirstOrDefault();
+                return prod;
+            }
+            public static ProductModel GetModel(int id)
+            {
+                ProductModel product = new ProductModel();
+                product.Contacts = GetContact();
+                product.Product = GetProduct(id);
+                return product;
             }
         }
     }

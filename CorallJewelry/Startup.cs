@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using afc_studio.Models.Entitys;
 using CorallJewelry.Entitys;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,7 +28,7 @@ namespace CorallJewelry
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(); 
             services.AddDistributedMemoryCache();
             //services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddSession(options =>
@@ -46,6 +47,13 @@ namespace CorallJewelry
            ));
             services.AddDbContextPool<BackendContext>(
               options => options.UseMySql("Server=localhost;Database=CorallJewelry;User=u0893_adminDB;Password=snRq40~6;",
+                  mySqlOptions =>
+                  {
+                      mySqlOptions.ServerVersion(new Version(5, 6, 45), ServerType.MySql);
+                  }
+          ));
+            services.AddDbContextPool<MainContext>(
+              options => options.UseMySql("Server=localhost;Database=u0893839_chat;User=u0893_adminDB;Password=snRq40~6;",
                   mySqlOptions =>
                   {
                       mySqlOptions.ServerVersion(new Version(5, 6, 45), ServerType.MySql);

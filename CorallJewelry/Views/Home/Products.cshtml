@@ -1,4 +1,5 @@
-﻿<section class="mt-5">
+﻿@model CorallJewelry.Models.FrontModel.ProductsModel
+<section class="mt-5">
     <div class="container-fluid ">
         <div class="row align-items-center mb-5 justify-content-center text-center">
             <h2>Наши работы</h2>
@@ -25,175 +26,61 @@
                         <h5><i>Все теги Corall Jewelry</i></h5>
                     </div>
                     <div class="row justify-content-center ml-2 mr-2">
-                        <button class="btn-block btn btn-outline-danger mb-4"><i></i>Кольца</button>
-                        <button class="btn-block btn btn-danger mb-4">Цепи</button>
-                        <button class="btn-block btn btn-outline-danger mb-4">Кресты</button>
-                        <button class="btn-block btn btn-danger mb-4">Запонки</button>
-                        <button class="btn-block btn btn-outline-danger mb-4">Брелки</button>
-                        <button class="btn-block btn btn-danger mb-4">Браслеты</button>
-                        <button class="btn-block btn btn-outline-danger mb-4">Значки</button>
-                        <button class="btn-block btn btn-danger mb-4">Печатки</button>
-                        <button class="btn-block btn btn-outline-danger mb-4">Подвески</button>
-                        <button class="btn-block btn btn-danger mb-4">Серьги</button>
+                        <a href="~/Home/Products?type=Кольца" class="btn-block btn btn-outline-danger mb-4"><i></i>Кольца</a>
+                        <a href="~/Home/Products?type=Цепи" class="btn-block btn btn-danger mb-4">Цепи</a>
+                        <a href="~/Home/Products?type=Кресты" class="btn-block btn btn-outline-danger mb-4">Кресты</a>
+                        <a href="~/Home/Products?type=Запонки" class="btn-block btn btn-danger mb-4">Запонки</a>
+                        <a href="~/Home/Products?type=Брелки" class="btn-block btn btn-outline-danger mb-4">Брелки</a>
+                        <a href="~/Home/Products?type=Браслеты" class="btn-block btn btn-danger mb-4">Браслеты</a>
+                        <a href="~/Home/Products?type=Значки" class="btn-block btn btn-outline-danger mb-4">Значки</a>
+                        <a href="~/Home/Products?type=Печатки" class="btn-block btn btn-danger mb-4">Печатки</a>
+                        <a href="~/Home/Products?type=Подвески" class="btn-block btn btn-outline-danger mb-4">Подвески</a>
+                        <a href="~/Home/Products?type=Серьги" class="btn-block btn btn-danger mb-4">Серьги</a>
                     </div>
                 </div>
             </div>
             <div class="col-xl-9">
+                @for (int i = 0; i < Model.Products.Count; i+=3)
+                {
                 <div class="row mt-2">
                     <div class="col-xl">
                         <div class="card shadow1dp" style="width: 16rem;">
-                            <img class="card-img-top" src="http://placehold.it/100x100?text=1" alt="Card image cap">
+                            <img class="card-img-top" src="~/products/@Model.Products[i].Images[0].Name" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Кольцо золото 999</h5>
-                                <h6 class="card-text">6000 р</h6>
-                                <a href="~/Home/Product?id=1" class="btn btn-outline-primary mt-2">Описание</a>
+                                <h5 class="card-title">@Model.Products[i].Name</h5>
+                                <h6 class="card-text">@Model.Products[i].Price P</h6>
+                                <a href="~/Home/Product?id=@Model.Products[i].Id" class="btn btn-outline-primary mt-2">Описание</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl">
-                        <div class="card shadow1dp" style="width:  16rem;">
-                            <img class="card-img-top" src="http://placehold.it/100x100?text=1" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Кольцо золото 999</h5>
-                                <h6 class="card-text">6000 р</h6>
-                                <a href="#" class="btn btn-outline-primary mt-2">Описание</a>
-                            </div>
-                        </div>
-                    </div> <div class="col-xl">
-                        <div class="card shadow1dp" style="width:  16rem;">
-                            <img class="card-img-top" src="http://placehold.it/100x100?text=1" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Кольцо золото 999</h5>
-                                <h6 class="card-text">6000 р</h6>
-                                <a href="#" class="btn btn-outline-primary mt-2">Описание</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-2">
+                    @try
+                    {
                     <div class="col-xl">
                         <div class="card shadow1dp" style="width: 16rem;">
-                            <img class="card-img-top" src="http://placehold.it/100x100?text=1" alt="Card image cap">
+                            <img class="card-img-top" src="~/products/@Model.Products[i + 1].Images[0].Name" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Кольцо золото 999</h5>
-                                <h6 class="card-text">6000 р</h6>
-                                <a href="#" class="btn btn-outline-primary mt-2">Описание</a>
+                                <h5 class="card-title">@Model.Products[i + 1].Name</h5>
+                                <h6 class="card-text">@Model.Products[i + 1].Price P</h6>
+                                <a href="~/Home/Product?id=@Model.Products[i + 1].Id" class="btn btn-outline-primary mt-2">Описание</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl">
-                        <div class="card shadow1dp" style="width:  16rem;">
-                            <img class="card-img-top" src="http://placehold.it/100x100?text=1" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Кольцо золото 999</h5>
-                                <h6 class="card-text">6000 р</h6>
-                                <a href="#" class="btn btn-outline-primary mt-2">Описание</a>
-                            </div>
-                        </div>
-                    </div> <div class="col-xl">
-                        <div class="card shadow1dp" style="width:  16rem;">
-                            <img class="card-img-top" src="http://placehold.it/100x100?text=1" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Кольцо золото 999</h5>
-                                <h6 class="card-text">6000 р</h6>
-                                <a href="#" class="btn btn-outline-primary mt-2">Описание</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-2">
                     <div class="col-xl">
                         <div class="card shadow1dp" style="width: 16rem;">
-                            <img class="card-img-top" src="http://placehold.it/100x100?text=1" alt="Card image cap">
+                            <img class="card-img-top" src="~/products/@Model.Products[i + 2].Images[0].Name" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Кольцо золото 999</h5>
-                                <h6 class="card-text">6000 р</h6>
-                                <a href="#" class="btn btn-outline-primary mt-2">Описание</a>
+                                <h5 class="card-title">@Model.Products[i + 2].Name</h5>
+                                <h6 class="card-text">@Model.Products[i + 2].Price P</h6>
+                                <a href="~/Home/Product?id=@Model.Products[i + 2].Id" class="btn btn-outline-primary mt-2">Описание</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl">
-                        <div class="card shadow1dp" style="width:  16rem;">
-                            <img class="card-img-top" src="http://placehold.it/100x100?text=1" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Кольцо золото 999</h5>
-                                <h6 class="card-text">6000 р</h6>
-                                <a href="#" class="btn btn-outline-primary mt-2">Описание</a>
-                            </div>
-                        </div>
-                    </div> <div class="col-xl">
-                        <div class="card shadow1dp" style="width:  16rem;">
-                            <img class="card-img-top" src="http://placehold.it/100x100?text=1" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Кольцо золото 999</h5>
-                                <h6 class="card-text">6000 р</h6>
-                                <a href="#" class="btn btn-outline-primary mt-2">Описание</a>
-                            </div>
-                        </div>
-                    </div>
+                    }
+                    catch { }
                 </div>
-                <div class="row mt-2">
-                    <div class="col-xl">
-                        <div class="card shadow1dp" style="width: 16rem;">
-                            <img class="card-img-top" src="http://placehold.it/100x100?text=1" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Кольцо золото 999</h5>
-                                <h6 class="card-text">6000 р</h6>
-                                <a href="#" class="btn btn-outline-primary mt-2">Описание</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl">
-                        <div class="card shadow1dp" style="width:  16rem;">
-                            <img class="card-img-top" src="http://placehold.it/100x100?text=1" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Кольцо золото 999</h5>
-                                <h6 class="card-text">6000 р</h6>
-                                <a href="#" class="btn btn-outline-primary mt-2">Описание</a>
-                            </div>
-                        </div>
-                    </div> <div class="col-xl">
-                        <div class="card shadow1dp" style="width:  16rem;">
-                            <img class="card-img-top" src="http://placehold.it/100x100?text=1" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Кольцо золото 999</h5>
-                                <h6 class="card-text">6000 р</h6>
-                                <a href="#" class="btn btn-outline-primary mt-2">Описание</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-xl">
-                        <div class="card shadow1dp" style="width: 16rem;">
-                            <img class="card-img-top" src="http://placehold.it/100x100?text=1" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Кольцо золото 999</h5>
-                                <h6 class="card-text">6000 р</h6>
-                                <a href="#" class="btn btn-outline-primary mt-2">Описание</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl">
-                        <div class="card shadow1dp" style="width:  16rem;">
-                            <img class="card-img-top" src="http://placehold.it/100x100?text=1" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Кольцо золото 999</h5>
-                                <h6 class="card-text">6000 р</h6>
-                                <a href="#" class="btn btn-outline-primary mt-2">Описание</a>
-                            </div>
-                        </div>
-                    </div> <div class="col-xl">
-                        <div class="card shadow1dp" style="width:  16rem;">
-                            <img class="card-img-top" src="http://placehold.it/100x100?text=1" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Кольцо золото 999</h5>
-                                <h6 class="card-text">6000 р</h6>
-                                <a href="#" class="btn btn-outline-primary mt-2">Описание</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                }
+
+
 
             </div>
         </div>

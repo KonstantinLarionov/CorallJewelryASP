@@ -29,24 +29,24 @@ namespace CorallJewelry.Controllers
         }
         public IActionResult Index()
         {
-            var index = AllExecutors.IndexExecutor.GetIndex();
+            var index = AllExecutors.IndexExecutor.GetModel();
             return View(index);
         }
         public IActionResult Contact()
         {
-            return View();
+            return View(AllExecutors.ContactExecutor.GetModel());
         }
         public IActionResult Pricelist()
         {
-            return View();
+            return View(AllExecutors.PriceExecutor.GetModel());
         }
-        public IActionResult Product()
+        public IActionResult Product(int id)
         {
-            return View();
+            return View(AllExecutors.ProductsExecutor.GetModel(id));
         }
-        public IActionResult Products()
+        public IActionResult Products(string type = "Кольца")
         {
-            return View();
+            return View(AllExecutors.ProductsExecutor.GetModel(type));
         }
        
         public IActionResult Service()
@@ -57,6 +57,12 @@ namespace CorallJewelry.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult Contact(string contact, string message)
+        {
+            AllExecutors.ContactExecutor.SendRequest(contact, message);
+            return View(AllExecutors.ContactExecutor.GetModel());
         }
 
         #region Service

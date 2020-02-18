@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="~/css/bootstrap.css">
     <link rel="stylesheet" href="~/css/style.css">
     <link rel="stylesheet" href="~/css/fontawesome/css/font-awesome.css">
+    <!-- CHAT -->
+    <link href="~/chat/css/clientchat.css" rel="stylesheet">
+    <!-- ENDCHAT -->
 </head>
 <body style="overflow-x: hidden; scroll-behavior: smooth;">
     <section class="" id="priceOff">
@@ -105,8 +108,8 @@
                 </div>
             </div>
             <div class="col-xl-3 mt-5">
-                <a href ="~/Home/Contact">Задайте нам вопрос</a><br>
-                <a href ="#aboutWork">Как сделать заказ?</a><br>
+                <a href="~/Home/Contact">Задайте нам вопрос</a><br>
+                <a href="#aboutWork">Как сделать заказ?</a><br>
             </div>
             <div class="col-xl-3 mt-5">
                 <div class="row justify-content-around">
@@ -128,11 +131,46 @@
         </div>
     </section>
 
+    <!--CHAT-->
+    <div id="chat-icon" onclick="chat();" title="Чат с оператором" class="position-fixed chat-wrap-min"></div>
+    <div id="chat-wrap" class="position-fixed chat-wrap-max chat-hidden" style="border-radius: 5px; box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.20); ">
+        <div class="row chat-shadow-4dp">
+            <div class="col-2">
+                <div class="row justify-content-center align-content-lg-center">
+                    <div title="Мы на связи" class="shadow-6dp" style="background-color: lawngreen; width: 18px; height: 18px; margin-top: 4px; border-radius: 50%; border: 1px solid #bdbdbd; cursor: pointer;"></div>
+                </div>
+            </div>
+            <div class="col-8 text-center">
+                <span>Оператор онлайн</span>
+            </div>
+            <div class="col-2 text-center" onclick="chat();">
+                <div title="Свернуть чат" class="chat-blur text-center row justify-content-center align-content-lg-center" style="cursor: pointer; margin: 0 auto;">
+                    <label class="m-1" style="font-size: 12px;"><b>X</b></label>
+                </div>
+            </div>
+        </div>
+        <div id="chat-list" class="m-1" style="height: 400px; padding: 5px; overflow: auto;">
+            <!--<div class="adminchat-msg-admin">Здравствуйте, чем я могу помочь вам?</div>-->
+        </div>
+        <div id="chat-area" class="row m-1 mb-0">
+            <div style="width: 79%; margin-right: 1%;">
+                <textarea id="chat-message" class="w-100 shadow-4dp" placeholder="Напишите нам тут" rows="3" style="padding: 1px; resize: none; font-size: 13px;"></textarea>
+            </div>
+            <div style="width: 20%; height: 61px;">
+                <a><img title="Отправить" src="~/chat/files/plane.png" class=" p-0 h-100 chat-shadow-4dp" onclick="SendMessage();" style="height: calc(1em * 1.5 * 3); border-radius: 50%; cursor: pointer;"></a>>
+            </div>
+        </div>
+    </div>
+    <!--ENDCHAT-->
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://use.fontawesome.com/ab77088c83.js"></script>
     <script src="~/js/bootstrap.js"></script>
     <script src="~/js/main.js"></script>
+
+    <script src="~/chat/js/jquerry.cookie.js"></script>
+    <script src="~/chat/js/main.js?v1"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
