@@ -1,3 +1,66 @@
 ﻿@{
     Layout = "_LayoutAdmin";
 }
+@model afc_studio.Models.Objects.ChatPage
+
+<section>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Общение в чате ОНЛАЙН на  <a href="">Corall Jewelry</a></h4>
+                    <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                    </div>
+                    <!--CHAT-->
+                    <div id="chat-icon" onclick="chat();" title="Чат с оператором" class=" chat-wrap-min"></div>
+                    <div id="chat-wrap" class="chat-wrap-max chat-hidden" style=" border-radius: 5px; box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.20); ">
+                        <div class="row chat-shadow-4dp">
+                            <div class="col-2">
+                               
+                            </div>
+                            <div class="col-8 text-center">
+                                <select id="selectBox" onchange="changeFunc();" style="width: 80%; margin-top: 2%;">
+                                    <option selected disabled value="">Выберите диалог из списка</option>
+                                    @for (int i = 0; i < Model.Dialogs.Count; i++)
+                                    {
+
+                                        <option value="@Model.Dialogs[i].Name">@Model.Dialogs[i].Name</option>
+
+                                    }
+
+                                </select>
+                            </div>
+                            <div class="col-2 text-center" onclick="chat();">
+                                <div title="Свернуть чат" class="chat-blur text-center row justify-content-center align-content-lg-center" style="cursor: pointer; margin: 0 auto;">
+                                    <label class="m-1" style="font-size: 12px;"><b>X</b></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="chat-list" class="m-1" style="height: 400px; padding: 5px; overflow: auto;">
+                            <!--<div class="adminchat-msg-admin">Здравствуйте, чем я могу помочь вам?</div>-->
+                        </div>
+                        <div id="chat-area" class="row m-1 mb-0">
+                            <div class="col-10">
+                                    <textarea id="chat-message" class="w-100 shadow-4dp" placeholder="Напишите нам тут" rows="3" style="padding: 1px; resize: none; font-size: 13px;"></textarea>
+                            </div>
+                            <div class="col-2">
+                                <div class="row justify-content-center" >
+                                    <a><img title="Отправить" width="70" height="70" src="~/chat/files/plane.png" class=" p-0 chat-shadow-4dp" onclick="SendMessage();" style="border-radius: 50%; cursor: pointer;"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--ENDCHAT-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -3,15 +3,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Ювелирная мастерская Оренбург | CorallJewelry</title>
     <link rel="stylesheet" href="~/css/bootstrap.css">
     <link rel="stylesheet" href="~/css/style.css">
     <link rel="stylesheet" href="~/css/fontawesome/css/font-awesome.css">
     <!-- CHAT -->
     <link href="~/chat/css/clientchat.css" rel="stylesheet">
+    <link rel="icon" href="~/favicon.ico">
     <!-- ENDCHAT -->
 </head>
 <body style="overflow-x: hidden; scroll-behavior: smooth;">
+    <div class="wrapper-slider" id="main2">
+        <div class="item-door" id="right"></div>
+        <div class="item-door" id="left"></div>
+        <div id="preloader">
+            <div id="loader"></div>
+        </div>
+    </div>
     <section class="" id="priceOff">
         <div>
             <div class="row w-100 ml-0 shadow1dp" style="background-image: url(@Url.Content("~/images/header-back.png")); height: 80px;">
@@ -23,9 +31,9 @@
                         <div class="col text-center ml-4">
                             <a style="text-decoration: none; color: brown;" href="~/Home/Index#aboutService"><h4>Услуги</h4></a>
                         </div>
-                        <div class="col text-center ml-4">
+                        @*<div class="col text-center ml-4">
                             <a style="text-decoration: none; color: brown;" href="~/Home/Catalogs"><h4>Каталоги</h4></a>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
                 <div class="col">
@@ -157,7 +165,7 @@
                 <textarea id="chat-message" class="w-100 shadow-4dp" placeholder="Напишите нам тут" rows="3" style="padding: 1px; resize: none; font-size: 13px;"></textarea>
             </div>
             <div style="width: 20%; height: 61px;">
-                <a><img title="Отправить" src="~/chat/files/plane.png" class=" p-0 h-100 chat-shadow-4dp" onclick="SendMessage();" style="height: calc(1em * 1.5 * 3); border-radius: 50%; cursor: pointer;"></a>>
+                <a><img title="Отправить" src="~/chat/files/plane.png" class=" p-0 h-100 chat-shadow-4dp" onclick="SendMessage();" style="height: calc(1em * 1.5 * 3); border-radius: 50%; cursor: pointer;"></a>
             </div>
         </div>
     </div>

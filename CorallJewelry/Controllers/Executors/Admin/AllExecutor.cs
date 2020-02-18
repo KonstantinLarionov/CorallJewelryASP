@@ -1,4 +1,6 @@
-﻿using CorallJewelry.Entitys;
+﻿using afc_studio.Models.Entitys;
+using afc_studio.Models.Objects;
+using CorallJewelry.Entitys;
 using CorallJewelry.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +15,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
     public static class AllExecutors
     {
         private static BackendContext db { get; set; } = new BackendContext(new DbContextOptions<BackendContext>());
+        private static MainContext chat = new MainContext(new DbContextOptions<MainContext>());
         public static class LoginExecutor
         {
             public static bool OnAuth(string login, string password, HttpContext httpContext)
@@ -42,14 +45,14 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 else {
                     products = db.Products.Where(x => x.Type == type).Include(x => x.Images).OrderByDescending(x => x.Id).ToList();
                 }
-             
+
                 return products;
             }
 
             public static void AddProducts(List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type)
             {
                 List<Image> imagesAdd = LoadImage(images);
-               
+
                 Product product = new Product()
                 {
                     Name = name,
@@ -67,7 +70,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
 
             public static void DeleteProduct(int id)
             {
-                var product = db.Products.Where(x=> x.Id == id).FirstOrDefault();
+                var product = db.Products.Where(x => x.Id == id).FirstOrDefault();
                 db.Products.Remove(product);
                 db.SaveChanges();
             }
@@ -105,7 +108,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 return imagesAdd;
             }
         }
-        public static class PriceExecutor 
+        public static class PriceExecutor
         {
             public static List<PriceList> GetAllPriceLists()
             {
@@ -115,11 +118,11 @@ namespace CorallJewelry.Controllers.Executors.Admin
 
             public static void AddPrice(int idList, string name, string money)
             {
-                db.PriceLists.Where(x=>x.Id == idList).FirstOrDefault().Prices.Add(new Price() { Money = money, Name = name });
+                db.PriceLists.Where(x => x.Id == idList).FirstOrDefault().Prices.Add(new Price() { Money = money, Name = name });
                 db.SaveChanges();
             }
 
-            public static void EditPrice(int id, string name, string money) 
+            public static void EditPrice(int id, string name, string money)
             {
                 var price = db.Prices.Where(x => x.Id == id).FirstOrDefault();
                 price.Money = money;
@@ -128,7 +131,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
             }
 
             public static void DeletePrice(int id)
-            { 
+            {
                 var price = db.Prices.Where(x => x.Id == id).FirstOrDefault();
                 db.Prices.Remove(price);
                 db.SaveChanges();
@@ -143,11 +146,11 @@ namespace CorallJewelry.Controllers.Executors.Admin
 
             public static void CreateList(string category)
             {
-                db.PriceLists.Add(new PriceList() { Category = category }) ;
+                db.PriceLists.Add(new PriceList() { Category = category });
                 db.SaveChanges();
             }
         }
-        public static class RequestExecutor 
+        public static class RequestExecutor
         {
             public static List<Request> GetRequest()
             {
@@ -171,7 +174,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 {
                     return contacts.OrderByDescending(x => x.Id).FirstOrDefault();
                 }
-                else 
+                else
                 {
                     db.Contacts.Add(new Contacts() { AddressStreet = "", AddressTown = "", Email = "", Inst = "", OK = "", Phone = "", VK = "" });
                     db.SaveChanges();
@@ -179,23 +182,37 @@ namespace CorallJewelry.Controllers.Executors.Admin
                     return new Contacts() { Inst = "", OK = "", Phone = "", VK = "", Email = "", AddressTown = "", AddressStreet = "" };
                 }
 
-               
-            }
-            public static void EditContact( string email, string phone, string vk, string ok, string inst, string addressTown, string street, int id = 1)
-            {
-               
-                    var contact = db.Contacts.Where(x => x.Id == id).FirstOrDefault();
 
-                    contact = db.Contacts.Where(x => x.Id == id).FirstOrDefault();
-                    contact.Inst = inst;
-                    contact.OK = ok;
-                    contact.Phone = phone;
-                    contact.VK = vk;
-                    contact.Email = email;
-                    contact.AddressTown = addressTown;
-                    contact.AddressStreet = street;
-                    db.SaveChanges();
-               
+            }
+            public static void EditContact(string email, string phone, string vk, string ok, string inst, string addressTown, string street, int id = 1)
+            {
+
+                var contact = db.Contacts.Where(x => x.Id == id).FirstOrDefault();
+
+                contact = db.Contacts.Where(x => x.Id == id).FirstOrDefault();
+                contact.Inst = inst;
+                contact.OK = ok;
+                contact.Phone = phone;
+                contact.VK = vk;
+                contact.Email = email;
+                contact.AddressTown = addressTown;
+                contact.AddressStreet = street;
+                db.SaveChanges();
+
+            }
+        }
+        public static class ChatExecutor
+        {
+            private static List<Dialog> GetDialogs()
+            {
+                var dialogs = chat.Dialogs.OrderByDescending(x=>x.Id).ToList();
+                return dialogs;
+            }
+            public static ChatPage GetModel()
+            {
+                ChatPage chatPage = new ChatPage();
+                chatPage.Dialogs = GetDialogs();
+                return chatPage;
             }
         }
     }

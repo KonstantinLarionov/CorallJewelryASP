@@ -10,9 +10,29 @@ using CorallJewelry.Entitys;
 using Microsoft.EntityFrameworkCore;
 using CorallJewelry.Models.FrontModel;
 using CorallJewelry.Controllers.Executors.Home;
+using System.Net;
 
 namespace CorallJewelry.Controllers
 {
+    public class Telegram
+    {
+        private string Token { get; set; }
+        private string Api { get; set; } = "https://api.telegram.org/bot";
+        private string MethodeSendMessage { get; set; } = "/sendMessage";
+
+        public Telegram(string token)
+        {
+            Token = token;
+        }
+
+        public void SendMessage(string text, string chatId)
+        {
+            using (var webClient = new WebClient())
+            {
+                var response = webClient.DownloadString("https://afcstudio.ru/core/telegram.php?token=" + Token + "&text=" + text + "&chatid=" + chatId);
+            }
+        }
+    }
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -51,7 +71,7 @@ namespace CorallJewelry.Controllers
        
         public IActionResult Service()
         {
-            return View();
+            return View(AllExecutors.ContactExecutor.GetModel());
         }
 
         public IActionResult Privacy()
@@ -62,37 +82,42 @@ namespace CorallJewelry.Controllers
         public IActionResult Contact(string contact, string message)
         {
             AllExecutors.ContactExecutor.SendRequest(contact, message);
+
+            var telega = new Telegram("1001206813:AAFdrMx5RTZy71AKbBy5OVO6FHfyeXNBP4g");
+            telega.SendMessage("У вас новый заявка! Проверьте Панель администратора...", "478950049");
+            telega.SendMessage("Ссылка в панель: https://korall56.ru/Admin/Requests", "478950049");
+
             return View(AllExecutors.ContactExecutor.GetModel());
         }
 
         #region Service
         public IActionResult Create()
         {
-            return View("Service/Create");
+            return View("Service/Create", AllExecutors.ContactExecutor.GetModel());
         }
         public IActionResult Clearproducts()
         {
-            return View("Service/Clearproducts");
+            return View("Service/Clearproducts", AllExecutors.ContactExecutor.GetModel());
         }
         public IActionResult Createchain()
         {
-            return View("Service/Createchain");
+            return View("Service/Createchain", AllExecutors.ContactExecutor.GetModel());
         }
         public IActionResult Createcopy()
         {
-            return View("Service/Createcopy");
+            return View("Service/Createcopy", AllExecutors.ContactExecutor.GetModel());
         }
         public IActionResult Repair()
         {
-            return View("Service/Repair");
+            return View("Service/Repair", AllExecutors.ContactExecutor.GetModel());
         }
         public IActionResult Repairbeads()
         {
-            return View("Service/Repairbeads");
+            return View("Service/Repairbeads", AllExecutors.ContactExecutor.GetModel());
         }
         public IActionResult Setstone()
         {
-            return View("Service/Setstone");
+            return View("Service/Setstone", AllExecutors.ContactExecutor.GetModel());
         }
         #endregion
 

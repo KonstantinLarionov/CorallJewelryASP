@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using afc_studio.Models.Objects;
 using System.Text;
+using CorallJewelry.Controllers;
 
 namespace afc_studio.Controllers
 {
@@ -25,7 +26,7 @@ namespace afc_studio.Controllers
         {
             _logger = logger;
             db = new MainContext(new DbContextOptions<MainContext>());
-            db.Database.EnsureCreated();
+            /*db.Database.EnsureCreated();*/
         }
 
         public IActionResult Index()
@@ -57,10 +58,10 @@ namespace afc_studio.Controllers
                     {
                         new Dialog
                         {
-                            Name = hash
+                            Name = "dialog_" + user +  "_" + DateTime.Now.Day.ToString() +  DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString()
                         }
                     }
-                });
+                }) ;
                 db.SaveChanges();
             }
             my = db.Users.Where(d => d.Name == user).Include(s => s.Dialogs).FirstOrDefault();
@@ -70,6 +71,13 @@ namespace afc_studio.Controllers
         [HttpPost]
         public string SendMessage(string text, string dialog, string user, string typeuser = "unnamed", int dialog_num = 0)
         {
+
+
+            var telega = new Telegram("1001206813:AAFdrMx5RTZy71AKbBy5OVO6FHfyeXNBP4g");
+            telega.SendMessage("У вас новое сообщение в чате! Проверьте Панель администратора...", "478950049");
+            telega.SendMessage("Ссылка в панель: https://korall56.ru/Admin/Chats", "478950049");
+
+
             var mydialog = db.Dialogs.Where(j => j.Name == dialog).Include(g => g.Messages).FirstOrDefault();
             var myuser = db.Users.Where(f => f.Name == user).FirstOrDefault();
 
