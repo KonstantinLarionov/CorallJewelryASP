@@ -22,7 +22,7 @@ function update_cookie() {
 function getWelcome() {
     $.ajax({
         type: "GET",
-        url: "API/welcome_message",
+        url: "/API/welcome_message",
         success: function (msg) {
             return msg;
         }
@@ -33,7 +33,7 @@ function getDialog() {
     $.ajax({
         async: false,
         type: "POST",
-        url: "API/GetDialog",
+        url: "/API/GetDialog",
         data: "user=" + user,
         success: function (msg) {
             id_dialog = msg;
@@ -61,7 +61,7 @@ function SendMessage() {
     }
     $.ajax({
         type: "POST",
-        url: "API/SendMessage",
+        url: "/API/SendMessage",
         data: "text=" + message + "&dialog=" + id_dialog + "&user=" + user,
         success: function () {
             $('#chat-message').val('');
@@ -76,7 +76,7 @@ function GetMessages() {
     setInterval(function () {
         $.ajax({
             type: "POST",
-            url: "API/GetMessages",
+            url: "/API/GetMessages",
             data: "dialog=" + id_dialog,
             success: function (msg) {
                 if (msg != null) {

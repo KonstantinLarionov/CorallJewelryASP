@@ -26,7 +26,6 @@ namespace afc_studio.Controllers
         {
             _logger = logger;
             db = new MainContext(new DbContextOptions<MainContext>());
-            /*db.Database.EnsureCreated();*/
         }
 
         public IActionResult Index()
@@ -61,7 +60,7 @@ namespace afc_studio.Controllers
                             Name = "dialog_" + user +  "_" + DateTime.Now.Day.ToString() +  DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString()
                         }
                     }
-                }) ;
+                });
                 db.SaveChanges();
             }
             my = db.Users.Where(d => d.Name == user).Include(s => s.Dialogs).FirstOrDefault();
@@ -74,11 +73,11 @@ namespace afc_studio.Controllers
 
 
             var telega = new Telegram("1001206813:AAFdrMx5RTZy71AKbBy5OVO6FHfyeXNBP4g");
-            telega.SendMessage("У вас новое сообщение в чате! Проверьте Панель администратора...", "478950049");
-            telega.SendMessage("Ссылка в панель: https://korall56.ru/Admin/Chats", "478950049");
+            telega.SendMessage("У вас новое сообщение в чате! Проверьте Панель администратора...", "1072967682");
+            telega.SendMessage("Ссылка в панель: https://korall56.ru/Admin/Chats", "1072967682");
 
 
-            var mydialog = db.Dialogs.Where(j => j.Name == dialog).Include(g => g.Messages).FirstOrDefault();
+            var mydialog = db.Dialogs.Where(j => j.Name == dialog).FirstOrDefault();
             var myuser = db.Users.Where(f => f.Name == user).FirstOrDefault();
 
             mydialog.Messages.Add(new Message()

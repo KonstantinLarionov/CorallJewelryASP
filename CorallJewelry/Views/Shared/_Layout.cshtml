@@ -85,11 +85,11 @@
 
         <div class="bord-line"></div>
         <div class="row justify-content-around">
-            <a style="text-decoration: none; color: brown;"><h4>Цены</h4></a>
-            <a style="text-decoration: none; color: brown;"><h4>Услуги</h4></a>
-            <a style="text-decoration: none; color: brown;"><h4>Каталоги</h4></a>
-            <a style="text-decoration: none; color: brown;"><h4>Наши работы</h4></a>
-            <a style="text-decoration: none; color: brown;"><h4>Контакты</h4></a>
+            <a  href="~/Home/PriceList" style="text-decoration: none; color: brown;"><h4>Цены</h4></a>
+            <a href="~/Home/Index#aboutService" style="text-decoration: none; color: brown;"><h4>Услуги</h4></a>
+            @*<a style="text-decoration: none; color: brown;"><h4>Каталоги</h4></a>*@
+            <a href="~/Home/Products" style="text-decoration: none; color: brown;"><h4>Наши работы</h4></a>
+            <a href="~/Home/Contact"style="text-decoration: none; color: brown;"><h4>Контакты</h4></a>
         </div>
         <div class="bord-line"></div>
         <div class="row mb-3">
@@ -121,9 +121,9 @@
             </div>
             <div class="col-xl-3 mt-5">
                 <div class="row justify-content-around">
-                    <a href="#" style="color: #c33"><i class="fa fa-vk fa-2x"></i></a>
-                    <a href="#" style="color: #c33"><i class="fa fa-odnoklassniki fa-2x"></i></a>
-                    <a href="#" style="color: #c33"><i class="fa fa-instagram fa-2x"></i></a>
+                    <a href="@Model.Contacts.VK" style="color: #c33"><i class="fa fa-vk fa-2x"></i></a>
+                    <a href="@Model.Contacts.OK" style="color: #c33"><i class="fa fa-odnoklassniki fa-2x"></i></a>
+                    <a href="@Model.Contacts.Inst" style="color: #c33"><i class="fa fa-instagram fa-2x"></i></a>
                 </div>
             </div>
         </div>
@@ -178,7 +178,7 @@
     <script src="~/js/main.js"></script>
 
     <script src="~/chat/js/jquerry.cookie.js"></script>
-    <script src="~/chat/js/main.js?v1"></script>
+    <script src="~/chat/js/main.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

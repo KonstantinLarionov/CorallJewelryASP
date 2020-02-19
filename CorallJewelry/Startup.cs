@@ -39,21 +39,21 @@ namespace CorallJewelry
             });
             services.AddMvc();
             services.AddDbContextPool<FrontendContext>(
-               options => options.UseMySql("Server=localhost;Database=CorallJewelry;User=u0893_adminDB;Password=snRq40~6;",
+               options => options.UseMySql("Server=localhost;Database=u0959678_coralljewelry;User=u0959_admcorall2;Password=sOq2e&032;",
                    mySqlOptions =>
                    {
                        mySqlOptions.ServerVersion(new Version(5, 6, 45), ServerType.MySql);
                    }
            ));
             services.AddDbContextPool<BackendContext>(
-              options => options.UseMySql("Server=localhost;Database=CorallJewelry;User=u0893_adminDB;Password=snRq40~6;",
+              options => options.UseMySql("Server=localhost;Database=u0959678_coralljewelry;User=u0959_admcorall2;Password=sOq2e&032;",
                   mySqlOptions =>
                   {
                       mySqlOptions.ServerVersion(new Version(5, 6, 45), ServerType.MySql);
                   }
           ));
             services.AddDbContextPool<MainContext>(
-              options => options.UseMySql("Server=localhost;Database=u0893839_chat;User=u0893_adminDB;Password=snRq40~6;",
+              options => options.UseMySql("Server=localhost;Database=u0959678_chatcj;User=u0959_admcorall2;Password=sOq2e&032;",
                   mySqlOptions =>
                   {
                       mySqlOptions.ServerVersion(new Version(5, 6, 45), ServerType.MySql);

@@ -21,7 +21,7 @@ namespace afc_studio.Models.Entitys
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("Server=localhost;Database=u0893839_chat;User=u0893_adminDB;Password=snRq40~6;");
+            optionsBuilder.UseMySql("Server=localhost;Database=u0959678_chatcj;User=u0959_admcorall2;Password=sOq2e&032;");
             base.OnConfiguring(optionsBuilder);
         }
     }
