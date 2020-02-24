@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div id="multiCarousel" class="carousel slide w-100 mt-5" data-ride="carousel">
-                    <div class="carousel-inner w-100 " role="listbox">
+                    <div class="carousel-inner w-100 justify-content-around" role="listbox">
                         @if (Model.Products != null)
                         {
                             @for (int i = 0; i < Model.Products.Count; i++)
@@ -32,13 +32,13 @@
                                 if (i == 0)
                                 {
                                     <div class="carousel-item active ">
-                                        <img class="d-block col-4 mcircle " width="150" height="150" src="~/products/@Model.Products[i].Images[0].Name">
+                                        <img class="d-block mcircle " width="150" height="150" src="~/products/@Model.Products[i].Images[0].Name">
                                     </div>
                                 }
                                 else
                                 {
                                     <div class="carousel-item">
-                                        <img class="d-block col-4 mcircle " width="150" height="150" src="~/products/@Model.Products[i].Images[0].Name">
+                                        <img class="d-block  mcircle " width="150" height="150" src="~/products/@Model.Products[i].Images[0].Name">
                                     </div>
                                 }
 
@@ -59,6 +59,9 @@
                     <h5 class="font-italic">Скидка 5% на все виды работ любым подписчикам</h5><br>
                 </div>
             </div>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h5 style="color:#c33">В данный момент времени сайт дорабатывается, приносим своим извинения за неудобства!</h5>
         </div>
     </div>
 </section>
@@ -290,23 +293,23 @@
         <div class="row">
             <div class="col-xl">
                 <div class="container-circle cc-first">
-                    <a class="circle" style="background-image:  url(@Url.Content("~/images/productionjewelry-bghover.png"));"></a>
+                    <a class="circle" style="background-image:  url(@Url.Content("~/images/new_service/create.jpg")); background-size: cover;"></a>
                     <a class="circle-header mt-2"><strong><i>Изготовление ювелирных изделий </i></strong></a>
                 </div>
                 <div class="container-circle cc-first-second">
-                    <a class="circle" style="background-image:  url(@Url.Content("~/images/productioncopies-bghover.png"));"></a>
+                    <a class="circle" style="background-image:  url(@Url.Content("~/images/new_service/copy.jpg")); background-size: cover;"></a>
                     <a class="circle-header mt-2"><strong><i>Изготовление копии<br>ювелирных изделий </i></strong></a>
                 </div>
             </div>
             <div class="col-xl">
                 <div class="row">
                     <div class="col-xl container-circle">
-                        <a class="circle" style="background-image: url(@Url.Content("~/images/jewelerstones-bghover.png"));"></a>
-                        <a class="circle-header mt-2"><strong><i>Закрепка камней</i></strong></a>
+                        <a class="circle" style="background-image: url(@Url.Content("~/images/new_service/repair.jpg")); background-size: cover;"></a>
+                        <a class="circle-header mt-2"><strong><i>Ремонт изделий</i></strong></a>
                     </div>
                     <div class="col-xl container-circle">
-                        <a class="circle" style="background-image: url(@Url.Content("~/images/repairbeads-bghover.png"));"></a>
-                        <a class="circle-header mt-2"><strong><i>Ремонт бус </i></strong></a>
+                        <a class="circle" style="background-image: url(@Url.Content("~/images/new_service/gravir.jpg")); background-size: cover;"></a>
+                        <a class="circle-header mt-2"><strong><i>Гравировка изделий </i></strong></a>
                     </div>
                 </div>
                 <div class="row align-items-center justify-content-center" style="margin-top: 15%;">
@@ -320,18 +323,18 @@
                     <img src="~/images/downBorder.png" />
                 </div>
                 <div class="container-circle cc-second-third">
-                    <a class="circle" style="background-image:  url(@Url.Content("~/images/chains-bghover.png"));"></a>
+                    <a class="circle" style="background-image:  url(@Url.Content("~/images/new_service/chain.jpg")); background-size: cover;"></a>
                     <a class="circle-header mt-2"><strong><i>Цепи и браслеты ручного плетения </i></strong></a>
                 </div>
             </div>
             <div class="col-xl">
                 <div class="container-circle cc-third-first">
-                    <a class="circle" style="background-image:  url(@Url.Content("~/images/cleaningjewelry-bghover.png"));"></a>
-                    <a class="circle-header mt-2"><strong><i>Чистка ювелирных изделий </i></strong></a>
+                    <a class="circle" style="background-image:  url(@Url.Content("~/images/new_service/emaling.jpg")); background-size: cover;"></a>
+                    <a class="circle-header mt-2"><strong><i>Эмалирование и гальваника </i></strong></a>
                 </div>
                 <div class="container-circle cc-third-second">
-                    <a class="circle" style="background-image:  url(@Url.Content("~/images/repairjewelry-bghover.png"));"></a>
-                    <a class="circle-header mt-2"><strong><i>Ремонт ювелирных изделий </i></strong></a>
+                    <a class="circle" style="background-image:  url(@Url.Content("~/images/new_service/3d.png")); background-size: cover;"></a>
+                    <a class="circle-header mt-2"><strong><i>3D модели и <br> ЧПУ фрезеровка</i></strong></a>
                 </div>
             </div>
         </div>
@@ -464,10 +467,6 @@
                         Лом может быть любой пробы и формы - корпус часов, кулон,
                         колечки, цепочки, золотые коронки зубов и т.д. - главное, что бы это
                         было настоящим золотом.<br><br>
-                    </li>
-                    <li>
-                        А как быть если лома нет?
-                        Тогда его можно приобрести в любом столичном ломбарде!<br>
                     </li>
                 </ul>
             </div>

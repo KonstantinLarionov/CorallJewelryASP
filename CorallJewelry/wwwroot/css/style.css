@@ -155,6 +155,9 @@ p:before {
     width: 80px;
     margin-left: -5%;
 }
+p {
+    padding-right: 20px;
+}
 /*p:after{*/
 /*    border-right: 2px solid #c33;*/
 /*    border-bottom: 2px solid #c33;*/

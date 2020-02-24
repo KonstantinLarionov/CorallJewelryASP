@@ -19,12 +19,23 @@ namespace CorallJewelry.Controllers.Executors.Home
             public static List<Product> GetProducts(string type)
             {
                 var products = db.Products.Where(x => x.Type == type).Include(x => x.Images).OrderByDescending(x => x.Id).ToList();
+                products.ForEach(x =>
+                {
+                    if (x.Images.Count == 0)
+                    {
+                        x.Images.Add(new Image() { Name = "header-logo.png" });
+                    }
+                });
                 return products;
             }
 
             public static Product GetProduct(int id)
             {
                 var prod = db.Products.Where(x => x.Id == id).Include(x => x.Images).FirstOrDefault();
+                if (prod.Images.Count == 0)
+                {
+                    prod.Images.Add(new Image() { Name = "header-logo.png" });
+                }
                 return prod;
             }
 
@@ -38,6 +49,13 @@ namespace CorallJewelry.Controllers.Executors.Home
                 IndexModel index = new IndexModel();
                 index.Contacts = GetContact();
                 index.Products = db.Products.OrderByDescending(x => x.Id).Include(x => x.Images).Take(6).ToList();
+                index.Products.ForEach(x =>
+                {
+                    if (x.Images.Count == 0)
+                    {
+                        x.Images.Add(new Image() { Name = "header-logo.png" });
+                    }
+                });
                 return index;
             }
         }
@@ -95,7 +113,14 @@ namespace CorallJewelry.Controllers.Executors.Home
             {
                
                     var prod = db.Products.Where(x => x.Type == type).Include(x => x.Images).OrderByDescending(x => x.Id).ToList();
-                    return prod;
+                prod.ForEach(x =>
+                {
+                    if (x.Images.Count == 0)
+                    {
+                        x.Images.Add(new Image() { Name = "header-logo.png" });
+                    }
+                });
+                return prod;
                 
             }
             public static ProductsModel GetModel(string type)
@@ -108,6 +133,12 @@ namespace CorallJewelry.Controllers.Executors.Home
             private static Product GetProduct(int id)
             {
                 var prod = db.Products.Where(x => x.Id == id).Include(x => x.Images).FirstOrDefault();
+
+                if (prod.Images.Count == 0)
+                {
+                    prod.Images.Add(new Image() { Name = "header-logo.png" });
+                }
+
                 return prod;
             }
             public static ProductModel GetModel(int id)

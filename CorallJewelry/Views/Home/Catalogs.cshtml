@@ -1,0 +1,99 @@
+﻿@model CorallJewelry.Models.FrontModel.CatalogModel
+<section class="mt-5">
+    <div class="container-fluid ">
+        <div class="row align-items-center mb-5 justify-content-center text-center">
+            <h2>Наши Каталоги</h2>
+        </div>
+
+        <div class="row justify-content-center text-center">
+            <div class="col-xl">
+                <h4 class="" style="font-size: 20px;">
+                    В разделе представлены все наши калатоги, где внутри каждого из них вы найдете что то для себя. <br><br> Данный раздел <strong><i> постоянно обновляется</i></strong>, всегда новые и интересные работы!
+                </h4>
+            </div>
+        </div>
+        <div class="row justify-content-center align-items-center mt-5 mb-5">
+            <img src="../images/reviews-bg2.png" />
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="col-xl-3 ">
+                <div style="border: 1px solid #c33;" class="pl-3 pr-3">
+                    <div class="row justify-content-center ml-2 mr-2 mt-2 mb-3">
+                        <h5><i>Все каталоги Corall Jewelry</i></h5>
+                    </div>
+                    <div class="row justify-content-center ml-2 mr-2">
+                        @for (int i = 0; i < Model.Catalogs.Count; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <button class="btn-block btn btn-outline-danger mb-4" data-toggle="collapse" data-target="#@Model.Catalogs[i].Id" aria-expanded="false" aria-controls="@Model.Catalogs[i].Id">@Model.Catalogs[i].Name</button>
+                            }
+                            else
+                            {
+                                <button class="btn-block btn btn-danger mb-4" data-toggle="collapse" data-target="#@Model.Catalogs[i].Id" aria-expanded="false" aria-controls="@Model.Catalogs[i].Id">@Model.Catalogs[i].Name</button>
+                            }
+                            for (int j = 0; j < Model.Catalogs[i].Category.Count; j++)
+                            {
+                                <div id="@Model.Catalogs[i].Id" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <a class="btn-block btn btn-outline-danger mb-4">@Model.Catalogs[i].Category[j].Name</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+            @*<div class="col-xl-9">
+                @for (int i = 0; i < Model.Products.Count; i += 3)
+                {
+                    <div class="row mt-2">
+                        <div class="col-xl">
+                            <div class="card shadow1dp" style="width: 16rem;">
+                                <img class="card-img-top" src="~/products/@Model.Products[i].Images[0].Name" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.Products[i].Name</h5>
+                                    <h6 class="card-text">@Model.Products[i].Price P</h6>
+                                    <a href="~/Home/Product?id=@Model.Products[i].Id" class="btn btn-outline-primary mt-2">Описание</a>
+                                </div>
+                            </div>
+                        </div>
+                        @try
+                        {
+                            <div class="col-xl">
+                                <div class="card shadow1dp" style="width: 16rem;">
+                                    <img class="card-img-top" src="~/products/@Model.Products[i + 1].Images[0].Name" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@Model.Products[i + 1].Name</h5>
+                                        <h6 class="card-text">@Model.Products[i + 1].Price P</h6>
+                                        <a href="~/Home/Product?id=@Model.Products[i + 1].Id" class="btn btn-outline-primary mt-2">Описание</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl">
+                                <div class="card shadow1dp" style="width: 16rem;">
+                                    <img class="card-img-top" src="~/products/@Model.Products[i + 2].Images[0].Name" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@Model.Products[i + 2].Name</h5>
+                                        <h6 class="card-text">@Model.Products[i + 2].Price P</h6>
+                                        <a href="~/Home/Product?id=@Model.Products[i + 2].Id" class="btn btn-outline-primary mt-2">Описание</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        catch { }
+                    </div>
+                }
+
+
+
+            </div>*@
+        </div>
+    </div>
+</section>
