@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "_LayoutAdmin";
 }
-@model afc_studio.Models.Objects.ChatPage
+@model List<ChatModule.Models.Chat.Objects.Dialog>;
 
 <section>
     <div class="row">
@@ -12,55 +12,120 @@
                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
-
                         </ul>
                     </div>
                 </div>
                 <div class="card-content collapse show">
                     <div class="card-body">
                     </div>
-                    <!--CHAT-->
-                    <div id="chat-icon" onclick="chat();" title="Чат с оператором" class=" chat-wrap-min"></div>
-                    <div id="chat-wrap" class="chat-wrap-max chat-hidden" style=" border-radius: 5px; box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.20); ">
-                        <div class="row chat-shadow-4dp">
-                            <div class="col-2">
-                               
-                            </div>
-                            <div class="col-8 text-center">
-                                <select id="selectBox" onchange="changeFunc();" style="width: 80%; margin-top: 2%;">
-                                    <option selected disabled value="">Выберите диалог из списка</option>
-                                    @for (int i = 0; i < Model.Dialogs.Count; i++)
+
+
+
+                    <div class="wrapper-body-chat">
+                        <div class="body-chat">
+                            <div class="list-dialogs" id="listDialog">
+                                <div class="list-dialogs-head">
+                                    <label class="header-dialogs">Список диалогов</label>
+                                    <button class="hide-dialogs" id="hiddeDialog">
+                                        <<
+                                    </button>
+                                </div>
+                                <div class="list-dialogs-body">
+                                    @for (int i = 0; i < Model.Count; i++)
                                     {
-
-                                        <option value="@Model.Dialogs[i].Name">@Model.Dialogs[i].Name</option>
-
+                                        <div class="dialog-item" onclick="SelectDialog('@Model[i].Identity')">
+                                            <label style="color: #7c8eaa;"><strong>Ник:</strong></label>
+                                            <label> @{string name = new string(Model[i].Identity.Take(10).ToArray());} @name</label>
+                                            <label style="color: #7c8eaa;"><strong> Дата: </strong></label>
+                                            <label> @Model[i].DateCreate.ToShortDateString()</label>
+                                        </div>
                                     }
-
-                                </select>
-                            </div>
-                            <div class="col-2 text-center" onclick="chat();">
-                                <div title="Свернуть чат" class="chat-blur text-center row justify-content-center align-content-lg-center" style="cursor: pointer; margin: 0 auto;">
-                                    <label class="m-1" style="font-size: 12px;"><b>X</b></label>
                                 </div>
                             </div>
-                        </div>
-                        <div id="chat-list" class="m-1" style="height: 400px; padding: 5px; overflow: auto;">
-                            <!--<div class="adminchat-msg-admin">Здравствуйте, чем я могу помочь вам?</div>-->
-                        </div>
-                        <div id="chat-area" class="row m-1 mb-0">
-                            <div class="col-10">
-                                    <textarea id="chat-message" class="w-100 shadow-4dp" placeholder="Напишите нам тут" rows="3" style="padding: 1px; resize: none; font-size: 13px;"></textarea>
-                            </div>
-                            <div class="col-2">
-                                <div class="row justify-content-center" >
-                                    <a><img title="Отправить" width="70" height="70" src="~/chat/files/plane.png" class=" p-0 chat-shadow-4dp" onclick="SendMessage();" style="border-radius: 50%; cursor: pointer;"></a>
+                            <div class="main-chat">
+                                <div class="list-messages">
+                                    <div class="header-list-messages">
+                                        <label>Диалог с: &nbsp </label>
+                                        <label id="nameUser"></label>
+                                    </div>
+                                    <div class="body-list-messages" id="chatroom">
+                                    </div>
+                                    <div class="inputs-messages">
+                                        <textarea id="message"></textarea>
+                                        <button id="sendBtn"><strong> PUSH</strong></button>
+                                        <button> <strong>PIN </strong></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--ENDCHAT-->
+
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<script src="~/chatSR/signalr/dist/browser/signalr.min.js"></script>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/chat/js/jquerry.cookie.js"></script>
+
+<script src="~/chatSR/admin/adminScript.js"></script>
+<script>
+    const hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl("/chat")
+        .build();
+
+    var dialogId = "";
+
+    function getCookie(name) {
+        let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
+    function SelectDialog(id) {
+        dialogId = id;
+        $("#nameUser").text(dialogId);
+        $("#chatroom").html("");
+
+        $.ajax({
+            method: "GET",
+            url: "/Admin/GetHistory?idDialog=" + id,
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var date = new Date(data[i].date);
+                    if (data[i].user["login"] !== null) {
+                        $("#chatroom").append('<div class="mine-message"><div class="head-message">Admin</div><div class="message">' + data[i].text + ' </div><div class="time-message"> Время отправки: ' + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + '</div></div></div>')
+                    }
+                    else {
+                        $("#chatroom").append('<div class="notmine-message"><div class="head-message">User</div><div class="message">' + data[i].text + ' </div><div class="time-message"> Время отправки: ' + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + '</div></div></div>')
+                    }
+                }
+            }
+        })
+    }
+
+    hubConnection.on("Send", function (data) {
+
+        var array = JSON.parse(data)
+        var dt = new Date();
+        var time = (dt.getHours() + "").padStart(2, "0") + ":" + (dt.getMinutes() + "").padStart(2, "0") + ":" + (dt.getSeconds() + "").padStart(2, "0");
+        if (array.Item1.Login !== null) {
+            $("#chatroom").append('<div class="mine-message"><div class="head-message">Admin</div><div class="message">' + array.Item2 + ' </div><div class="time-message"> Время отправки: ' + time + '</div></div></div>')
+        }
+        else {
+            $("#chatroom").append('<div class="notmine-message"><div class="head-message">User</div><div class="message">' + array.Item2 + ' </div><div class="time-message"> Время отправки: ' + time + '</div></div></div>')
+        }
+
+    });
+
+    document.getElementById("sendBtn").addEventListener("click", function (e) {
+        let message = $("#message").val();
+        hubConnection.invoke("Send", message, getCookie("login"), getCookie("password"), dialogId);
+    });
+
+    hubConnection.start();
+</script>

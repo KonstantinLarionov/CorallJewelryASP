@@ -79,6 +79,16 @@ namespace CorallJewelry.Controllers
         {
             return View();
         }
+
+        public IActionResult Catalogs()
+        {
+            return View(AllExecutors.CatalogsExecutor.GetModel());
+        }
+        public IActionResult Catalogs(int id, string name)
+        {
+            return View(AllExecutors.CatalogsExecutor.GetModel(id, name));
+        }
+
         [HttpPost]
         public IActionResult Contact(string contact, string message)
         {

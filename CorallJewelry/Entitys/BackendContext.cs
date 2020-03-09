@@ -16,7 +16,8 @@ namespace CorallJewelry.Entitys
         public DbSet<Product> Products { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<User> Users { get; set; }
-
+        public DbSet<Catalog> Catalogs { get; set; }
+        public DbSet<ItemCatalog> Items { get; set; }
         public BackendContext(DbContextOptions options) : base(options)
         {
             Database.EnsureCreated();

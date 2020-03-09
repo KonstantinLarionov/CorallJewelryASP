@@ -8,5 +8,6 @@ namespace CorallJewelry.Models.FrontModel
     public class CatalogModel : BaseFrontend
     {
         public List<Catalog> Catalogs { get; set; }
+        public List<ItemCatalog> Items { get; set; }
     }
 }

@@ -19,11 +19,18 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\admin\.idea\chameleon-admin-master.iml" />
     <None Include="wwwroot\admin\src\scss\bootstrap-extended\.sass-cache\b161be96449978188ab92f1e37bbeda94f2952ce\buttons.scssc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\%40microsoft\" />
+    <Folder Include="wwwroot\chatSR\admin\" />
+    <Folder Include="wwwroot\products_FULL\" />
   </ItemGroup>
 
 </Project>

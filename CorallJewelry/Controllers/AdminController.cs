@@ -14,6 +14,7 @@ using CorallJewelry.Controllers.Executors.Admin;
 using System.Security.Cryptography;
 using afc_studio.Models.Entitys;
 using System.Text.Json;
+using ChatModule.Models.Chat.Entitys;
 
 namespace CorallJewelry.Controllers
 {
@@ -21,6 +22,7 @@ namespace CorallJewelry.Controllers
     {
         #region Header
         private readonly ILogger<HomeController> _logger;
+        private ChatContext chat = new ChatContext((new DbContextOptions<ChatContext>()));
         private BackendContext db { get; set; }
         private MainContext db2 { get; set; }
         public AdminController(ILogger<HomeController> logger)
@@ -44,6 +46,8 @@ namespace CorallJewelry.Controllers
             var admin = db.Users.Where(u => u.Login == login && u.Password == password && u.Type == TypeUser.Admin).ToList();
             if (admin.Count != 0)
             {
+                HttpContext.Request.Cookies.Append(new KeyValuePair<string, string>("login", login));
+                HttpContext.Request.Cookies.Append(new KeyValuePair<string, string>("password", password));
                 HttpContext.Session.SetString("login", login);
                 HttpContext.Session.SetString("password", password);
                 return true;
@@ -55,6 +59,7 @@ namespace CorallJewelry.Controllers
         }
         #endregion
 
+
         #region Get
         public IActionResult Products(string type = "all")
         {
@@ -65,14 +70,14 @@ namespace CorallJewelry.Controllers
             var model = AllExecutors.ProductsExecutor.GetProducts(type);
             return View(model);
         }
-        public IActionResult Chats()
-        {
-            //if (!Auth())
-            //{
-            //    return View("Login");
-            //}
-            return View(AllExecutors.ChatExecutor.GetModel());
-        }
+        //public IActionResult Chats()
+        //{
+        //    //if (!Auth())
+        //    //{
+        //    //    return View("Login");
+        //    //}
+        //    return View(AllExecutors.ChatExecutor.GetModel());
+        //}
         public IActionResult Contacts()
         {
             if (!Auth())
@@ -81,6 +86,16 @@ namespace CorallJewelry.Controllers
             }
             var cont = AllExecutors.ContactExecutor.GetContact();
             return View(cont);
+        }
+
+        public IActionResult Catalogs()
+        {
+            return View(AllExecutors.CatalogsExecutor.GetCatalogs());
+        }
+        public IActionResult Category(int id)
+        {
+            ViewBag["idCatalog"] = id;
+            return View(AllExecutors.CatalogsExecutor.GetCategories(id));
         }
         public IActionResult Prices()
         {
@@ -113,6 +128,8 @@ namespace CorallJewelry.Controllers
         {
             if (AllExecutors.LoginExecutor.OnAuth(login, password, HttpContext))
             {
+                HttpContext.Response.Cookies.Append("login", login);
+                HttpContext.Response.Cookies.Append("password", password);
                 var model = AllExecutors.ProductsExecutor.GetProducts("all");
                 return View("Products",model);
             }
@@ -223,6 +240,7 @@ namespace CorallJewelry.Controllers
             return View("Requests",model);
         }
         #endregion
+
         #region ChatPost
         [HttpPost]
         public string GetDialog(string user)
@@ -274,6 +292,50 @@ namespace CorallJewelry.Controllers
             return null;
         }
         #endregion
+
+        #region PostCatalogs
+        [HttpPost]
+        public IActionResult AddCatalogs(string name)
+        {
+            AllExecutors.CatalogsExecutor.AddCatalog(name);
+            return View("Catalogs", AllExecutors.CatalogsExecutor.GetCatalogs());
+        }
+        [HttpPost]
+        public IActionResult RemoveCatalogs(int id)
+        {
+            AllExecutors.CatalogsExecutor.RemoveCatalog(id);
+            return View("Catalogs", AllExecutors.CatalogsExecutor.GetCatalogs());
+        }
+
+
+
+        [HttpPost]
+        public IActionResult AddCategory(int id, string name)
+        {
+            AllExecutors.CatalogsExecutor.AddCategory(id, name);
+            return View("Category", AllExecutors.CatalogsExecutor.GetCategories(id));
+        }
+        [HttpPost]
+        public IActionResult RemoveCategory(int id, int idcateg)
+        {
+            AllExecutors.CatalogsExecutor.RemoveCategory(id, idcateg);
+            return View("Category", AllExecutors.CatalogsExecutor.GetCategories(id));
+        }
+        #endregion
+
+        public IActionResult Chats()
+        {
+            var dialog = chat.Dialogs.OrderByDescending(x => x.Id).ToList();
+
+            return View(dialog);
+        }
+        public object GetHistory(string idDialog)
+        {
+            var di = chat.Dialogs.Where(x => x.Identity == idDialog).Include(x => x.Messages).ThenInclude(x => x.User).FirstOrDefault();
+            var json = Json(di.Messages);
+            return json.Value;
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -1,0 +1,248 @@
+﻿body {
+    margin 0;
+}
+
+.wrappall {
+    position: relative;
+    margin-left: 4%;
+    width: 90%;
+    height: 300px;
+    text-align: center;
+    color: white;
+    font-size: large;
+    border-radius: 5px;
+}
+
+.bodyall {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.14), 0 2px 2px 0 rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20);
+    padding-top: 10px;
+    padding-left: 10px;
+    overflow: hidden;
+}
+
+.messageall {
+    height: 30px;
+    width: 90%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+    background-color: rgba(45, 105, 135, 0.8);
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.14), 0 2px 2px 0 rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20);
+}
+
+.chat2 {
+    width: 300px;
+    height: 0px;
+    border: solid 1px #EEE;
+    display: flex;
+    padding: 10px;
+    transition: 0.6s;
+    position: fixed;
+    bottom: 10px; /* отступ кнопки от нижнего края страницы*/
+    right: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    border-radius: 10px;
+    margin-top:10px;
+}
+
+.chat {
+    
+    height: 0px;
+    border: solid 1px #EEE;
+    display: flex;
+    flex-direction: column;
+
+    position: fixed;
+    bottom: 5px; /* отступ кнопки от нижнего края страницы*/
+    right: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.14), 0 2px 2px 0 rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20);
+    z-index: 20;
+}
+
+.messages {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    border-radius: 20px;
+    padding: 8px 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.yours {
+    align-items: flex-start;
+}
+
+    .yours .message {
+        margin-right: 25%;
+        background-color: #eee;
+        position: relative;
+    }
+
+        .yours .message.last:before {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            bottom: 0;
+            left: -7px;
+            height: 20px;
+            width: 20px;
+            background: #eee;
+            border-bottom-right-radius: 15px;
+        }
+
+        .yours .message.last:after {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            bottom: 0;
+            left: -10px;
+            width: 10px;
+            height: 20px;
+            background: white;
+            border-bottom-right-radius: 10px;
+        }
+
+.mine {
+    align-items: flex-end;
+}
+
+    .mine .message {
+        color: white;
+        margin-left: 25%;
+        background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
+        background-attachment: fixed;
+        position: relative;
+    }
+
+        .mine .message.last:before {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            bottom: 0;
+            right: -8px;
+            height: 20px;
+            width: 20px;
+            background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
+            background-attachment: fixed;
+            border-bottom-left-radius: 15px;
+        }
+
+        .mine .message.last:after {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            bottom: 0;
+            right: -10px;
+            width: 10px;
+            height: 20px;
+            background: white;
+            border-bottom-left-radius: 10px;
+        }
+
+.inputmessage {
+    width: 80%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.sendmessage {
+    height: 80%;
+    width: 18%;
+    margin-left: 2%;
+    text-align: center;
+    border-color: black;
+    border-width: 3px;
+    border-radius: 20px;
+}
+
+.sendmessage {
+}
+
+.sends {
+    margin-top: 5%;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+    .sends:hover {
+        background-color: #eeeeee;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .sends:active {
+        box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    }
+
+.head {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 15px; /* отступ кнопки от нижнего края страницы*/
+    right: 20px;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.14), 0 2px 2px 0 rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20);
+    border-radius: 50%;
+    z-index: 21;
+    height: 50px;
+    width: 50px;
+    background-color: white;
+}
+
+    .head:hover {
+        transition: 0.7s;
+        background-color: #eeeeee;
+    }
+
+.pulse {
+    
+    animation: pulse 2s infinite;
+}
+
+    .pulse:hover {
+        animation: none;
+    }
+
+@-webkit-keyframes pulse {
+    0% {
+        box-shadow: 0 0 2px 0 rgba(0,0,0,0.14), 0 2px 2px 0 rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20);
+    }
+
+    70% {
+        box-shadow: 0 0 2px 0 rgba(0,0,0,0.14), 10px 12px 12px 0 rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20);
+    }
+
+    100% {
+        box-shadow: 0 0 2px 0 rgba(0,0,0,0.14), 0 2px 2px 0 rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 2px 0 rgba(0,0,0,0.14), 0 2px 2px 0 rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20);
+    }
+
+    70% {
+        box-shadow: 0 0 2px 0 rgba(0,0,10,0.14), 10px 12px 12px 0 rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20);
+    }
+
+    100% {
+        box-shadow: 0 0 2px 0 rgba(0,0,0,0.14), 0 2px 2px 0 rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20);
+    }
+}

@@ -1,0 +1,84 @@
+﻿@{ Layout = "_LayoutAdmin"; }
+@model List<Catalog>
+<section>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Таблица редактирования каталогов на <a href="">Corall Jewelry</a></h4>
+                    <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            @*  <li><a data-action="collapse"><i class="ft-minus"></i></a></li>*@
+                            @*<li><a data-action="reload" href="/Admin/Contacts"><i class="ft-rotate-cw"></i></a></li>*@
+                            @*<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                <li><a data-action="close"><i class="ft-x"></i></a></li>*@
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <p>Добавить новый Каталог</p>
+                    </div>
+                    <div class="table-responsive">
+                        <form action="/Admin/AddCatalogs" method="post">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Название</th>
+                                        <th scope="col">Действие</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" name="name" class="form-control" value="" /></td>
+                                        <td>
+                                            <button name="action" value="add" type="submit" class="btn btn-icon btn-success mr-1"><i class="ft-check"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <p><h3>Каталоги Corall Jewelry</h3></p>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Название</th>
+                                    <th scope="col">Действие</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int j = 0; j < Model.Count; j++)
+                                {
+                                    <form action="/Admin/RemoveCatalogs" method="post">
+                                        <tr>
+
+                                            <td><a href="/Admin/Category/?id=@Model[j].Id" name="action" class="form-control btn btn-icon btn-danger mr-1" value="go">@Model[j].Name</a></td>
+                                            <td>
+                                                <input type="hidden" name="id" class="form-control" value="@Model[j].Id" />
+                                                <button name="action" value="delete" type="submit" class="btn btn-icon btn-danger mr-1"><i class="ft-delete"></i></button>
+                                            </td>
+                                        </tr>
+
+                                    </form>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>

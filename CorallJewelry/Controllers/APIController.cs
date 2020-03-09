@@ -70,8 +70,6 @@ namespace afc_studio.Controllers
         [HttpPost]
         public string SendMessage(string text, string dialog, string user, string typeuser = "unnamed", int dialog_num = 0)
         {
-
-
             var telega = new Telegram("1001206813:AAFdrMx5RTZy71AKbBy5OVO6FHfyeXNBP4g");
             telega.SendMessage("У вас новое сообщение в чате! Проверьте Панель администратора...", "1072967682");
             telega.SendMessage("Ссылка в панель: https://korall56.ru/Admin/Chats", "1072967682");

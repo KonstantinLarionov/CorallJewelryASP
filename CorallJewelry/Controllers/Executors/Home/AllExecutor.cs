@@ -149,5 +149,30 @@ namespace CorallJewelry.Controllers.Executors.Home
                 return product;
             }
         }
+        public static class CatalogsExecutor
+        {
+            public static CatalogModel GetModel()
+            {
+                CatalogModel catalogs = new CatalogModel();
+                catalogs.Contacts = GetContact();
+                catalogs.Catalogs = db.Catalogs.Include(x=>x.Category).ToList();
+                return catalogs;
+            }
+
+            public static CatalogModel GetModel(int id, string name)
+            {
+                CatalogModel catalogs = new CatalogModel();
+                catalogs.Contacts = GetContact();
+                catalogs.Catalogs = db.Catalogs.Include(x => x.Category).ToList();
+                catalogs.Catalogs.Where(x => x.Id == id).FirstOrDefault().Items = db.ItemsCatalog.Where(x=>x.NameCategory == name && x.IdCatalog == id).ToList();
+                return catalogs;
+            }
+
+            private static Contacts GetContact()
+            {
+                var conts = db.Contacts.ToList();
+                return conts.Count != 0 ? conts.Last() : new Contacts();
+            }
+        }
     }
 }

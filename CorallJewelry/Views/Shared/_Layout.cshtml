@@ -9,7 +9,12 @@
     <link rel="stylesheet" href="~/css/fontawesome/css/font-awesome.css">
     <!-- CHAT -->
     <link href="~/chat/css/clientchat.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/chatSR/styleChat.css" />
+
     <link rel="icon" href="~/favicon.ico">
+    <script src="~/js/main.js"></script>
+
     <!-- ENDCHAT -->
 </head>
 <body style="overflow-x: hidden; scroll-behavior: smooth;">
@@ -32,8 +37,8 @@
                             <a style="text-decoration: none; color: brown;" href="~/Home/Index#aboutService"><h4>Услуги</h4></a>
                         </div>
                         @*<div class="col text-center ml-4">
-                            <a style="text-decoration: none; color: brown;" href="~/Home/Catalogs"><h4>Каталоги</h4></a>
-                        </div>*@
+                                <a style="text-decoration: none; color: brown;" href="~/Home/Catalogs"><h4>Каталоги</h4></a>
+                            </div>*@
                     </div>
                 </div>
                 <div class="col">
@@ -85,11 +90,11 @@
 
         <div class="bord-line"></div>
         <div class="row justify-content-around">
-            <a  href="~/Home/PriceList" style="text-decoration: none; color: brown;"><h4>Цены</h4></a>
+            <a href="~/Home/PriceList" style="text-decoration: none; color: brown;"><h4>Цены</h4></a>
             <a href="~/Home/Index#aboutService" style="text-decoration: none; color: brown;"><h4>Услуги</h4></a>
             @*<a style="text-decoration: none; color: brown;"><h4>Каталоги</h4></a>*@
             <a href="~/Home/Products" style="text-decoration: none; color: brown;"><h4>Наши работы</h4></a>
-            <a href="~/Home/Contact"style="text-decoration: none; color: brown;"><h4>Контакты</h4></a>
+            <a href="~/Home/Contact" style="text-decoration: none; color: brown;"><h4>Контакты</h4></a>
         </div>
         <div class="bord-line"></div>
         <div class="row mb-3">
@@ -148,36 +153,48 @@
     </section>
 
     <!--CHAT-->
-    <div id="chat-icon" onclick="chat();" title="Чат с оператором" class="position-fixed chat-wrap-min"></div>
-    <div id="chat-wrap" class="position-fixed chat-wrap-max chat-hidden" style="border-radius: 5px; box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.20); ">
-        <div class="row chat-shadow-4dp">
-            <div class="col-2">
-                <div class="row justify-content-center align-content-lg-center">
-                    <div title="Мы на связи" class="shadow-6dp" style="background-color: lawngreen; width: 18px; height: 18px; margin-top: 4px; border-radius: 50%; border: 1px solid #bdbdbd; cursor: pointer;"></div>
+    @*<div id="chat-icon" onclick="chat();" title="Чат с оператором" class="position-fixed chat-wrap-min"></div>
+        <div id="chat-wrap" class="position-fixed chat-wrap-max chat-hidden" style="border-radius: 5px; box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.20); ">
+            <div class="row chat-shadow-4dp">
+                <div class="col-2">
+                    <div class="row justify-content-center align-content-lg-center">
+                        <div title="Мы на связи" class="shadow-6dp" style="background-color: lawngreen; width: 18px; height: 18px; margin-top: 4px; border-radius: 50%; border: 1px solid #bdbdbd; cursor: pointer;"></div>
+                    </div>
+                </div>
+                <div class="col-8 text-center">
+                    <span>Оператор онлайн</span>
+                </div>
+                <div class="col-2 text-center" onclick="chat();">
+                    <div title="Свернуть чат" class="chat-blur text-center row justify-content-center align-content-lg-center" style="cursor: pointer; margin: 0 auto;">
+                        <label class="m-1" style="font-size: 12px;"><b>X</b></label>
+                    </div>
                 </div>
             </div>
-            <div class="col-8 text-center">
-                <span>Оператор онлайн</span>
-            </div>
-            <div class="col-2 text-center" onclick="chat();">
-                <div title="Свернуть чат" class="chat-blur text-center row justify-content-center align-content-lg-center" style="cursor: pointer; margin: 0 auto;">
-                    <label class="m-1" style="font-size: 12px;"><b>X</b></label>
+            <div id="chat-list" class="m-1" style="height: 400px; padding: 5px; overflow: auto;">*@
+    <!--<div class="adminchat-msg-admin">Здравствуйте, чем я могу помочь вам?</div>-->
+    @*</div>
+            <div id="chat-area" class="row m-1 mb-0">
+                <div style="width: 79%; margin-right: 1%;">
+                    <textarea id="chat-message" class="w-100 shadow-4dp" placeholder="Напишите нам тут" rows="3" style="padding: 1px; resize: none; font-size: 13px;"></textarea>
+                </div>
+                <div style="width: 20%; height: 61px;">
+                    <a><img title="Отправить" src="~/chat/files/plane.png" class=" p-0 h-100 chat-shadow-4dp" onclick="SendMessage();" style="height: calc(1em * 1.5 * 3); border-radius: 50%; cursor: pointer;"></a>
                 </div>
             </div>
-        </div>
-        <div id="chat-list" class="m-1" style="height: 400px; padding: 5px; overflow: auto;">
-            <!--<div class="adminchat-msg-admin">Здравствуйте, чем я могу помочь вам?</div>-->
-        </div>
-        <div id="chat-area" class="row m-1 mb-0">
-            <div style="width: 79%; margin-right: 1%;">
-                <textarea id="chat-message" class="w-100 shadow-4dp" placeholder="Напишите нам тут" rows="3" style="padding: 1px; resize: none; font-size: 13px;"></textarea>
-            </div>
-            <div style="width: 20%; height: 61px;">
-                <a><img title="Отправить" src="~/chat/files/plane.png" class=" p-0 h-100 chat-shadow-4dp" onclick="SendMessage();" style="height: calc(1em * 1.5 * 3); border-radius: 50%; cursor: pointer;"></a>
-            </div>
-        </div>
-    </div>
+        </div>*@
     <!--ENDCHAT-->
+
+    <!--PLUGIN CHAT-->
+    <div class="head pulse" onclick="closeChat()" id="head"><div><img src="~/resources/message.png" width="30" height="30"> </div></div>
+    <div class="chat" id="mainChat" style="height:0px;bottom: 5px; overflow: hidden;">
+        <div style="display: none" id="bufferMess"></div>
+        <div id="bodychat" style="width: 100%;"></div>
+    </div>
+    <div class="chat2" id="inmessage" style="height: 0px; display: none;">
+        <input type="text" name="inputmessage" class="inputmessage" id="inputMessage">
+        <a name="send" class="sendmessage" onclick="Send()"><img src="~/resources/plane.png" width="50" height="50" id="sendBtn" class="sends"></a>
+    </div>
+    <!--PLUGIN CHAT-->
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -186,7 +203,41 @@
     <script src="~/js/main.js"></script>
 
     <script src="~/chat/js/jquerry.cookie.js"></script>
-    <script src="~/chat/js/main.js"></script>
+    @*<script src="~/chat/js/main.js"></script>*@
+    <script src="~/chatSR/signalr/dist/browser/signalr.min.js"></script>
+    <script>
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/chat")
+            .build();
+        hubConnection.on("Send", function (array_message) {
+            let array_message2 = JSON.parse(array_message);
+            console.log(array_message2);
+            if (array_message2.Item1.Login == null) {
+                var message = '<div class="mine messages"><div class="message last">' + array_message2.Item2 + '</div></div>';
+                $('#bodychat').append(message);
+                $('#bodychat').animate({ scrollTop: $('#bodychat').prop('scrollHeight') }, 500);
+
+            } else {
+                var message2 = '<div class="yours messages"><div class="message last">' + array_message2.Item2 + '</div></div>';
+                $('#bodychat').append(message2);
+                $('#bodychat').animate({ scrollTop: $('#bodychat').prop('scrollHeight') }, 500);
+            }
+        });
+        function Send() {
+            let message = document.getElementById("inputMessage").value;
+            if (message != "") {
+                document.getElementById("inputMessage").value = "";
+                hubConnection.invoke("Send", message, "", "", "");
+            }
+        }
+        $(document).keydown(function (e) {
+            if (e.keyCode === 13) {
+                Send();
+            }
+        });
+        hubConnection.start();
+    </script>
+    <script src="~/chatSR/scriptChat.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

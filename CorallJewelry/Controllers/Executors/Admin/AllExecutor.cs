@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,7 +45,8 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 {
                     products = db.Products.Include(x => x.Images).OrderByDescending(x => x.Id).ToList();
                 }
-                else {
+                else
+                {
                     products = db.Products.Where(x => x.Type == type).Include(x => x.Images).OrderByDescending(x => x.Id).ToList();
                 }
 
@@ -51,7 +55,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
 
             public static void AddProducts(List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type)
             {
-                List<Image> imagesAdd = LoadImage(images);
+                List<CorallJewelry.Models.Image> imagesAdd = LoadImage(images);
 
                 Product product = new Product()
                 {
@@ -89,24 +93,69 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 product.Weight = weight;
                 db.SaveChanges();
             }
-
-            private static List<Image> LoadImage(List<IFormFile> images)
+            private static List<CorallJewelry.Models.Image> LoadImage(List<IFormFile> images)
             {
-                List<Image> imagesAdd = new List<Image>();
+                List<CorallJewelry.Models.Image> imagesAdd = new List<CorallJewelry.Models.Image>();
                 if (images != null && images.Count() != 0)
                 {
                     foreach (var file in images)
                     {
-                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\products", file.FileName);
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\products_FULL", file.FileName);
+
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                             file.CopyTo(stream);
                         }
-                        imagesAdd.Add(new Image() { Name = file.FileName });
+                        Resizer(path);
+                        imagesAdd.Add(new CorallJewelry.Models.Image() { Name = file.FileName });
                     }
                 }
                 return imagesAdd;
             }
+            private static void Resizer(string inputPath)
+            {
+                const int size = 600;
+                const int quality = 75;
+
+                using (var image = new Bitmap(System.Drawing.Image.FromFile(inputPath)))
+                {
+                    int width, height;
+                    if (image.Width > image.Height)
+                    {
+                        if (image.Width <= size)
+                        {
+                            FileInfo filea = new FileInfo(inputPath);
+                            image.Save(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\products", filea.Name));
+                            return;
+                        }
+                        width = size;
+                        height = Convert.ToInt32(image.Height * size / (double)image.Width);
+                    }
+                    else
+                    {
+                        if (image.Height <= size)
+                        {
+                            FileInfo filea = new FileInfo(inputPath);
+                            image.Save(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\products", filea.Name));
+                            return;
+                        }
+                        width = Convert.ToInt32(image.Width * size / (double)image.Height);
+                        height = size;
+                    }
+                    var resized = new Bitmap(width, height);
+                    using (var graphics = Graphics.FromImage(resized))
+                    {
+                        graphics.CompositingQuality = CompositingQuality.HighSpeed;
+                        graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        graphics.CompositingMode = CompositingMode.SourceCopy;
+                        graphics.DrawImage(image, 0, 0, width, height);
+                    }
+                    FileInfo file = new FileInfo(inputPath);
+
+                    resized.Save(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\products", file.Name));
+                }
+            }
+
         }
         public static class PriceExecutor
         {
@@ -205,7 +254,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
         {
             private static List<Dialog> GetDialogs()
             {
-                var dialogs = chat.Dialogs.OrderByDescending(x=>x.Id).ToList();
+                var dialogs = chat.Dialogs.OrderByDescending(x => x.Id).ToList();
                 return dialogs;
             }
             public static ChatPage GetModel()
@@ -214,6 +263,155 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 chatPage.Dialogs = GetDialogs();
                 return chatPage;
             }
+        }
+        public static class CatalogsExecutor
+        {
+            #region Catalogs
+            public static List<Catalog> GetCatalogs()
+            {
+                var catalogs = db.Catalogs.ToList();
+                return catalogs;
+            }
+            public static void AddCatalog(string name)
+            {
+                Catalog catalog = new Catalog()
+                {
+                    Name = name,
+                    DateCreate = DateTime.Now
+                };
+                db.Catalogs.Add(catalog);
+                db.SaveChanges();
+            }
+            public static void EditCatalog(int id, string name)
+            {
+                db.Catalogs.Where(x => x.Id == id).FirstOrDefault().Name = name;
+                db.SaveChanges();
+            }
+            public static void RemoveCatalog(int id)
+            {
+                var catalog = db.Catalogs.Where(x => x.Id == id).FirstOrDefault();
+                db.Catalogs.Remove(catalog);
+                db.SaveChanges();
+            }
+            #endregion
+
+            #region Category
+            public static List<Category> GetCategories(int id)
+            {
+                var categ = db.Catalogs.Where(x => x.Id == id).Include(x => x.Category).FirstOrDefault();
+                return categ.Category;
+            }
+            public static void AddCategory(int idCatalog, string name)
+            {
+                Category category = new Category()
+                {
+                    Name = name
+                };
+                var catalog = db.Catalogs.Where(x => x.Id == idCatalog).FirstOrDefault();
+                catalog.Category.Add(category);
+                db.SaveChanges();
+            }
+            public static void RemoveCategory(int idCatalog, int idCategory)
+            {
+                var catolog = db.Catalogs.Where(x => x.Id == idCatalog).Include(x => x.Category).FirstOrDefault();
+                var category = catolog.Category.Where(x => x.Id == idCategory).FirstOrDefault();
+                catolog.Category.Remove(category);
+            }
+            #endregion
+
+            #region Items
+            public static List<ItemCatalog> GetItems(int idCatalog, string name)
+            {
+                var items = db.Items.Where(x=>x.IdCatalog == idCatalog && x.NameCategory == name).ToList();
+                return items;
+            }
+            public static void AddItem(int idCatalog, string nameCategory, IFormFile image, string nameItem, string article, string about, double price)
+            {
+                List<IFormFile> imgs = new List<IFormFile>();
+                imgs.Add(image);
+                ItemCatalog item = new ItemCatalog()
+                {
+                    IdCatalog = idCatalog,
+                    Name = nameItem,
+                    NameCategory = nameCategory,
+                    Price = price,
+                    Article = article,
+                    About = about,
+                    Image = LoadImage(imgs)
+                };
+                db.Items.Add(item);
+                db.SaveChanges();
+            }
+            public static void RemoveItem(int idCatalog, string name)
+            {
+                var item = db.Items.Where(x => x.IdCatalog == idCatalog && x.NameCategory == name).FirstOrDefault();
+                db.Items.Remove(item);
+                db.SaveChanges();
+            }
+
+            private static List<CorallJewelry.Models.Image> LoadImage(List<IFormFile> images)
+            {
+                List<CorallJewelry.Models.Image> imagesAdd = new List<CorallJewelry.Models.Image>();
+                if (images != null && images.Count() != 0)
+                {
+                    foreach (var file in images)
+                    {
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\products_FULL", file.FileName);
+
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            file.CopyTo(stream);
+                        }
+                        Resizer(path);
+                        imagesAdd.Add(new CorallJewelry.Models.Image() { Name = file.FileName });
+                    }
+                }
+                return imagesAdd;
+            }
+            private static void Resizer(string inputPath)
+            {
+                const int size = 600;
+                const int quality = 75;
+
+                using (var image = new Bitmap(System.Drawing.Image.FromFile(inputPath)))
+                {
+                    int width, height;
+                    if (image.Width > image.Height)
+                    {
+                        if (image.Width <= size)
+                        {
+                            FileInfo filea = new FileInfo(inputPath);
+                            image.Save(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\products", filea.Name));
+                            return;
+                        }
+                        width = size;
+                        height = Convert.ToInt32(image.Height * size / (double)image.Width);
+                    }
+                    else
+                    {
+                        if (image.Height <= size)
+                        {
+                            FileInfo filea = new FileInfo(inputPath);
+                            image.Save(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\products", filea.Name));
+                            return;
+                        }
+                        width = Convert.ToInt32(image.Width * size / (double)image.Height);
+                        height = size;
+                    }
+                    var resized = new Bitmap(width, height);
+                    using (var graphics = Graphics.FromImage(resized))
+                    {
+                        graphics.CompositingQuality = CompositingQuality.HighSpeed;
+                        graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        graphics.CompositingMode = CompositingMode.SourceCopy;
+                        graphics.DrawImage(image, 0, 0, width, height);
+                    }
+                    FileInfo file = new FileInfo(inputPath);
+
+                    resized.Save(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\products", file.Name));
+                }
+            }
+            #endregion
         }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using afc_studio.Models.Entitys;
+using ChatModule;
+using ChatModule.Models.Chat.Entitys;
 using CorallJewelry.Entitys;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,7 +30,8 @@ namespace CorallJewelry
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllersWithViews(); 
+            services.AddControllersWithViews();
+            services.AddSignalR();
             services.AddDistributedMemoryCache();
             //services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddSession(options =>
@@ -52,13 +55,20 @@ namespace CorallJewelry
                       mySqlOptions.ServerVersion(new Version(5, 6, 45), ServerType.MySql);
                   }
           ));
-            services.AddDbContextPool<MainContext>(
-              options => options.UseMySql("Server=localhost;Database=u0959678_chatcj;User=u0959_admcorall2;Password=sOq2e&032;",
-                  mySqlOptions =>
-                  {
-                      mySqlOptions.ServerVersion(new Version(5, 6, 45), ServerType.MySql);
-                  }
-          ));
+            services.AddDbContextPool<ChatContext>(
+            options => options.UseMySql("Server=localhost;Database=u0959678_onlyChat;User=u0959_admcorall2;Password=sOq2e&032;",
+                mySqlOptions =>
+                {
+                    mySqlOptions.ServerVersion(new Version(5, 6, 45), ServerType.MySql);
+                }
+        ));
+            //  services.AddDbContextPool<MainContext>(
+            //    options => options.UseMySql("Server=localhost;Database=u0959678_chatcj;User=u0959_admcorall2;Password=sOq2e&032;",
+            //        mySqlOptions =>
+            //        {
+            //            mySqlOptions.ServerVersion(new Version(5, 6, 45), ServerType.MySql);
+            //        }
+            //));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,6 +93,7 @@ namespace CorallJewelry
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/chat");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -17,10 +17,12 @@ $('.carousel .carousel-item').each(function(){
         next.children(':first-child').clone().appendTo($(this));
     }
 });
-
-$(window).on("load", function () {
-    setTimeout(function () { LoadOff() }, 2000);
-});
+function Strt() {
+    setTimeout(function () { LoadOff() }, 200);
+}
+//$(window).on("load", function () {
+//    setTimeout(function () { LoadOff() }, 2000);
+//});
 
 function RootingAnimation(millisecond) {
     LoadOn();
@@ -40,5 +42,6 @@ function LoadOff() {
     $(".item-door").css("0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 3px rgba(0,0,0,0.12), 0 4px 5px 0 rgba(0,0,0,0.20)");
     setTimeout(function () {
         $(".wrapper-slider").css("z-index", "0");
-    }, 1000);
+    }, 500);
 }/* JS Document */
+Strt();
