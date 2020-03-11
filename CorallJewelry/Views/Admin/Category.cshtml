@@ -32,7 +32,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><input type="hidden" name="id" class="form-control" value="@ViewBag["idCatalog"]" />
+                                        <td><input type="hidden" name="id" class="form-control" value="@ViewData["idCatalog"]" />
                                         <input type="text" name="name" class="form-control" value="" /></td>
                                         <td>
                                             <button name="action" value="add" type="submit" class="btn btn-icon btn-success mr-1"><i class="ft-check"></i></button>
@@ -63,9 +63,11 @@
                                     <form action="/Admin/RemoveCategory" method="post">
                                         <tr>
 
-                                            <td><button href="/Admin/Items/?id=@Model[j].Id" name="name" class="form-control btn btn-icon btn-danger mr-1" value="">@Model[j].Name</button></td>
+                                            <td><a href="/Admin/Items/?id=@ViewData["idCatalog"]&name=@Model[j].Name" name="name" class="form-control btn btn-icon btn-danger mr-1" value="">@Model[j].Name</a></td>
                                             <td>
-                                                <input type="hidden" name="id" class="form-control" value="@Model[j].Id" />
+                                                <input type="hidden" name="id" class="form-control" value="@ViewData["idCatalog"]" />
+                                                <input type="hidden" name="idcateg" class="form-control" value="@Model[j].Id" />
+
                                                 <button name="action" value="delete" type="submit" class="btn btn-icon btn-danger mr-1"><i class="ft-delete"></i></button>
                                             </td>
                                         </tr>

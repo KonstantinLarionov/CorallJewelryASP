@@ -94,8 +94,14 @@ namespace CorallJewelry.Controllers
         }
         public IActionResult Category(int id)
         {
-            ViewBag["idCatalog"] = id;
+            ViewData["idCatalog"] = id;
             return View(AllExecutors.CatalogsExecutor.GetCategories(id));
+        }
+        public IActionResult Items(int id,string name)
+        {
+            ViewData["idCatalog"] = id;
+            ViewData["nameCateg"] = name;
+            return View(AllExecutors.CatalogsExecutor.GetItems(id,name));
         }
         public IActionResult Prices()
         {
@@ -117,7 +123,6 @@ namespace CorallJewelry.Controllers
         }
         public IActionResult Login()
         {
-
             return View();
         }
         #endregion
@@ -320,6 +325,14 @@ namespace CorallJewelry.Controllers
         {
             AllExecutors.CatalogsExecutor.RemoveCategory(id, idcateg);
             return View("Category", AllExecutors.CatalogsExecutor.GetCategories(id));
+        }
+        #endregion
+        #region PostItem
+        [HttpPost]
+        public IActionResult AddItem(int id, string nameCat, string name, double price, string article, string about, IFormFile images)
+        {
+            AllExecutors.CatalogsExecutor.AddItem(id,nameCat,images,name,article,about,price);
+            return View("Items", AllExecutors.CatalogsExecutor.GetItems(id,nameCat));
         }
         #endregion
 

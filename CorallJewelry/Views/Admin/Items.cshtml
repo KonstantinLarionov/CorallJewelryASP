@@ -1,1 +1,94 @@
-﻿
+﻿@{
+    Layout = "_LayoutAdmin";
+}
+@model List<ItemCatalog>
+<section>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Таблица редактирования товаров в каталоге на <a href="">Corall Jewelry</a></h4>
+                    <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                    <div class="heading-elements">
+                    </div>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <p>Для того чтобы изменить товары на сайте заполните поле ниже и нажмите <code>добавить товар</code>. Или редактируйте товар <code>редактировать</code></p>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Название</th>
+                                    <th scope="col">Цена</th>
+
+                                    <th scope="col">Артикул</th>
+
+                                    <th scope="col">Описание</th>
+                                    <th scope="col">Изображение</th>
+                                    <th scope="col">Действие</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <form action="~/Admin/AddItem" method="POST" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="@ViewData["idCatalog"]" />
+                                    <input type="hidden" name="nameCat" value="@ViewData["nameCateg"]" />
+                                    <tr>
+
+                                        <td><input style="width: 150px;" type="text" name="id" class="form-control" readonly value="" /></td>
+                                        <td><input style="width: 150px;" type="text" name="name" class="form-control" value="" /></td>
+                                        <td><input style="width: 150px;" type="text" name="price" class="form-control" value="" /></td>
+
+                                        <td><input style="width: 150px;" type="text" name="article" class="form-control" value="" /></td>
+
+                                        <td><textarea style="width: 150px;" type="text" name="about" class="form-control"></textarea></td>
+                                        <td><input onclick="" style="width: 200px;" type="file" name="images" class="p-0" multiple /></td>
+
+                                        <td><button type="submit" class="btn btn-icon btn-success mr-1"><i class="ft-check"></i></button></td>
+                                    </tr>
+
+                                </form>
+                                @for (int i = 0; i < Model.Count; i++)
+                                {
+                                    using (Html.BeginForm("EditItem", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        <tr>
+                                            <td><input style="width: 150px;" type="text" name="id" class="form-control" value="@Model[i].Id" /></td>
+
+                                            <td><input style="width: 150px;" type="text" name="name" class="form-control" value="@Model[i].Name" /></td>
+                                            <td><input style="width: 150px;" type="text" name="price" class="form-control" value="@Model[i].Price" /></td>
+
+                                            <td><input style="width: 150px;" type="text" name="article" class="form-control" value="@Model[i].Article" /></td>
+
+                                            <td><textarea style="width: 150px;" type="text" name="about" class="form-control">@Model[i].About</textarea></td>
+                                            <td>
+                                                @for (int k = 0; k < @Model[i].Image.Count; k++)
+                                                {
+                                                    <img width="20" height="20" src="~/products/@Model[i].Image[k].Name" />
+                                                }
+                                            </td>
+                                            <td>
+                                                <button name="action" value="edit" type="submit" class="btn btn-icon btn-warning mr-1"><i class="ft-edit"></i></button>
+                                                <button name="action" value="delete" type="submit" class="btn btn-icon btn-danger mr-1"><i class="ft-delete"></i></button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    $(function () {
+        $("#categori").change(function () {
+            alert();
+            window.location = window.location.href.split('?')[0] + "?category=" + this.value
+        });
+    });
+</script>

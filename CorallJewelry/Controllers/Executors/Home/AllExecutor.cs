@@ -164,7 +164,7 @@ namespace CorallJewelry.Controllers.Executors.Home
                 CatalogModel catalogs = new CatalogModel();
                 catalogs.Contacts = GetContact();
                 catalogs.Catalogs = db.Catalogs.Include(x => x.Category).ToList();
-                catalogs.Catalogs.Where(x => x.Id == id).FirstOrDefault().Items = db.ItemsCatalog.Where(x=>x.NameCategory == name && x.IdCatalog == id).ToList();
+                catalogs.Items = db.Items.Where(x=>x.NameCategory == name && x.IdCatalog == id).Include(x=>x.Image).ToList();
                 return catalogs;
             }
 

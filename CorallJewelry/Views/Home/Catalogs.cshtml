@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="row justify-content-center align-items-center mt-5 mb-5">
-            <img src="../images/reviews-bg2.png" />
+            <img src="~/images/reviews-bg2.png" />
         </div>
     </div>
 </section>
@@ -42,7 +42,7 @@
                                 {
                                     <div id="@Model.Catalogs[i].Id" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                         <div class="card-body">
-                                            <a href="~/Home/Catalogs/?id=@Model.Catalogs[i].Id&name=@Model.Catalogs[i].Category[j].Name" class="btn-block btn btn-outline-danger mb-4">@Model.Catalogs[i].Category[j].Name</a>
+                                            <a href="~/Home/CatalogItems/?id=@Model.Catalogs[i].Id&name=@Model.Catalogs[i].Category[j].Name" class="btn-block btn btn-outline-danger mb-4">@Model.Catalogs[i].Category[j].Name</a>
                                         </div>
                                     </div>
                                 }
