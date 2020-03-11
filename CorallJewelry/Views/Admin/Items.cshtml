@@ -54,6 +54,8 @@
                                 {
                                     using (Html.BeginForm("EditItem", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                     {
+                                        <input type="hidden" name="id" value="@ViewData["idCatalog"]" />
+                                        <input type="hidden" name="nameCat" value="@ViewData["nameCateg"]" />
                                         <tr>
                                             <td><input style="width: 150px;" type="text" name="id" class="form-control" value="@Model[i].Id" /></td>
 
@@ -64,13 +66,16 @@
 
                                             <td><textarea style="width: 150px;" type="text" name="about" class="form-control">@Model[i].About</textarea></td>
                                             <td>
-                                                @for (int k = 0; k < @Model[i].Image.Count; k++)
+                                                @if (@Model[i].Image != null)
                                                 {
-                                                    <img width="20" height="20" src="~/products/@Model[i].Image[k].Name" />
+                                                    @for (int k = 0; k < @Model[i].Image.Count; k++)
+                                                    {
+                                                        <img width="20" height="20" src="~/products/@Model[i].Image[k].Name" />
+                                                    }
                                                 }
                                             </td>
                                             <td>
-                                                <button name="action" value="edit" type="submit" class="btn btn-icon btn-warning mr-1"><i class="ft-edit"></i></button>
+                                                @*<button name="action" value="edit" type="submit" class="btn btn-icon btn-warning mr-1"><i class="ft-edit"></i></button>*@
                                                 <button name="action" value="delete" type="submit" class="btn btn-icon btn-danger mr-1"><i class="ft-delete"></i></button>
                                             </td>
                                         </tr>

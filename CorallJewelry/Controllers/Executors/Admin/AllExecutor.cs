@@ -322,7 +322,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
             #region Items
             public static List<ItemCatalog> GetItems(int idCatalog, string name)
             {
-                var items = db.Items.Where(x=>x.IdCatalog == idCatalog && x.NameCategory == name).ToList();
+                var items = db.Items.Where(x=>x.IdCatalog == idCatalog && x.NameCategory == name).Include(x=>x.Image).ToList();
                 return items;
             }
             public static void AddItem(int idCatalog, string nameCategory, IFormFile image, string nameItem, string article, string about, double price)
