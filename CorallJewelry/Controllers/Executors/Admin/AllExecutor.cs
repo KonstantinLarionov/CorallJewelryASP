@@ -313,9 +313,13 @@ namespace CorallJewelry.Controllers.Executors.Admin
             }
             public static void RemoveCategory(int idCatalog, int idCategory)
             {
-                var catolog = db.Catalogs.Where(x => x.Id == idCatalog).Include(x => x.Category).FirstOrDefault();
-                var category = catolog.Category.Where(x => x.Id == idCategory).FirstOrDefault();
-                catolog.Category.Remove(category);
+                //var catolog = db.Catalogs.Where(x => x.Id == idCatalog).Include(x => x.Category).FirstOrDefault();
+                //var category = catolog.Category.Where(x => x.Id == idCategory).FirstOrDefault();
+                //catolog.Category.Remove(category);
+                //db.SaveChanges();
+                var catalog = db.Category.Where(x => x.Id == idCategory).FirstOrDefault();
+                db.Category.Remove(catalog);
+                db.SaveChanges();
             }
             #endregion
 
@@ -325,7 +329,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 var items = db.Items.Where(x=>x.IdCatalog == idCatalog && x.NameCategory == name).Include(x=>x.Image).ToList();
                 return items;
             }
-            public static void AddItem(int idCatalog, string nameCategory, IFormFile image, string nameItem, string article, string about, double price)
+            public static void AddItem(int idCatalog, string nameCategory, IFormFile image, string nameItem, string article, string about, string price)
             {
                 List<IFormFile> imgs = new List<IFormFile>();
                 imgs.Add(image);

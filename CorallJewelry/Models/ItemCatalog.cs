@@ -11,7 +11,7 @@ namespace CorallJewelry.Models
         public string Name { get; set; }
         public string Article { get; set; }
         public string About { get; set; }
-        public double Price { get; set; }
+        public string Price { get; set; }
         public List<Image> Image { get; set; }
         public string NameCategory { get; set; }
         public int IdCatalog { get; set; }

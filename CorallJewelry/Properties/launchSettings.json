@@ -1,10 +1,14 @@
-﻿{
+{
   "iisSettings": {
-    "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/CorallJewelry",
+      "sslPort": 0
+    },
     "iisExpress": {
-      "applicationUrl": "http://localhost:64220",
-      "sslPort": 44318
+      "applicationUrl": "http://tester:44318",
+      "sslPort": 44306
     }
   },
   "profiles": {
@@ -18,10 +22,10 @@
     "CorallJewelry": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000;http://tester:44318"
     }
   }
 }
