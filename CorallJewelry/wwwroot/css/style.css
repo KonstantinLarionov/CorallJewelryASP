@@ -280,17 +280,105 @@ p {
 }*/
 
 /* Landscape phones and portrait tablets */
-@media (min-width: 768px) and (max-width: 991.98px) {
+@media (min-width: 370px) and (max-width: 991.98px) {
     .m-parent-head {
         width: 100px;
+        height: 100px;
         position: fixed;
         right: 0;
-    }
-    .m-item-menu-head {
-        display:none;
+        z-index: 9999999999;
     }
 
+    .m-headbutton {
+        border-radius: 50px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .m-headbutton:focus .m-item-menu-head {
+            display: flex;
+            background-color: rgb(255, 220, 220);
+            margin-left: -110%;
+            width: 200%;
+            height: 300%;
+            justify-content: start;
+            box-shadow: 0 2px 4px 0 rgba(0,0,0,0.14), 0 3px 4px 0 rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20);
+        }
+
+    .m-item-menu-head {
+        transition: 1s;
+        display: none;
+    }
+
+    .m-burger-line {
+        border-top: 3px solid #c33;
+        width: 100%;
+        height: 0px;
+        margin-top: 10%;
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+
+    .m-item-menu-headimg {
+        display: none;
+    }
+
+    .m-burger {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 25%;
+        margin-left: 10%;
+        margin-right: 35%;
+    }
+
+    .m-wellcome {
+        margin-top: 10%;
+    }
+
+    .m-startimg {
+        margin-top: 20%;
+    }
+
+    .m-allworks {
+        display: none;
+    }
+
+    .m-circle {
+        margin: 0;
+    }
+
+    .m-serv {
+        margin-bottom: 15%;
+    }
+
+    .m-button-allservice {
+        display: none;
+    }
+
+    .m-feedback {
+        display: none !important;
+    }
+
+    .m-minifooter {
+        margin-left: 60%;
+    }
+    .m-chat {
+        display: none;
+    }
+    .m-door {
+        display: none;
+    }
+    .m-car {
+        padding-left: 20%;
+    }
+    .m-minikost {
+        margin-bottom: 20%;
+    }
 }
+
 
 /* Portrait phones and smaller */
 /*@media (max-width: 480px) {*/

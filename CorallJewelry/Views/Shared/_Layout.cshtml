@@ -19,16 +19,21 @@
 </head>
 <body style="overflow-x: hidden; scroll-behavior: smooth;">
     <div class="wrapper-slider" id="main2">
-        <div class="item-door" id="right"></div>
-        <div class="item-door" id="left"></div>
+        <div class="item-door m-door" id="right"></div>
+        <div class="item-door m-door" id="left"></div>
         <div id="preloader">
             <div id="loader"></div>
         </div>
     </div>
     <section class="" id="priceOff">
         <div class="m-parent-head">
-            <div class="row w-100 ml-0 shadow1dp" style="background-image: url(@Url.Content("~/images/header-back.png")); height: 80px;">
-                <div class="col m-item-menu-head">
+            <div tabindex="0"  class="row w-100 ml-0 shadow1dp m-headbutton" style="background-image: url(@Url.Content("~/images/header-back.png")); height: 80px;">
+                <div class="m-burger">
+                    <span class="m-burger-line "></span>
+                    <span class="m-burger-line "></span>
+                    <span class="m-burger-line "></span>
+                </div>
+                <div class="col-xl m-item-menu-head">
                     <div class="row align-items-center justify-content-center mt-4 font-weight-bold">
                         <div class="col text-center ml-4">
                             <a style="text-decoration: none; color: brown;" href="~/Home/PriceList"><h4>Цены</h4></a>
@@ -37,16 +42,16 @@
                             <a style="text-decoration: none; color: brown;" href="~/Home/Index#aboutService"><h4>Услуги</h4></a>
                         </div>
                         <div class="col text-center ml-4">
-                                <a style="text-decoration: none; color: brown;" href="~/Home/Catalogs"><h4>Каталоги</h4></a>
+                            <a style="text-decoration: none; color: brown;" href="~/Home/Catalogs"><h4>Каталоги</h4></a>
                         </div>
                     </div>
                 </div>
-                <div class="col m-item-menu-head">
+                <div class="col-xl m-item-menu-headimg">
                     <div class="row justify-content-center" style="margin-top: -1px;">
                         <a href="~/Home/Index"><img src="~/images/vimpel-header.png"></a>
                     </div>
                 </div>
-                <div class="col m-item-menu-head">
+                <div class="col-xl m-item-menu-head">
                     <div class="row align-items-center justify-content-center mt-4 font-weight-bold" style="color: brown;">
                         <div class="col text-center">
                             <a style="text-decoration: none; color: brown;" href="~/Home/Products"><h4>Наши работы</h4></a>
@@ -129,7 +134,7 @@
                     <a style="margin-left: 10px;"> @Model.Contacts.Phone</a>
                 </div>
             </div>
-            <div class="col-xl-3 mt-5">
+            <div class="col-xl-3 mt-5 m-minifooter">
                 <a href="~/Home/Contact">Задайте нам вопрос</a><br>
                 <a href="#aboutWork">Как сделать заказ?</a><br>
             </div>
@@ -186,7 +191,7 @@
     <!--ENDCHAT-->
 
     <!--PLUGIN CHAT-->
-    <div class="head pulse" onclick="closeChat()" id="head"><div><img src="~/resources/message.png" width="30" height="30"> </div></div>
+    <div class="head pulse m-chat" onclick="closeChat()" id="head"><div><img src="~/resources/message.png" width="30" height="30"> </div></div>
     <div class="chat" id="mainChat" style="height:0px;bottom: 5px; overflow: hidden;">
         <div style="display: none" id="bufferMess"></div>
         <div id="bodychat" style="width: 100%;"></div>

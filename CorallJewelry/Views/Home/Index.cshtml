@@ -6,20 +6,20 @@
                 <div class="row justify-content-center align-items-center">
                     <img src="~/images/discount-bg.png" width="500" height="400">
                 </div>
-                <div class="row justify-content-center align-items-center" style="margin-top: -15%;">
+                <div class="row justify-content-center align-items-center m-allworks" style="margin-top: -15%;">
                     <a href="~/Home/Products" style="color: #c33;">Все работы</a>
                 </div>
             </div>
-            <div class="col-xl">
+            <div class="col-xl m-wellcome">
                 <div class="container-fluid ">
                     <div class="row justify-content-center align-items-center">
-                        <h1 class="font-weight-bold mt-4">Добро пожаловать!</h1><br>
+                        <h1 class="font-weight-bold mt-4 col-xl text-center">Добро пожаловать!</h1><br>
                         <h3 class="font-italic">Мы рады видеть Вас в нашей мастерской.</h3><br>
                         <h6>У нас Вы можете заказать, отремонтировать ювелирные изделия.</h6>
                     </div>
                 </div>
                 <div id="multiCarousel" class="carousel slide w-100 mt-5" data-ride="carousel">
-                    <div class="carousel-inner w-100 justify-content-around" role="listbox">
+                    <div class="carousel-inner w-100 justify-content-around m-car" role="listbox">
                         @if (Model.Products != null)
                         {
                             @for (int i = 0; i < Model.Products.Count; i++)
@@ -65,7 +65,7 @@
         </div>
     </div>
 </section>
-<section  style="margin-top: 15%;" id="aboutMe">
+<section  style="margin-top: 15%;" class=" m-startimg" id="aboutMe">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl">
@@ -75,7 +75,7 @@
             </div>
             <div class="col-xl">
                 <div class="row justify-content-center align-items-center ">
-                    <h2>Ждем Вас в гости!</h2>
+                    <h2 class="col-xl text-center">Ждем Вас в гости!</h2>
 
                     <h6 class="font-italic mt-3 mb-4">Наши ювелирные мастера предоставляют огромный выбор услуг</h6>
                     <ul class="mb-4">
@@ -105,7 +105,7 @@
         </div>
     </div>
 </section>
-<section  style="margin-top: 15%; background-image: url('@Url.Content("~/images/header-back.png")');" id="aboutWork">
+<section  style="margin-top: 15%; background-image: url('@Url.Content("~/images/header-back.png")');" id="aboutWork" class="m-startimg">
     <div class="container-fluid" style="padding-top: 5%; padding-bottom: 5%;">
         <div class="row align-items-center justify-content-center">
             <h2>Как мы работаем с нашими клиентами</h2>
@@ -292,47 +292,47 @@
         </div>
         <div class="row">
             <div class="col-xl">
-                <div class="container-circle cc-first">
+                <div class="container-circle cc-first m-circle">
                     <a href="~/Home/Create" class="circle" style="background-image:  url(@Url.Content("~/images/new_service/create.jpg")); background-size: cover;"></a>
                     <a class="circle-header mt-2"><strong><i>Изготовление ювелирных изделий </i></strong></a>
                 </div>
-                <div class="container-circle cc-first-second">
+                <div class="container-circle cc-first-second m-circle">
                     <a href="~/Home/Createcopy" class="circle" style="background-image:  url(@Url.Content("~/images/new_service/copy.jpg")); background-size: cover;"></a>
                     <a class="circle-header mt-2"><strong><i>Изготовление копии<br>ювелирных изделий </i></strong></a>
                 </div>
             </div>
             <div class="col-xl">
                 <div class="row">
-                    <div class="col-xl container-circle">
+                    <div class="col-xl container-circle m-circle">
                         <a href="~/Home/Repair" class="circle" style="background-image: url(@Url.Content("~/images/new_service/repair.jpg")); background-size: cover;"></a>
                         <a class="circle-header mt-2"><strong><i>Ремонт изделий</i></strong></a>
                     </div>
-                    <div class="col-xl container-circle">
+                    <div class="col-xl container-circle m-circle">
                         <a href="~/Home/Repairbeads" class="circle" style="background-image: url(@Url.Content("~/images/new_service/gravir.jpg")); background-size: cover;"></a>
                         <a class="circle-header mt-2"><strong><i>Гравировка изделий </i></strong></a>
                     </div>
                 </div>
-                <div class="row align-items-center justify-content-center" style="margin-top: 15%;">
+                <div class="row align-items-center justify-content-center m-minikost" style="margin-top: 15%;">
                     <img src="~/images/upBorder.png" />
                     <div class="text-center cc-text-center">
                         Одни из самых низких цен в Оренбурге
                         на ремонт и изготовление украшений!
                         И это не просто слова!
                     </div>
-                    <a class="btn btn-outline-danger " href="~/Home/Service" style="margin-top: 20px; border-radius: 0px;">Смотреть все услуги</a>
+                    <a class="btn btn-outline-danger m-button-allservice" href="~/Home/Service" style="margin-top: 20px; border-radius: 0px;">Смотреть все услуги</a>
                     <img src="~/images/downBorder.png" />
                 </div>
-                <div class="container-circle cc-second-third">
+                <div class="container-circle cc-second-third m-circle">
                     <a href="~/Home/Createchain" class="circle" style="background-image:  url(@Url.Content("~/images/new_service/chain.jpg")); background-size: cover;"></a>
                     <a class="circle-header mt-2"><strong><i>Цепи и браслеты ручного плетения </i></strong></a>
                 </div>
             </div>
             <div class="col-xl">
-                <div class="container-circle cc-third-first">
+                <div class="container-circle cc-third-first m-circle">
                     <a href="~/Home/Setstone" class="circle" style="background-image:  url(@Url.Content("~/images/new_service/emaling.jpg")); background-size: cover;"></a>
                     <a class="circle-header mt-2"><strong><i>Эмалирование и гальваника </i></strong></a>
                 </div>
-                <div class="container-circle cc-third-second">
+                <div class="container-circle cc-third-second m-circle">
                     <a href="~/Home/Clearproducts" class="circle" style="background-image:  url(@Url.Content("~/images/new_service/3d.png")); background-size: cover;"></a>
                     <a class="circle-header mt-2"><strong><i>3D модели и <br> ЧПУ фрезеровка</i></strong></a>
                 </div>
@@ -372,7 +372,7 @@
         </div>
     </div>
 </section>
-<section class="vh100" id="feedBacks">
+<section class="vh100 m-feedback" id="feedBacks">
     <div class="container-fluid mt-xl-5">
         <div class="row justify-content-center align-items-center mt-5 mb-5">
             <img src="~/images/reviews-bg2.png" />
