@@ -282,6 +282,7 @@ p {
 /* Landscape phones and portrait tablets */
 @media (min-width: 370px) and (max-width: 991.98px) {
     .m-parent-head {
+        display: none;
         width: 100px;
         height: 100px;
         position: fixed;
@@ -368,9 +369,9 @@ p {
     .m-chat {
         display: none;
     }
-    .m-door {
+    /*.m-door {
         display: none;
-    }
+    }*/
     .m-car {
         padding-left: 20%;
     }
