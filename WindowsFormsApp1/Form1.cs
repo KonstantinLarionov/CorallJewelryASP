@@ -14,6 +14,8 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        private string[] Files { get; set; }
+        private string Path { get; set; }
         public Form1()
         {
             InitializeComponent();
@@ -24,14 +26,14 @@ namespace WindowsFormsApp1
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             // получаем выбранный файл
-            string[] filename = openFileDialog1.FileNames;
-            Resizer(filename);
+            Files = openFileDialog1.FileNames;
+            textBox1.Text = openFileDialog1.InitialDirectory;
+           
             // читаем файл в строку
         }
-        private static void Resizer(string[] inputPath)
+        private void Resizer(string[] inputPath)
         {
-            const int size = 600;
-            const int quality = 75;
+            int size = Convert.ToInt32(textBox3.Text);
             for (int i = 0; i < inputPath.Length; i++)
             {
                 using (var image = new Bitmap(System.Drawing.Image.FromFile(inputPath[i])))
@@ -64,9 +66,21 @@ namespace WindowsFormsApp1
                         graphics.DrawImage(image, 0, 0, width, height);
                     }
                     FileInfo file = new FileInfo(inputPath[i]);
-                    resized.Save("products/" + file.Name); ;
+                    resized.Save(Path + "/" + file.Name); ;
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.Cancel)
+                return;
+            Path = folderBrowserDialog1.SelectedPath;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Resizer(Files);
         }
     }
 }
