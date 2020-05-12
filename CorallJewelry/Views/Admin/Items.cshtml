@@ -57,7 +57,7 @@
                                         <input type="hidden" name="id" value="@ViewData["idCatalog"]" />
                                         <input type="hidden" name="nameCat" value="@ViewData["nameCateg"]" />
                                         <tr>
-                                            <td><input style="width: 150px;" type="text" name="id" class="form-control" value="@Model[i].Id" /></td>
+                                            <td><input style="width: 150px;" type="text" name="idItem" class="form-control" value="@Model[i].Id" /></td>
 
                                             <td><input style="width: 150px;" type="text" name="name" class="form-control" value="@Model[i].Name" /></td>
                                             <td><input style="width: 150px;" type="text" name="price" class="form-control" value="@Model[i].Price" /></td>
@@ -75,7 +75,7 @@
                                                 }
                                             </td>
                                             <td>
-                                                @*<button name="action" value="edit" type="submit" class="btn btn-icon btn-warning mr-1"><i class="ft-edit"></i></button>*@
+                                                <button name="action" value="edit" type="submit" class="btn btn-icon btn-warning mr-1"><i class="ft-edit"></i></button>
                                                 <button name="action" value="delete" type="submit" class="btn btn-icon btn-danger mr-1"><i class="ft-delete"></i></button>
                                             </td>
                                         </tr>

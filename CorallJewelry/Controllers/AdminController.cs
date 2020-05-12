@@ -335,16 +335,24 @@ namespace CorallJewelry.Controllers
         public IActionResult AddItem(int id, string nameCat, string name, string price, string article, string about, IFormFile images)
         {
             ViewData["idCatalog"] = id;
-            ViewData["nameCateg"] = name;
+            ViewData["nameCateg"] = nameCat;
             AllExecutors.CatalogsExecutor.AddItem(id,nameCat,images,name,article,about,price);
             return View("Items", AllExecutors.CatalogsExecutor.GetItems(id,nameCat));
         }
         [HttpPost]
-        public IActionResult EditItem(int id, string nameCat, string name, double price, string article, string about, IFormFile images)
+        public IActionResult EditItem(int id, int idItem, string nameCat, string name, double price, string article, string about, IFormFile images, string action)
         {
             ViewData["idCatalog"] = id;
-            ViewData["nameCateg"] = name;
-            AllExecutors.CatalogsExecutor.RemoveItem(id, nameCat);
+            ViewData["nameCateg"] = nameCat;
+            if (action == "delete")
+            {
+                AllExecutors.CatalogsExecutor.RemoveItem(id, nameCat, name);
+            }
+            else if (action == "edit")
+            {
+                AllExecutors.CatalogsExecutor.EditItem(idItem,  nameCat,  name,  price,  article,  about);
+            }
+           
             return View("Items",AllExecutors.CatalogsExecutor.GetItems(id,nameCat));
         }
         #endregion

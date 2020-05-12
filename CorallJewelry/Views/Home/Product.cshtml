@@ -8,7 +8,7 @@
         <div class="row justify-content-start">
             <div class="col-xl">
                 <p class="ml-5 pl-5" style="font-size: 20px;">
-                 @Model.Product.Name <br> @Model.Product.About
+                    @Model.Product.Name <br> @Model.Product.About
                 </p>
             </div>
 
@@ -45,6 +45,38 @@
                 </a>
             </div>
         </div>
+
+        <div class="row justify-content-center align-items-center mt-5 mb-5">
+            <div id="multiCarousel" class="carousel slide w-100 mt-5" data-ride="carousel">
+                <div class="carousel-inner w-100 " role="listbox">
+                    @for (int i = 0; i < Model.Product.Videos.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            <div class="carousel-item active ">
+                                @Model.Product.Videos[i].Name
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="carousel-item">
+                                @Model.Product.Videos[i].Name
+                            </div>
+                        }
+                    }
+                </div>
+                <a class="carousel-control-prev" href="#multiCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Предыдущий</span>
+                </a>
+                <a class="carousel-control-next" href="#multiCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Cледующий</span>
+                </a>
+            </div>
+        </div>
+
+
         <div class="row justify-content-center ml-5 mb-3">
             <div class="col-xl">
                 <h4><strong><i>Об изделии:</i></strong></h4>

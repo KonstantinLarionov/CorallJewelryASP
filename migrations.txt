@@ -1,0 +1,11 @@
+CREATE TABLE `u0959678_coralljewelry`.`videos` (
+  `Id` INT NULL AUTO_INCREMENT,
+  `Url` LONGTEXT NULL,
+  `Name` LONGTEXT NULL,
+  `About` LONGTEXT NULL,
+  `ItemCatalogId` INT NULL,
+  `ProductId` INT NULL,
+  `ProductId1` INT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;

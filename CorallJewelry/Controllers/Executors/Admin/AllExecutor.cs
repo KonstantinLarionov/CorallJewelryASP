@@ -346,10 +346,16 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 db.Items.Add(item);
                 db.SaveChanges();
             }
-            public static void RemoveItem(int idCatalog, string name)
+            public static void RemoveItem(int idCatalog, string nameCat, string name)
             {
-                var item = db.Items.Where(x => x.IdCatalog == idCatalog && x.NameCategory == name).FirstOrDefault();
+                var item = db.Items.Where(x => x.IdCatalog == idCatalog && x.NameCategory == nameCat && x.Name == name).FirstOrDefault();
                 db.Items.Remove(item);
+                db.SaveChanges();
+            }
+            public static void EditItem(int id, string nameCat, string name, double price, string article, string about)
+            {
+                var item = db.Items.Where(x => x.Id == id).FirstOrDefault();
+                item.Name = name; item.Price = price.ToString(); item.Article = article; item.About = about;
                 db.SaveChanges();
             }
 
