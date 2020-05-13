@@ -20,6 +20,5 @@ namespace CorallJewelry.Models
         public string Metall { get; set; }
         public string Type { get; set; }
         public List<Image> Images { get; set; }
-        public List<Image> Videos { get; set; }
     }
 }
