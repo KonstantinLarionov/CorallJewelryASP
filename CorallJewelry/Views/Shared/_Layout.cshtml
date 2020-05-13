@@ -27,7 +27,7 @@
     </div>
     <section class="" id="priceOff">
         <div class="m-parent-head">
-            <div tabindex="0"  class="row w-100 ml-0 shadow1dp m-headbutton" style="background-image: url(@Url.Content("~/images/header-back.png")); height: 80px;">
+            <div tabindex="0" class="row w-100 ml-0 shadow1dp m-headbutton" style="background-image: url(@Url.Content("~/images/header-back.png")); height: 80px;">
                 <div class="m-burger">
                     <span class="m-burger-line "></span>
                     <span class="m-burger-line "></span>
@@ -193,7 +193,6 @@
             </div>
         </div>*@
     <!--ENDCHAT-->
-
     <!--PLUGIN CHAT-->
     <div class="head pulse m-chat" onclick="closeChat()" id="head"><div><img src="~/resources/message.png" width="30" height="30"> </div></div>
     <div class="chat" id="mainChat" style="height:0px;bottom: 5px; overflow: hidden;">
@@ -205,7 +204,20 @@
         <a name="send" class="sendmessage" onclick="Send()"><img src="~/resources/plane.png" width="50" height="50" id="sendBtn" class="sends"></a>
     </div>
     <!--PLUGIN CHAT-->
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
+   ym(62766310, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/62766310" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://use.fontawesome.com/ab77088c83.js"></script>
