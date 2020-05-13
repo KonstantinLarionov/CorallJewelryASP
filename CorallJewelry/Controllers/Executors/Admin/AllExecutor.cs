@@ -53,7 +53,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 return products;
             }
 
-            public static void AddProducts(List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type)
+            public static void AddProducts(List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type, string video)
             {
                 List<CorallJewelry.Models.Image> imagesAdd = LoadImage(images);
 
@@ -66,7 +66,8 @@ namespace CorallJewelry.Controllers.Executors.Admin
                     Stone = stone,
                     Metall = metall,
                     Type = type,
-                    Images = imagesAdd
+                    Images = imagesAdd,
+                    Video = video
                 };
                 db.Products.Add(product);
                 db.SaveChanges();
@@ -79,7 +80,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 db.SaveChanges();
             }
 
-            public static void EditProduct(int id, List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type)
+            public static void EditProduct(int id, List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type, string video)
             {
                 var imagesAll = LoadImage(images);
                 var product = db.Products.Where(x => x.Id == id).FirstOrDefault();
@@ -91,6 +92,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 product.Stone = stone;
                 product.Type = type;
                 product.Weight = weight;
+                product.Video = video;
                 db.SaveChanges();
             }
             private static List<CorallJewelry.Models.Image> LoadImage(List<IFormFile> images)

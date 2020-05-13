@@ -15,5 +15,6 @@ namespace CorallJewelry.Models
         public List<Image> Image { get; set; }
         public string NameCategory { get; set; }
         public int IdCatalog { get; set; }
+        public string Video { get; set; }
     }
 }

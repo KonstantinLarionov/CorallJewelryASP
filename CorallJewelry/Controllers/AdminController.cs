@@ -144,18 +144,18 @@ namespace CorallJewelry.Controllers
             }
         }
         [HttpPost]
-        public IActionResult AddProduct(List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type)
+        public IActionResult AddProduct(List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type, string video)
         {
             if (!Auth())
             {
                 return View("Login");
             }
-            AllExecutors.ProductsExecutor.AddProducts(images, name, about, price, weight, stone, metall, type);
+            AllExecutors.ProductsExecutor.AddProducts(images, name, about, price, weight, stone, metall, type, video);
             var model = AllExecutors.ProductsExecutor.GetProducts("all");
             return View("Products", model);
         }
         [HttpPost]
-        public IActionResult EditProducts(int id, List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type,string action)
+        public IActionResult EditProducts(int id, List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type,string action, string video)
         {
             if (!Auth())
             {
@@ -164,7 +164,7 @@ namespace CorallJewelry.Controllers
             if (action == "edit")
             {
 
-                AllExecutors.ProductsExecutor.EditProduct(id, images, name, about, price, weight, stone, metall, type);
+                AllExecutors.ProductsExecutor.EditProduct(id, images, name, about, price, weight, stone, metall, type, video);
             }
             else if (action == "delete")
             {

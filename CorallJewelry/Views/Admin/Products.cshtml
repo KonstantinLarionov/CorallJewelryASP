@@ -27,8 +27,8 @@
                                     <th scope="col">Вес</th>
                                     <th scope="col">Камни</th>
                                     <th scope="col">Металл</th>
-
                                     <th scope="col">Описание</th>
+                                    <th scope="col">Видео</th>
                                     <th scope="col">Изображение</th>
                                     <th scope="col">Категория</th>
                                     <th scope="col">Действие</th>
@@ -44,15 +44,14 @@
                                         <td><input style="width: 150px;" type="text" name="weight" class="form-control" value="" /></td>
                                         <td><input style="width: 150px;" type="text" name="stone" class="form-control" value="" /></td>
                                         <td><input style="width: 150px;" type="text" name="metall" class="form-control" value="" /></td>
-
                                         <td><textarea style="width: 150px;" type="text" name="about" class="form-control"></textarea></td>
+                                        <td><textarea style="width: 150px;" type="text" name="video" class="form-control"></textarea></td>
                                         <td><input onclick="" style="width: 200px;" type="file" name="images" class="p-0" multiple /></td>
                                         <td>
                                             <select class="custom-select" id="type" name="type">
                                                 <option selected="" value="Кольца">Кольца</option>
                                                 <option value="Цепи">Цепи</option>
                                                 <option value="Кресты">Кресты</option>
-
                                                 <option value="Пирсинг">Пирсинг</option>
                                                 <option value="Сувениры">Сувениры</option>
                                                 <option value="3D модели">3D модели</option>
@@ -62,7 +61,6 @@
                                                 <option value="Гальваника">Гальваника</option>
                                                 <option value="Броши">Броши</option>
                                                 <option value="Пряжки">Пряжки</option>
-
                                                 <option value="Запонки">Запонки</option>
                                                 <option value="Брелки">Брелки</option>
                                                 <option value="Браслеты">Браслеты</option>
@@ -92,8 +90,8 @@
                                 <td><input style="width: 150px;" type="text" name="weight" class="form-control" value="@Model[i].Weight" /></td>
                                 <td><input style="width: 150px;" type="text" name="stone" class="form-control" value="@Model[i].Stone" /></td>
                                 <td><input style="width: 150px;" type="text" name="metall" class="form-control" value="@Model[i].Metall" /></td>
-
                                 <td><textarea style="width: 150px;" type="text" name="about" class="form-control">@Model[i].About</textarea></td>
+                                <td><textarea style="width: 150px;" type="text" name="video" class="form-control">@Model[i].Video</textarea></td>
                                 <td>
                                     @for (int k = 0; k < @Model[i].Images.Count; k++)
                                     {
