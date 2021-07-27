@@ -12,6 +12,7 @@ using CorallJewelry.Models.FrontModel;
 using CorallJewelry.Controllers.Executors.Home;
 using System.Net;
 using afc_studio.Models.Entitys;
+using CorallJewelry.Models.Helpers;
 
 namespace CorallJewelry.Controllers
 {
@@ -28,10 +29,10 @@ namespace CorallJewelry.Controllers
 
         public void SendMessage(string text, string chatId)
         {
-            using (var webClient = new WebClient())
+            /*using (var webClient = new WebClient())
             {
                 var response = webClient.DownloadString("https://afcstudio.ru/core/telegram.php?token=" + Token + "&text=" + text + "&chatid=" + chatId);
-            }
+            }*/
         }
     }
     public class HomeController : Controller
@@ -91,12 +92,14 @@ namespace CorallJewelry.Controllers
         [HttpPost]
         public IActionResult Contact(string contact, string message)
         {
+
             AllExecutors.ContactExecutor.SendRequest(contact, message);
 
             var telega = new Telegram("1001206813:AAFdrMx5RTZy71AKbBy5OVO6FHfyeXNBP4g");
             telega.SendMessage("У вас новый заявка! Проверьте Панель администратора...", "1072967682");
-            telega.SendMessage("Ссылка в панель: https://korall56.ru/Admin/Requests", "1072967682");
+            telega.SendMessage("Ссылка в панель: https://korall56.ru/admin/requests/?token=YliB0kTebedEdMakR", "1072967682");
 
+            Mailler.SendEmailAsync(message, contact).GetAwaiter().GetResult();
             return View(AllExecutors.ContactExecutor.GetModel());
         }
 

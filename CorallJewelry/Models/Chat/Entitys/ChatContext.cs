@@ -20,8 +20,11 @@ namespace ChatModule.Models.Chat.Entitys
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseMySql("Server=localhost;Database=u0959678_onlyChat;User=u0959_admcorall;Password=sOq2e&032;");
+#if DEBUG
             optionsBuilder.UseMySql("Server=localhost;Database=u0959678_onlyChat;User=root;Password=root;");
+#else
+            optionsBuilder.UseMySql("Server=localhost;Database=u0959678_onlyChat;User=u0959_admcorall;Password=sOq2e&032;");
+#endif
             base.OnConfiguring(optionsBuilder);
         }
     }

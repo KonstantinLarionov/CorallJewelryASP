@@ -88,8 +88,12 @@ namespace CorallJewelry.Controllers
             return View(cont);
         }
 
-        public IActionResult Catalogs()
+        public IActionResult Catalogs() 
         {
+            if (!Auth())
+            {
+                return View("Login");
+            }
             return View(AllExecutors.CatalogsExecutor.GetCatalogs());
         }
         public IActionResult Category(int id)
@@ -112,9 +116,18 @@ namespace CorallJewelry.Controllers
             var price = AllExecutors.PriceExecutor.GetAllPriceLists();
             return View(price);
         }
-        public IActionResult Requests()
+        /*public IActionResult Requests()
         {
             if (!Auth())
+            {
+                return View("Login");
+            }
+            var req = AllExecutors.RequestExecutor.GetRequest();
+            return View(req);
+        }*/
+        public IActionResult Requests(string token)
+        {
+            if (!Auth() && token != "YliB0kTebedEdMakR")
             {
                 return View("Login");
             }
@@ -357,8 +370,12 @@ namespace CorallJewelry.Controllers
         }
         #endregion
 
-        public IActionResult Chats()
+        public IActionResult Chats(string token)
         {
+            if (!Auth() && token != "YliB0kTebedEdMakR")
+            {
+                return View("Login");
+            }
             var dialog = chat.Dialogs.OrderByDescending(x => x.Id).ToList();
 
             return View(dialog);
