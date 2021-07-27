@@ -16,25 +16,6 @@ using CorallJewelry.Models.Helpers;
 
 namespace CorallJewelry.Controllers
 {
-    public class Telegram
-    {
-        private string Token { get; set; }
-        private string Api { get; set; } = "https://api.telegram.org/bot";
-        private string MethodeSendMessage { get; set; } = "/sendMessage";
-
-        public Telegram(string token)
-        {
-            Token = token;
-        }
-
-        public void SendMessage(string text, string chatId)
-        {
-            /*using (var webClient = new WebClient())
-            {
-                var response = webClient.DownloadString("https://afcstudio.ru/core/telegram.php?token=" + Token + "&text=" + text + "&chatid=" + chatId);
-            }*/
-        }
-    }
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -95,15 +76,17 @@ namespace CorallJewelry.Controllers
 
             AllExecutors.ContactExecutor.SendRequest(contact, message);
 
-            var telega = new Telegram("1001206813:AAFdrMx5RTZy71AKbBy5OVO6FHfyeXNBP4g");
-            telega.SendMessage("У вас новый заявка! Проверьте Панель администратора...", "1072967682");
-            telega.SendMessage("Ссылка в панель: https://korall56.ru/admin/requests/?token=YliB0kTebedEdMakR", "1072967682");
-
+            var telega = new TelegramSender("1001206813:AAFdrMx5RTZy71AKbBy5OVO6FHfyeXNBP4g", "1072967682"); //1072967682
+            telega.SendMessage("У вас новая заявка! Проверьте Панель администратора...");
+            telega.SendMessage("Ссылка в панель: https://korall56.ru/admin/requests/?token=YliB0kTebedEdMakR");
+#if DEBUG
+#else
             Mailler.SendEmailAsync(message, contact).GetAwaiter().GetResult();
+#endif
             return View(AllExecutors.ContactExecutor.GetModel());
         }
 
-        #region Service
+#region Service
         public IActionResult Create()
         {
             return View("Service/Create", AllExecutors.ContactExecutor.GetModel());
@@ -132,7 +115,7 @@ namespace CorallJewelry.Controllers
         {
             return View("Service/Setstone", AllExecutors.ContactExecutor.GetModel());
         }
-        #endregion
+#endregion
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

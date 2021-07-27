@@ -14,6 +14,7 @@ using System.Text.Json;
 using afc_studio.Models.Objects;
 using System.Text;
 using CorallJewelry.Controllers;
+using CorallJewelry.Models.Helpers;
 
 namespace afc_studio.Controllers
 {
@@ -70,9 +71,9 @@ namespace afc_studio.Controllers
         [HttpPost]
         public string SendMessage(string text, string dialog, string user, string typeuser = "unnamed", int dialog_num = 0)
         {
-            var telega = new Telegram("1001206813:AAFdrMx5RTZy71AKbBy5OVO6FHfyeXNBP4g");
-            telega.SendMessage("У вас новое сообщение в чате! Проверьте Панель администратора...", "1072967682");
-            telega.SendMessage("Ссылка в панель: https://korall56.ru/Admin/Chats", "1072967682");
+            var telega = new TelegramSender("1001206813:AAFdrMx5RTZy71AKbBy5OVO6FHfyeXNBP4g", "1072967682"); //1072967682
+            telega.SendMessage("У вас новое сообщение в чате! Проверьте Панель администратора...");
+            telega.SendMessage("Ссылка в панель: https://korall56.ru/Admin/Chats/?token=YliB0kTebedEdMakR");
 
 
             var mydialog = db.Dialogs.Where(j => j.Name == dialog).FirstOrDefault();
