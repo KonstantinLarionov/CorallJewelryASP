@@ -13,7 +13,7 @@ namespace CorallJewelry.Controllers.Executors.Home
 {
     public static class AllExecutors
     {
-        private static FrontendContext db { get; set; } = new FrontendContext(new DbContextOptions<FrontendContext>());
+        private static BackendContext db { get; set; } = new BackendContext(new DbContextOptions<BackendContext>());
         public static class IndexExecutor
         {
             public static List<Product> GetProducts(string type)
