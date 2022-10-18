@@ -29,7 +29,7 @@ namespace CorallJewelry.Entitys
 #if DEBUG
             optionsBuilder.UseMySql("Server=localhost;Database=u0959678_coralljewelry;User=root;Password=root;");
 #else
-            optionsBuilder.UseMySql("Server=localhost;Database=u0959678_coralljewelry;User=u0959_admcorall;Password=sOq2e&032;");
+            optionsBuilder.UseMySql("Server=localhost;Database=u1810457_coralljewelry;User=u1810457_corall;Password=sOq2e&032;");
 #endif
             base.OnConfiguring(optionsBuilder);
         }

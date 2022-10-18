@@ -23,7 +23,7 @@ namespace ChatModule.Models.Chat.Entitys
 #if DEBUG
             optionsBuilder.UseMySql("Server=localhost;Database=u0959678_onlyChat;User=root;Password=root;");
 #else
-            optionsBuilder.UseMySql("Server=localhost;Database=u0959678_onlyChat;User=u0959_admcorall;Password=sOq2e&032;");
+            optionsBuilder.UseMySql("Server=localhost;Database=u1810457_onlyChat;User=u1810457_admcorall;Password=sOq2e&032;");
 #endif
             base.OnConfiguring(optionsBuilder);
         }
