@@ -22,7 +22,8 @@
                     <div class="carousel-inner w-100 justify-content-around m-car" role="listbox">
                         @if (Model.Products != null)
                         {
-                            @for (int i = 0; i < Model.Products.Count; i++)
+
+                            for (int i = 0; i < Model.Products.Count; i++)
                             {
                                 if (i > 5)
                                 {
@@ -43,6 +44,7 @@
                                 }
 
                             }
+
                         }
                     </div>
                     <a class="carousel-control-prev" href="#multiCarousel" role="button" data-slide="prev">
@@ -65,7 +67,7 @@
         </div>
     </div>
 </section>
-<section  style="margin-top: 15%;" class=" m-startimg" id="aboutMe">
+<section style="margin-top: 15%;" class=" m-startimg" id="aboutMe">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl">
@@ -105,7 +107,7 @@
         </div>
     </div>
 </section>
-<section  style="margin-top: 15%; background-image: url('@Url.Content("~/images/header-back.png")');" id="aboutWork" class="m-startimg">
+<section style="margin-top: 15%; background-image: url('@Url.Content("~/images/header-back.png")');" id="aboutWork" class="m-startimg">
     <div class="container-fluid" style="padding-top: 5%; padding-bottom: 5%;">
         <div class="row align-items-center justify-content-center">
             <h2>Как мы работаем с нашими клиентами</h2>
@@ -146,7 +148,7 @@
                 <div class="row justify-content-center align-items-center">
                     <p class="text-center ml-5">
                         <strong>
-                            Если вы требуется
+                            Если вам требуется
                             отремонтировать
                             ювелирное изделие
                         </strong>
@@ -262,7 +264,6 @@
                 <i class="ml-2">Мы изготавливаем украшение в течение 1-2 недель</i>
             </div>
             <div class="col-xl">
-
             </div>
         </div>
         <div class="row mt-4 ">
@@ -273,14 +274,12 @@
 
         <div class="row mt-4 ml-5">
             <div class="col-xl">
-
             </div>
             <div class="col-xl">
                 <i class="fa fa-money fa-2x"></i>
                 <i class="ml-2">Вы приезжаете в ювелирную мастерскую за украшением и оплачиваете работу</i>
             </div>
             <div class="col-xl">
-
             </div>
         </div>
     </div>

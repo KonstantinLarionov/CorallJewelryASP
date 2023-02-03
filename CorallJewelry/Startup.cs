@@ -41,13 +41,13 @@ namespace CorallJewelry
                 options.Cookie.IsEssential = true;
             });
             services.AddMvc();
-            services.AddDbContextPool<FrontendContext>(
+            /*services.AddDbContextPool<FrontendContext>(
                options => options.UseMySql("Server=localhost;Database=u0959678_coralljewelry;User=u0959_admcorall;Password=sOq2e&032;",
                    mySqlOptions =>
                    {
                        mySqlOptions.ServerVersion(new Version(5, 6, 45), ServerType.MySql);
                    }
-           ));
+           ));*/
             services.AddDbContextPool<BackendContext>(
               options => options.UseMySql("Server=localhost;Database=u0959678_coralljewelry;User=u0959_admcorall;Password=sOq2e&032;",
                   mySqlOptions =>

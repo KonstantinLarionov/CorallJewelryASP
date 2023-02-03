@@ -37,12 +37,12 @@ namespace CorallJewelry.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        /*private FrontendContext db { get; set; }*/
+        //private FrontendContext db { get; set; }
         public HomeController(ILogger<HomeController> logger)
         {
-            /*db = new FrontendContext(new DbContextOptions<FrontendContext>());*/
+            //db = new FrontendContext(new DbContextOptions<FrontendContext>());
+            
             _logger = logger;
-           
         }
         public IActionResult Login()
         {
@@ -94,7 +94,7 @@ namespace CorallJewelry.Controllers
             AllExecutors.ContactExecutor.SendRequest(contact, message);
 
             var telega = new Telegram("1001206813:AAFdrMx5RTZy71AKbBy5OVO6FHfyeXNBP4g");
-            telega.SendMessage("У вас новый заявка! Проверьте Панель администратора...", "1072967682");
+            telega.SendMessage("У вас новая заявка! Проверьте Панель администратора...", "1072967682");
             telega.SendMessage("Ссылка в панель: https://korall56.ru/Admin/Requests", "1072967682");
 
             return View(AllExecutors.ContactExecutor.GetModel());

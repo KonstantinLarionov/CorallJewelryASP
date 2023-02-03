@@ -109,7 +109,7 @@ namespace ChatModule
         }
 
 
-        /// <summary>
+        /// <summary>   
         /// AdminHandleMessage
         /// </summary>
         /// <param name="dialogId">Where recieve message</param>

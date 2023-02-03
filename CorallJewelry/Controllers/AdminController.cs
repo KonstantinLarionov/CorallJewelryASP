@@ -164,13 +164,14 @@ namespace CorallJewelry.Controllers
             if (action == "edit")
             {
 
-                AllExecutors.ProductsExecutor.EditProduct(id, images, name, about, price, weight, stone, metall, type, video);
+                AllExecutors.ProductsExecutor.EditProduct(id, images, name, about, price, weight, stone, metall, type, video);                
             }
             else if (action == "delete")
             {
                 AllExecutors.ProductsExecutor.DeleteProduct(id);
             }
             var model = AllExecutors.ProductsExecutor.GetProducts("all");
+            
             return View("Products", model);
         }
         #endregion

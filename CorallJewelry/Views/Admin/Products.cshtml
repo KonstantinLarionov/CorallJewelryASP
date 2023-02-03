@@ -69,7 +69,6 @@
                                                 <option value="Подвески">Подвески</option>
                                                 <option value="Серьги">Серьги</option>
                                                 <option value="Изделия из дерева">Изделия из дерева</option>
-
                                             </select>
 
                                         </td>
@@ -93,9 +92,10 @@
                                 <td><textarea style="width: 150px;" type="text" name="about" class="form-control">@Model[i].About</textarea></td>
                                 <td><textarea style="width: 150px;" type="text" name="video" class="form-control">@Model[i].Video</textarea></td>
                                 <td>
+                                                <input onclick="" style="width: 200px;" type="file" name="images" class="p-0" multiple/>
                                     @for (int k = 0; k < @Model[i].Images.Count; k++)
                                     {
-                                        <img width="20" height="20" src="~/products/@Model[i].Images[k].Name" />
+                                        <img width="50" height="50" src="~/products/@Model[i].Images[k].Name" />
                                     }
                                 </td>
                                 <td>
@@ -110,6 +110,33 @@
                                                 break;
                                             case "Кресты":
                                                 <option selected value="Кресты">Кресты</option>
+                                                break;
+                                            case "Пирсинг":
+                                                <option selected value="Пирсинг">Пирсинг</option>
+                                                break;
+                                            case "Сувениры":
+                                                <option selected value="Сувениры">Сувениры</option>
+                                                break;
+                                            case "3D модели":
+                                                <option selected value="3D модели">3D модели</option>
+                                                break;
+                                            case "Гравировка":
+                                                <option selected value="Гравировка">Гравировка</option>
+                                                break;
+                                            case "ЧПУ фрезеровка":
+                                                <option selected value="ЧПУ фрезеровка">ЧПУ фрезеровка</option>
+                                                break;
+                                            case "Эмалирование":
+                                                <option selected value="Эмалирование">Эмалирование</option>
+                                                break;
+                                            case "Гальваника":
+                                                <option selected value="Гальваника">Гальваника</option>
+                                                break;
+                                            case "Броши":
+                                                <option selected value="Броши">Броши</option>
+                                                break;
+                                            case "Пряжки":
+                                                <option selected value="Пряжки">Пряжки</option>
                                                 break;
                                             case "Запонки":
                                                 <option selected value="Запонки">Запонки</option>
@@ -131,6 +158,9 @@
                                                 break;
                                             case "Серьги":
                                                 <option selected value="Серьги">Серьги</option>
+                                                break;
+                                            case "Изделия из дерева":
+                                                <option selected value="Изделия из дерева">Изделия из дерева</option>
                                                 break;
                                             default:
                                                 break;
@@ -155,7 +185,6 @@
                                         <option value="Подвески">Подвески</option>
                                         <option value="Серьги">Серьги</option>
                                         <option value="Изделия из дерева">Изделия из дерева</option>
-
                                     </select>
                                 </td>
                                 <td>
@@ -179,5 +208,6 @@
             alert();
             window.location = window.location.href.split('?')[0] + "?category=" + this.value
         });
+        return;
     });
 </script>
