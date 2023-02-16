@@ -25,8 +25,8 @@ namespace CorallJewelry.Entitys
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseMySql("Server=localhost;Database=u1810457_coralljewelry;User=u1810457_corall;Password=ZT5U2b2pSU4Zalnc;Zero Datetime=True");
-            optionsBuilder.UseMySql("Server=localhost;Database=u1810457_default;User=u1810_457default;Password=ZT5U2b2pSU4Zalnc;ZeroDatetime=True");
+            optionsBuilder.UseMySql("Server=localhost;Database=u1810457_coralljewelry;User=u1810457_corall;Password=sOq2e&032;Zero Datetime=True");
+            //optionsBuilder.UseMySql("Server=localhost;Database=u1810457_default;User=u1810_457default;Password=ZT5U2b2pSU4Zalnc;ZeroDatetime=True");
             //optionsBuilder.UseMySql("Server=localhost;Database=u0959678_coralljewelry;User=root;Password=root;Convert Zero Datetime=True");
             //optionsBuilder.UseMySql("Server=localhost;Database=u1810457_coralljewelry;User=root;Password=root;ConvertZeroDatetime=True");
             base.OnConfiguring(optionsBuilder);
