@@ -97,11 +97,11 @@ namespace CorallJewelry.Controllers
             ViewData["idCatalog"] = id;
             return View(AllExecutors.CatalogsExecutor.GetCategories(id));
         }
-        public IActionResult Items(int id,string name)
+        public IActionResult Items(int id, string name)
         {
             ViewData["idCatalog"] = id;
             ViewData["nameCateg"] = name;
-            return View(AllExecutors.CatalogsExecutor.GetItems(id,name));
+            return View(AllExecutors.CatalogsExecutor.GetItems(id, name));
         }
         public IActionResult Prices()
         {
@@ -127,6 +127,7 @@ namespace CorallJewelry.Controllers
         }
         #endregion
 
+
         #region PostProduct
         [HttpPost]
         public IActionResult Login(string login, string password)
@@ -136,7 +137,7 @@ namespace CorallJewelry.Controllers
                 HttpContext.Response.Cookies.Append("login", login);
                 HttpContext.Response.Cookies.Append("password", password);
                 var model = AllExecutors.ProductsExecutor.GetProducts("all");
-                return View("Products",model);
+                return View("Products", model);
             }
             else
             {
@@ -150,12 +151,15 @@ namespace CorallJewelry.Controllers
             {
                 return View("Login");
             }
-            AllExecutors.ProductsExecutor.AddProducts(images, name, about, price, weight, stone, metall, type, video);
+            AllExecutors.ProductsExecutor addProducts = new AllExecutors.ProductsExecutor();
+            addProducts.AddProducts(images, name, about, price, weight, stone, metall, type, video);
+            //AllExecutors.ProductsExecutor.AddProducts(images, name, about, price, weight, stone, metall, type, video);
+            
             var model = AllExecutors.ProductsExecutor.GetProducts("all");
             return View("Products", model);
         }
         [HttpPost]
-        public IActionResult EditProducts(int id, List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type,string action, string video)
+        public IActionResult EditProducts(int id, List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type, string action, string video)
         {
             if (!Auth())
             {
@@ -163,15 +167,21 @@ namespace CorallJewelry.Controllers
             }
             if (action == "edit")
             {
-
-                AllExecutors.ProductsExecutor.EditProduct(id, images, name, about, price, weight, stone, metall, type, video);                
+                AllExecutors.ProductsExecutor edidtProduct = new AllExecutors.ProductsExecutor();
+                edidtProduct.EditProduct(id, images, name, about, price, weight, stone, metall, type, video);
+                //AllExecutors.ProductsExecutor.EditProduct(id, images, name, about, price, weight, stone, metall, type, video);
             }
             else if (action == "delete")
             {
-                AllExecutors.ProductsExecutor.DeleteProduct(id);
+                //var loadedImages = images.Where(x=>x.FileName == );
+                AllExecutors.ProductsExecutor.DeleteProduct(id, images);
+            }
+            else if (Convert.ToInt32(action) >= 0)
+            {
+                AllExecutors.ProductsExecutor.DeleteImage(Convert.ToInt32(action));
             }
             var model = AllExecutors.ProductsExecutor.GetProducts("all");
-            
+
             return View("Products", model);
         }
         #endregion
@@ -184,7 +194,7 @@ namespace CorallJewelry.Controllers
             {
                 return View("Login");
             }
-            AllExecutors.ContactExecutor.EditContact(EmailInfo,PhoneInfo,VKLink,OKLink,InstagramLink,addressT,addressS);
+            AllExecutors.ContactExecutor.EditContact(EmailInfo, PhoneInfo, VKLink, OKLink, InstagramLink, addressT, addressS);
             var model = AllExecutors.ContactExecutor.GetContact();
             return View("Contacts", model);
         }
@@ -208,7 +218,7 @@ namespace CorallJewelry.Controllers
             {
                 return View("Login");
             }
-            AllExecutors.PriceExecutor.AddPrice(idList,name,price);
+            AllExecutors.PriceExecutor.AddPrice(idList, name, price);
             var model = AllExecutors.PriceExecutor.GetAllPriceLists();
             return View("Prices", model);
         }
@@ -243,7 +253,7 @@ namespace CorallJewelry.Controllers
             }
             AllExecutors.RequestExecutor.DeleteRequest(id);
             var model = AllExecutors.RequestExecutor.GetRequest();
-            return View("Requests",model);
+            return View("Requests", model);
         }
         #endregion
 
@@ -337,8 +347,8 @@ namespace CorallJewelry.Controllers
         {
             ViewData["idCatalog"] = id;
             ViewData["nameCateg"] = nameCat;
-            AllExecutors.CatalogsExecutor.AddItem(id,nameCat,images,name,article,about,price);
-            return View("Items", AllExecutors.CatalogsExecutor.GetItems(id,nameCat));
+            AllExecutors.CatalogsExecutor.AddItem(id, nameCat, images, name, article, about, price);
+            return View("Items", AllExecutors.CatalogsExecutor.GetItems(id, nameCat));
         }
         [HttpPost]
         public IActionResult EditItem(int id, int idItem, string nameCat, string name, double price, string article, string about, IFormFile images, string action)
@@ -351,10 +361,10 @@ namespace CorallJewelry.Controllers
             }
             else if (action == "edit")
             {
-                AllExecutors.CatalogsExecutor.EditItem(idItem,  nameCat,  name,  price,  article,  about);
+                AllExecutors.CatalogsExecutor.EditItem(idItem, nameCat, name, price, article, about);
             }
-           
-            return View("Items",AllExecutors.CatalogsExecutor.GetItems(id,nameCat));
+
+            return View("Items", AllExecutors.CatalogsExecutor.GetItems(id, nameCat));
         }
         #endregion
 

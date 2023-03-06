@@ -14,13 +14,14 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 namespace CorallJewelry.Controllers.Executors.Admin
 {
-    public static class AllExecutors
+    public class AllExecutors
     {
         private static BackendContext db { get; set; }
-        
+
         private static MainContext chat = new MainContext(new DbContextOptions<MainContext>());
         public static class LoginExecutor
         {
@@ -41,7 +42,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 }
             }
         }
-        public static class ProductsExecutor
+        public class ProductsExecutor
         {
             public static List<Product> GetProducts(string type)
             {
@@ -60,10 +61,11 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 return products;
             }
 
-            public static void AddProducts(List<IFormFile> images, string name, string about, double price, 
+            public void AddProducts(List<IFormFile> images, string name, string about, double price,
                 string weight, string stone, string metall, string type, string video)
             {
                 db = Accessor.GetDbContext();
+
                 List<CorallJewelry.Models.Image> imagesAdd = LoadImage(images);
 
                 Product product = new Product()
@@ -80,25 +82,46 @@ namespace CorallJewelry.Controllers.Executors.Admin
                     Date = DateTime.Now
                 };
                 db.Products.Add(product);
-                db.SaveChanges();                
+                db.SaveChanges();
             }
-
-            public static void DeleteProduct(int id)
+            public static void DeleteAllImagesFromProduct(int id)
             {
                 db = Accessor.GetDbContext();
+
+                var image = db.Image.Where(x => x.Id == id).FirstOrDefault();
+                db.Image.Remove(image);
+                db.SaveChanges();
+            }
+            public static void DeleteImage(int id)
+            {
+                db = Accessor.GetDbContext();
+                var image = db.Image.Where(x => x.Id == id).FirstOrDefault();
+                db.Image.Remove(image);
+                db.SaveChanges();
+            }
+            public static void DeleteProduct(int id, List<IFormFile> allImages)
+            {
+                db = Accessor.GetDbContext();
+                var products = db.Products.Where(x => x.Id == id).Include(y=>y.Images).FirstOrDefault();
+                for (int i = 0; i < products.Images.Count; i++)
+                {
+                    DeleteImage(products.Images[i].Id);
+                    //db.Image.Remove();
+                }
+                //foreach(var product in products)
                 var product = db.Products.Where(x => x.Id == id).FirstOrDefault();
                 db.Products.Remove(product);
                 db.SaveChanges();
             }
 
-            public static void EditProduct(int id, List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type, string video)
+            public void EditProduct(int id, List<IFormFile> images, string name, string about, double price, string weight, string stone, string metall, string type, string video)
             {
                 db = Accessor.GetDbContext();
                 db = new BackendContext(new DbContextOptions<BackendContext>());
 
 
                 var product = db.Products.Where(x => x.Id == id).FirstOrDefault();
-                
+
                 if (images != null && images.Count != 0)
                 {
                     var imagesAll = LoadImage(images);
@@ -115,25 +138,43 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 product.Date = DateTime.Now;
                 db.Products.Update(product);
                 db.SaveChanges();
-                
+
             }
-            private static List<CorallJewelry.Models.Image> LoadImage(List<IFormFile> images)
+            private List<CorallJewelry.Models.Image> LoadImage(List<IFormFile> images)
             {
                 db = Accessor.GetDbContext();
                 List<CorallJewelry.Models.Image> imagesAdd = new List<CorallJewelry.Models.Image>();
                 if (images != null && images.Count() != 0)
                 {
-                    foreach (var file in images)
+                    for (int i = 0; i < images.Count(); i++)
                     {
-                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\products_FULL", file.FileName);
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\products_FULL", images[i].FileName);
 
-                        using (var stream = new FileStream(path, FileMode.Create))
+                        if (!System.IO.File.Exists(path))
                         {
-                            file.CopyTo(stream);
+                            using (var stream = System.IO.File.Open(path, FileMode.Create))
+                            {
+                                images[i].CopyTo(stream);
+
+                            }
                         }
+                        
                         Resizer(path);
-                        imagesAdd.Add(new CorallJewelry.Models.Image() { Name = file.FileName });
+                        imagesAdd.Add(new CorallJewelry.Models.Image() { Name = images[i].FileName });
                     }
+                    //foreach (var file in images)
+                    //{
+                    //    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\products_FULL", file.FileName);
+
+                    //    using (var stream = new FileStream(path, FileMode.Create))
+                    //    {
+                    //        file.CopyTo(stream);
+                    //    }
+
+                    //    Resizer(path);
+                    //    imagesAdd.Add(new CorallJewelry.Models.Image() { Name = file.FileName });
+                    // 
+                    //}
                 }
                 return imagesAdd;
             }
@@ -195,7 +236,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
             public static void AddPrice(int idList, string name, string money)
             {
                 db = Accessor.GetDbContext();
-                db.PriceLists.Where(x => x.Id == idList).FirstOrDefault().Prices.Add(new Price() { Money = money, Name= name });
+                db.PriceLists.Where(x => x.Id == idList).FirstOrDefault().Prices.Add(new Price() { Money = money, Name = name });
                 db.SaveChanges();
             }
 
@@ -371,7 +412,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
             public static List<ItemCatalog> GetItems(int idCatalog, string name)
             {
                 db = Accessor.GetDbContext();
-                var items = db.Items.Where(x=>x.IdCatalog == idCatalog && x.NameCategory == name).Include(x=>x.Image).ToList();
+                var items = db.Items.Where(x => x.IdCatalog == idCatalog && x.NameCategory == name).Include(x => x.Image).ToList();
                 return items;
             }
             public static void AddItem(int idCatalog, string nameCategory, IFormFile image, string nameItem, string article, string about, string price)

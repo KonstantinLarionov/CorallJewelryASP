@@ -36,162 +36,167 @@
                             </thead>
                             <tbody>
                                 <form action="~/Admin/AddProduct" method="POST" enctype="multipart/form-data">
-                                    <tr>
-                                        <td><input style="width: 150px;" type="text" name="id" class="form-control" readonly value="" /></td>
-                                        <td><input style="width: 150px;" type="text" name="name" class="form-control" value="" /></td>
-                                        <td><input style="width: 150px;" type="text" name="price" class="form-control" value="" /></td>
+                                <tr>
+                                    <td><input style="width: 150px;" type="text" name="id" class="form-control" readonly value="" /></td>
+                                    <td><input style="width: 150px;" type="text" name="name" class="form-control" value="" /></td>
+                                    <td><input style="width: 150px;" type="text" name="price" class="form-control" value="" /></td>
 
-                                        <td><input style="width: 150px;" type="text" name="weight" class="form-control" value="" /></td>
-                                        <td><input style="width: 150px;" type="text" name="stone" class="form-control" value="" /></td>
-                                        <td><input style="width: 150px;" type="text" name="metall" class="form-control" value="" /></td>
-                                        <td><textarea style="width: 150px;" type="text" name="about" class="form-control"></textarea></td>
-                                        <td><textarea style="width: 150px;" type="text" name="video" class="form-control"></textarea></td>
-                                        <td><input onclick="" style="width: 200px;" type="file" name="images" class="p-0" multiple /></td>
-                                        <td>
-                                            <select class="custom-select" id="type" name="type">
-                                                <option selected="" value="Кольца">Кольца</option>
-                                                <option value="Цепи">Цепи</option>
-                                                <option value="Кресты">Кресты</option>
-                                                <option value="Пирсинг">Пирсинг</option>
-                                                <option value="Сувениры">Сувениры</option>
-                                                <option value="3D модели">3D модели</option>
-                                                <option value="Гравировка">Гравировка</option>
-                                                <option value="ЧПУ фрезеровка">ЧПУ фрезеровка</option>
-                                                <option value="Эмалирование">Эмалирование</option>
-                                                <option value="Гальваника">Гальваника</option>
-                                                <option value="Броши">Броши</option>
-                                                <option value="Пряжки">Пряжки</option>
-                                                <option value="Запонки">Запонки</option>
-                                                <option value="Брелки">Брелки</option>
-                                                <option value="Браслеты">Браслеты</option>
-                                                <option value="Значки">Значки</option>
-                                                <option value="Печатки">Печатки</option>
-                                                <option value="Подвески">Подвески</option>
-                                                <option value="Серьги">Серьги</option>
-                                                <option value="Изделия из дерева">Изделия из дерева</option>
-                                            </select>
+                                    <td><input style="width: 150px;" type="text" name="weight" class="form-control" value="" /></td>
+                                    <td><input style="width: 150px;" type="text" name="stone" class="form-control" value="" /></td>
+                                    <td><input style="width: 150px;" type="text" name="metall" class="form-control" value="" /></td>
+                                    <td><textarea style="width: 150px;" type="text" name="about" class="form-control"></textarea></td>
+                                    <td><textarea style="width: 150px;" type="text" name="video" class="form-control"></textarea></td>
+                                    <td><input onclick="" style="width: 200px;" type="file" name="images" class="p-0" multiple /></td>
+                                    <td>
+                                        <select class="custom-select" id="type" name="type">
+                                            <option selected="" value="Кольца">Кольца</option>
+                                            <option value="Цепи">Цепи</option>
+                                            <option value="Кресты">Кресты</option>
+                                            <option value="Пирсинг">Пирсинг</option>
+                                            <option value="Сувениры">Сувениры</option>
+                                            <option value="3D модели">3D модели</option>
+                                            <option value="Гравировка">Гравировка</option>
+                                            <option value="ЧПУ фрезеровка">ЧПУ фрезеровка</option>
+                                            <option value="Эмалирование">Эмалирование</option>
+                                            <option value="Гальваника">Гальваника</option>
+                                            <option value="Броши">Броши</option>
+                                            <option value="Пряжки">Пряжки</option>
+                                            <option value="Запонки">Запонки</option>
+                                            <option value="Брелки">Брелки</option>
+                                            <option value="Браслеты">Браслеты</option>
+                                            <option value="Значки">Значки</option>
+                                            <option value="Печатки">Печатки</option>
+                                            <option value="Подвески">Подвески</option>
+                                            <option value="Серьги">Серьги</option>
+                                            <option value="Изделия из дерева">Изделия из дерева</option>
+                                        </select>
 
-                                        </td>
-                                        <td><button type="submit" class="btn btn-icon btn-success mr-1"><i class="ft-check"></i></button></td>
-                                    </tr>
+                                    </td>
+                                    <td><button type="submit" class="btn btn-icon btn-success mr-1"><i class="ft-check"></i></button></td>
+                                </tr>
 
                                 </form>
                                 @for (int i = 0; i < Model.Count; i++)
                                 {
                                     using (Html.BeginForm("EditProducts", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                     {
-                            <tr>
-                                <td><input style="width: 150px;" type="text" name="id" class="form-control" value="@Model[i].Id" /></td>
+                                        <tr>
+                                            <td><input style="width: 150px;" type="text" name="id" class="form-control" value="@Model[i].Id" /></td>
 
-                                <td><input style="width: 150px;" type="text" name="name" class="form-control" value="@Model[i].Name" /></td>
-                                <td><input style="width: 150px;" type="text" name="price" class="form-control" value="@Model[i].Price" /></td>
+                                            <td><input style="width: 150px;" type="text" name="name" class="form-control" value="@Model[i].Name" /></td>
+                                            <td><input style="width: 150px;" type="text" name="price" class="form-control" value="@Model[i].Price" /></td>
 
-                                <td><input style="width: 150px;" type="text" name="weight" class="form-control" value="@Model[i].Weight" /></td>
-                                <td><input style="width: 150px;" type="text" name="stone" class="form-control" value="@Model[i].Stone" /></td>
-                                <td><input style="width: 150px;" type="text" name="metall" class="form-control" value="@Model[i].Metall" /></td>
-                                <td><textarea style="width: 150px;" type="text" name="about" class="form-control">@Model[i].About</textarea></td>
-                                <td><textarea style="width: 150px;" type="text" name="video" class="form-control">@Model[i].Video</textarea></td>
-                                <td>
-                                                <input onclick="" style="width: 200px;" type="file" name="images" class="p-0" multiple/>
-                                    @for (int k = 0; k < @Model[i].Images.Count; k++)
-                                    {
-                                        <img width="50" height="50" src="~/products/@Model[i].Images[k].Name" />
-                                    }
-                                </td>
-                                <td>
-                                    <select class="custom-select" id="type" name="type">
-                                        @switch (Model[i].Type)
-                                        {
-                                            case "Кольца":
-                                                <option selected value="Кольца">Кольца</option>
-                                                break;
-                                            case "Цепи":
-                                                <option selected value="Цепи">Цепи</option>
-                                                break;
-                                            case "Кресты":
-                                                <option selected value="Кресты">Кресты</option>
-                                                break;
-                                            case "Пирсинг":
-                                                <option selected value="Пирсинг">Пирсинг</option>
-                                                break;
-                                            case "Сувениры":
-                                                <option selected value="Сувениры">Сувениры</option>
-                                                break;
-                                            case "3D модели":
-                                                <option selected value="3D модели">3D модели</option>
-                                                break;
-                                            case "Гравировка":
-                                                <option selected value="Гравировка">Гравировка</option>
-                                                break;
-                                            case "ЧПУ фрезеровка":
-                                                <option selected value="ЧПУ фрезеровка">ЧПУ фрезеровка</option>
-                                                break;
-                                            case "Эмалирование":
-                                                <option selected value="Эмалирование">Эмалирование</option>
-                                                break;
-                                            case "Гальваника":
-                                                <option selected value="Гальваника">Гальваника</option>
-                                                break;
-                                            case "Броши":
-                                                <option selected value="Броши">Броши</option>
-                                                break;
-                                            case "Пряжки":
-                                                <option selected value="Пряжки">Пряжки</option>
-                                                break;
-                                            case "Запонки":
-                                                <option selected value="Запонки">Запонки</option>
-                                                break;
-                                            case "Брелки":
-                                                <option selected value="Брелки">Брелки</option>
-                                                break;
-                                            case "Браслеты":
-                                                <option selected value="Браслеты">Браслеты</option>
-                                                break;
-                                            case "Значки":
-                                                <option selected value="Значки">Значки</option>
-                                                break;
-                                            case "Печатки":
-                                                <option selected value="Печатки">Печатки</option>
-                                                break;
-                                            case "Подвески":
-                                                <option selected value="Подвески">Подвески</option>
-                                                break;
-                                            case "Серьги":
-                                                <option selected value="Серьги">Серьги</option>
-                                                break;
-                                            case "Изделия из дерева":
-                                                <option selected value="Изделия из дерева">Изделия из дерева</option>
-                                                break;
-                                            default:
-                                                break;
-                                        }
-                                        <option value="Кольца">Кольца</option>
-                                        <option value="Цепи">Цепи</option>
-                                        <option value="Кресты">Кресты</option>
-                                        <option value="Пирсинг">Пирсинг</option>
-                                        <option value="Сувениры">Сувениры</option>
-                                        <option value="3D модели">3D модели</option>
-                                        <option value="Гравировка">Гравировка</option>
-                                        <option value="ЧПУ фрезеровка">ЧПУ фрезеровка</option>
-                                        <option value="Эмалирование">Эмалирование</option>
-                                        <option value="Гальваника">Гальваника</option>
-                                        <option value="Броши">Броши</option>
-                                        <option value="Пряжки">Пряжки</option>
-                                        <option value="Запонки">Запонки</option>
-                                        <option value="Брелки">Брелки</option>
-                                        <option value="Браслеты">Браслеты</option>
-                                        <option value="Значки">Значки</option>
-                                        <option value="Печатки">Печатки</option>
-                                        <option value="Подвески">Подвески</option>
-                                        <option value="Серьги">Серьги</option>
-                                        <option value="Изделия из дерева">Изделия из дерева</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <button name="action" value="edit" type="submit" class="btn btn-icon btn-warning mr-1"><i class="ft-edit"></i></button>
-                                    <button name="action" value="delete" type="submit" class="btn btn-icon btn-danger mr-1"><i class="ft-delete"></i></button>
-                                </td>
-                            </tr>
+                                            <td><input style="width: 150px;" type="text" name="weight" class="form-control" value="@Model[i].Weight" /></td>
+                                            <td><input style="width: 150px;" type="text" name="stone" class="form-control" value="@Model[i].Stone" /></td>
+                                            <td><input style="width: 150px;" type="text" name="metall" class="form-control" value="@Model[i].Metall" /></td>
+                                            <td><textarea style="width: 150px;" type="text" name="about" class="form-control">@Model[i].About</textarea></td>
+                                            <td><textarea style="width: 150px;" type="text" name="video" class="form-control">@Model[i].Video</textarea></td>
+                                            <td>
+                                                <input onclick="" style="width: 200px;" type="file" name="images" class="p-0" multiple />
+                                                <div style="padding:5px; width:60px; display:inline;">
+                                                @for (int k = 0; k < @Model[i].Images.Count; k++)
+                                                {
+                                                    
+                                                        <img width="50" height="50" src="~/products/@Model[i].Images[k].Name" )" />
+                                                        <button name="action" value=@Model[i].Images[k].Id type="submit">X</button>
+                                                    
+                                                }
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <select class="custom-select" id="type" name="type">
+                                                    @switch (Model[i].Type)
+                                                    {
+                                                        case "Кольца":
+                                                            <option selected value="Кольца">Кольца</option>
+                                                            break;
+                                                        case "Цепи":
+                                                            <option selected value="Цепи">Цепи</option>
+                                                            break;
+                                                        case "Кресты":
+                                                            <option selected value="Кресты">Кресты</option>
+                                                            break;
+                                                        case "Пирсинг":
+                                                            <option selected value="Пирсинг">Пирсинг</option>
+                                                            break;
+                                                        case "Сувениры":
+                                                            <option selected value="Сувениры">Сувениры</option>
+                                                            break;
+                                                        case "3D модели":
+                                                            <option selected value="3D модели">3D модели</option>
+                                                            break;
+                                                        case "Гравировка":
+                                                            <option selected value="Гравировка">Гравировка</option>
+                                                            break;
+                                                        case "ЧПУ фрезеровка":
+                                                            <option selected value="ЧПУ фрезеровка">ЧПУ фрезеровка</option>
+                                                            break;
+                                                        case "Эмалирование":
+                                                            <option selected value="Эмалирование">Эмалирование</option>
+                                                            break;
+                                                        case "Гальваника":
+                                                            <option selected value="Гальваника">Гальваника</option>
+                                                            break;
+                                                        case "Броши":
+                                                            <option selected value="Броши">Броши</option>
+                                                            break;
+                                                        case "Пряжки":
+                                                            <option selected value="Пряжки">Пряжки</option>
+                                                            break;
+                                                        case "Запонки":
+                                                            <option selected value="Запонки">Запонки</option>
+                                                            break;
+                                                        case "Брелки":
+                                                            <option selected value="Брелки">Брелки</option>
+                                                            break;
+                                                        case "Браслеты":
+                                                            <option selected value="Браслеты">Браслеты</option>
+                                                            break;
+                                                        case "Значки":
+                                                            <option selected value="Значки">Значки</option>
+                                                            break;
+                                                        case "Печатки":
+                                                            <option selected value="Печатки">Печатки</option>
+                                                            break;
+                                                        case "Подвески":
+                                                            <option selected value="Подвески">Подвески</option>
+                                                            break;
+                                                        case "Серьги":
+                                                            <option selected value="Серьги">Серьги</option>
+                                                            break;
+                                                        case "Изделия из дерева":
+                                                            <option selected value="Изделия из дерева">Изделия из дерева</option>
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                    <option value="Кольца">Кольца</option>
+                                                    <option value="Цепи">Цепи</option>
+                                                    <option value="Кресты">Кресты</option>
+                                                    <option value="Пирсинг">Пирсинг</option>
+                                                    <option value="Сувениры">Сувениры</option>
+                                                    <option value="3D модели">3D модели</option>
+                                                    <option value="Гравировка">Гравировка</option>
+                                                    <option value="ЧПУ фрезеровка">ЧПУ фрезеровка</option>
+                                                    <option value="Эмалирование">Эмалирование</option>
+                                                    <option value="Гальваника">Гальваника</option>
+                                                    <option value="Броши">Броши</option>
+                                                    <option value="Пряжки">Пряжки</option>
+                                                    <option value="Запонки">Запонки</option>
+                                                    <option value="Брелки">Брелки</option>
+                                                    <option value="Браслеты">Браслеты</option>
+                                                    <option value="Значки">Значки</option>
+                                                    <option value="Печатки">Печатки</option>
+                                                    <option value="Подвески">Подвески</option>
+                                                    <option value="Серьги">Серьги</option>
+                                                    <option value="Изделия из дерева">Изделия из дерева</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button name="action" value="edit" type="submit" class="btn btn-icon btn-warning mr-1"><i class="ft-edit"></i></button>
+                                                <button name="action" value="delete" type="submit" class="btn btn-icon btn-danger mr-1"><i class="ft-delete"></i></button>
+                                            </td>
+                                        </tr>
                                     }
                                 }
                             </tbody>
@@ -210,4 +215,5 @@
         });
         return;
     });
+
 </script>
