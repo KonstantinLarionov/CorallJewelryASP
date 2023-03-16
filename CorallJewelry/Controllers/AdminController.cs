@@ -15,6 +15,7 @@ using System.Security.Cryptography;
 using afc_studio.Models.Entitys;
 using System.Text.Json;
 using ChatModule.Models.Chat.Entitys;
+using CorallJewelry.Controllers;
 
 namespace CorallJewelry.Controllers
 {

@@ -32,7 +32,7 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <button class="btn-block btn btn-outline-danger mb-4" data-toggle="collapse" data-target="#@Model.Catalogs[i].Id" aria-expanded="false" aria-controls="@Model.Catalogs[i].Id">@Model.Catalogs[i].Name</button>
+                                    <button class="btn-block btn btn-outline-danger mb-4" data-toggle="collapse" data-target="#@Model.Catalogs[i].Id" aria-expanded="false" aria-controls="@Model.Catalogs[i].Id" onclick=toggleShowAllCollapse()>@Model.Catalogs[i].Name</button>
                                 }
                                 else
                                 {
@@ -65,7 +65,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title">@Model.Items[i].Name</h5>
                                         <h6 class="card-text">@Model.Items[i].Price P</h6>
-                                       @* <a href="~/Home/Product?id=@Model.Items[i].Id" class="btn btn-outline-primary mt-2">Описание</a>*@
+                                        @* <a href="~/Home/Product?id=@Model.Items[i].Id" class="btn btn-outline-primary mt-2">Описание</a>*@
                                     </div>
                                 </div>
                             </div>
@@ -99,9 +99,9 @@
                 else
                 {
                     <div class="row mt-2 justify-content-center align-items-center">
-                        
-                            <h4>Выберите каталог и категорию <br><br> для того что бы загрузить и посмотреть работы!</h4>
-                        
+
+                        <h4>Выберите каталог и категорию <br><br> для того что бы загрузить и посмотреть работы!</h4>
+
                     </div>
                 }
 
@@ -110,3 +110,20 @@
         </div>
     </div>
 </section>
+<script>
+    function toggleShowAllCollapse() {
+        console.log(document.querySelectorAll(".collapse"));
+        var collapsedElements = document.querySelectorAll(".collapse");
+        var iterator = 0;
+        //не получилось убрать конфликт с другой функцией, поэтому приходится игнорировать первый элемент
+        collapsedElements.forEach(function (item) {
+            if (iterator == 0) {
+                console.log(iterator);
+                iterator = iterator + 1;
+            } else {
+                console.log(iterator);
+                item.classList.toggle("show");
+            }
+        });
+    }
+</script>

@@ -5,6 +5,7 @@ using CorallJewelry.Models;
 using CorallJewelry.Views.Home;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -102,7 +103,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
             public static void DeleteProduct(int id, List<IFormFile> allImages)
             {
                 db = Accessor.GetDbContext();
-                var products = db.Products.Where(x => x.Id == id).Include(y=>y.Images).FirstOrDefault();
+                var products = db.Products.Where(x => x.Id == id).Include(y => y.Images).FirstOrDefault();
                 for (int i = 0; i < products.Images.Count; i++)
                 {
                     DeleteImage(products.Images[i].Id);
@@ -158,7 +159,7 @@ namespace CorallJewelry.Controllers.Executors.Admin
 
                             }
                         }
-                        
+
                         Resizer(path);
                         imagesAdd.Add(new CorallJewelry.Models.Image() { Name = images[i].FileName });
                     }
@@ -383,16 +384,18 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 db = Accessor.GetDbContext();
                 var categ = db.Catalogs.Where(x => x.Id == id).Include(x => x.Category).FirstOrDefault();
                 return categ.Category;
+                
             }
             public static void AddCategory(int idCatalog, string name)
             {
                 db = Accessor.GetDbContext();
                 Category category = new Category()
                 {
-                    Name = name
+                    Name = name,
                 };
                 var catalog = db.Catalogs.Where(x => x.Id == idCatalog).FirstOrDefault();
-                catalog.Category.Add(category);
+                catalog.Category = new List<Category>{ category };
+                //catalog.Category.Add(category);
                 db.SaveChanges();
             }
             public static void RemoveCategory(int idCatalog, int idCategory)
@@ -402,8 +405,11 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 //var category = catolog.Category.Where(x => x.Id == idCategory).FirstOrDefault();
                 //catolog.Category.Remove(category);
                 //db.SaveChanges();
-                var catalog = db.Category.Where(x => x.Id == idCategory).FirstOrDefault();
-                db.Category.Remove(catalog);
+                var catalog = db.Category.Where(x => x.Id == idCategory).ToList();
+                foreach (var category in catalog)
+                {
+                    db.Category.Remove(category);
+                }
                 db.SaveChanges();
             }
             #endregion
@@ -437,7 +443,14 @@ namespace CorallJewelry.Controllers.Executors.Admin
             {
                 db = Accessor.GetDbContext();
                 var item = db.Items.Where(x => x.IdCatalog == idCatalog && x.NameCategory == nameCat && x.Name == name).FirstOrDefault();
-                db.Items.Remove(item);
+                var items = db.Items.Where(x => x.IdCatalog == idCatalog && x.NameCategory == nameCat && x.Name == name).Include(e => e.Image).FirstOrDefault();
+
+                /*foreach (var soloitem in items)
+                {
+                    db.Items.Remove(soloitem);
+                }*/
+                db.Image.Remove(items.Image[0]);
+                db.Items.Remove(items);
                 db.SaveChanges();
             }
             public static void EditItem(int id, string nameCat, string name, double price, string article, string about)
@@ -456,14 +469,17 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 {
                     foreach (var file in images)
                     {
-                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\products_FULL", file.FileName);
-
-                        using (var stream = new FileStream(path, FileMode.Create))
+                        if (file != null)
                         {
-                            file.CopyTo(stream);
+                            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\products_FULL", file.FileName);
+
+                            using (var stream = new FileStream(path, FileMode.Create))
+                            {
+                                file.CopyTo(stream);
+                            }
+                            Resizer(path);
+                            imagesAdd.Add(new CorallJewelry.Models.Image() { Name = file.FileName });
                         }
-                        Resizer(path);
-                        imagesAdd.Add(new CorallJewelry.Models.Image() { Name = file.FileName });
                     }
                 }
                 return imagesAdd;

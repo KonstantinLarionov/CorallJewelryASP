@@ -1360,7 +1360,7 @@ var Collapse = function ($$$1) {
    * ------------------------------------------------------------------------
    */
 
-
+    
   $$$1(document).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
     // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
     if (event.currentTarget.tagName === 'A') {
@@ -1377,12 +1377,15 @@ var Collapse = function ($$$1) {
       Collapse._jQueryInterface.call($target, config);
     });
   });
+  
+
   /**
    * ------------------------------------------------------------------------
    * jQuery
    * ------------------------------------------------------------------------
    */
 
+    
   $$$1.fn[NAME] = Collapse._jQueryInterface;
   $$$1.fn[NAME].Constructor = Collapse;
 
@@ -1393,6 +1396,7 @@ var Collapse = function ($$$1) {
 
   return Collapse;
 }($);
+
 
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.

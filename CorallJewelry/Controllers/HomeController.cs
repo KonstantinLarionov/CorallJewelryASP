@@ -12,6 +12,7 @@ using CorallJewelry.Models.FrontModel;
 using CorallJewelry.Controllers.Executors.Home;
 using System.Net;
 using afc_studio.Models.Entitys;
+using System.Net.Http;
 
 namespace CorallJewelry.Controllers
 {
@@ -20,17 +21,30 @@ namespace CorallJewelry.Controllers
         private string Token { get; set; }
         private string Api { get; set; } = "https://api.telegram.org/bot";
         private string MethodeSendMessage { get; set; } = "/sendMessage";
+        private string Chat { get; set; }
+        private HttpClient HttpClient { get; set; }
 
-        public Telegram(string token)
+        public Telegram(string token, string chat = "")
         {
+            HttpClient = new HttpClient();
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             Token = token;
+            Chat = chat;
         }
+        
+        /*
+        public void SendMessage1(string mess) =>
+            HttpClient
+                .GetAsync($"https://api.telegram.org/bot{Token}/sendMessage?chat_id={Chat}&text={mess}")
+                .GetAwaiter()
+                .GetResult();
+        */
 
         public void SendMessage(string text, string chatId)
         {
             using (var webClient = new WebClient())
             {
-                var response = webClient.DownloadString("https://afcstudio.ru/core/telegram.php?token=" + Token + "&text=" + text + "&chatid=" + chatId);
+                var response = webClient.DownloadString("https://api.telegram.org/bot" + Token + "/sendMessage?chat_id=" + chatId + "&text=" + text);
             }
         }
     }
@@ -41,7 +55,7 @@ namespace CorallJewelry.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             //db = new FrontendContext(new DbContextOptions<FrontendContext>());
-            
+
             _logger = logger;
         }
         public IActionResult Login()
@@ -69,7 +83,7 @@ namespace CorallJewelry.Controllers
         {
             return View(AllExecutors.ProductsExecutor.GetModel(type));
         }
-       
+
         public IActionResult Service()
         {
             return View(AllExecutors.ContactExecutor.GetModel());
@@ -85,7 +99,7 @@ namespace CorallJewelry.Controllers
         }
         public IActionResult CatalogItems(int id, string name)
         {
-            return View("Catalogs",AllExecutors.CatalogsExecutor.GetModel(id, name));
+            return View("Catalogs", AllExecutors.CatalogsExecutor.GetModel(id, name));
         }
 
         [HttpPost]
