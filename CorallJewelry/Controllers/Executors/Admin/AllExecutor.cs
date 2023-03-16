@@ -449,15 +449,36 @@ namespace CorallJewelry.Controllers.Executors.Admin
                 {
                     db.Items.Remove(soloitem);
                 }*/
-                db.Image.Remove(items.Image[0]);
+                foreach (var soloitem in items.Image)
+                {
+                    db.Image.Remove(soloitem);
+                }
+                //db.Image.Remove(items.Image[0]);
                 db.Items.Remove(items);
                 db.SaveChanges();
             }
-            public static void EditItem(int id, string nameCat, string name, double price, string article, string about)
+            public static void EditItem(int id, string nameCat, string name, double price, string article, string about, IFormFile image)
             {
                 db = Accessor.GetDbContext();
-                var item = db.Items.Where(x => x.Id == id).FirstOrDefault();
-                item.Name = name; item.Price = price.ToString(); item.Article = article; item.About = about;
+                var item = db.Items.Where(x => x.Id == id).Include(e=>e.Image).FirstOrDefault();
+                List<IFormFile> imgs = new List<IFormFile>();
+                imgs.Add(image);
+                item.Name = name; 
+                item.Price = price.ToString(); 
+                item.Article = article; 
+                item.About = about;
+                if (image != null)
+                {
+                    foreach (var soloitem in item.Image)
+                    {
+                        db.Image.Remove(soloitem);
+                    }
+                    db.SaveChanges();
+                    var imgList = LoadImage(imgs);
+
+                    item.Image = imgList;
+                }
+                db.Update(item);
                 db.SaveChanges();
             }
 

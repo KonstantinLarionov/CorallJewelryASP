@@ -109,7 +109,7 @@ namespace CorallJewelry.Controllers
 
             var telega = new Telegram("1001206813:AAFdrMx5RTZy71AKbBy5OVO6FHfyeXNBP4g");
             telega.SendMessage("У вас новая заявка! Проверьте Панель администратора...", "1072967682");
-            telega.SendMessage("Ссылка в панель: https://korall56.ru/Admin/Requests", "1072967682");
+            telega.SendMessage("Ссылка в панель: https://korall56.com/Admin/Requests", "1072967682");
 
             return View(AllExecutors.ContactExecutor.GetModel());
         }

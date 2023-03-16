@@ -70,10 +70,11 @@
                                                 {
                                                     @for (int k = 0; k < @Model[i].Image.Count; k++)
                                                     {
-                                                        <img width="20" height="20" src="~/products/@Model[i].Image[k].Name" />
+                                                        <img width="100" height="100" src="~/products/@Model[i].Image[k].Name" />
                                                     }
                                                 }
                                             </td>
+                                            <td><input onclick="" style="width: 200px;" type="file" name="images" class="p-0" multiple /></td>
                                             <td>
                                                 <button name="action" value="edit" type="submit" class="btn btn-icon btn-warning mr-1"><i class="ft-edit"></i></button>
                                                 <button name="action" value="delete" type="submit" class="btn btn-icon btn-danger mr-1"><i class="ft-delete"></i></button>

@@ -65,7 +65,8 @@
                                     <div class="card-body">
                                         <h5 class="card-title">@Model.Items[i].Name</h5>
                                         <h6 class="card-text">@Model.Items[i].Price P</h6>
-                                        @* <a href="~/Home/Product?id=@Model.Items[i].Id" class="btn btn-outline-primary mt-2">Описание</a>*@
+                                        <h6 class="card-text">@Model.Items[i].About</h6>
+                                         @*<a href="~/Home/Product?id=@Model.Items[i].Id" class="btn btn-outline-primary mt-2">Описание</a>*@
                                     </div>
                                 </div>
                             </div>
@@ -77,6 +78,7 @@
                                         <div class="card-body">
                                             <h5 class="card-title">@Model.Items[i + 1].Name</h5>
                                             <h6 class="card-text">@Model.Items[i + 1].Price P</h6>
+                                            <h6 class="card-text">@Model.Items[i+1].About</h6>
                                             @*<a href="~/Home/Product?id=@Model.Items[i + 1].Id" class="btn btn-outline-primary mt-2">Описание</a>*@
                                         </div>
                                     </div>
@@ -87,6 +89,7 @@
                                         <div class="card-body">
                                             <h5 class="card-title">@Model.Items[i + 2].Name</h5>
                                             <h6 class="card-text">@Model.Items[i + 2].Price P</h6>
+                                            <h6 class="card-text">@Model.Items[i+2].About</h6>
                                             @*<a href="~/Home/Product?id=@Model.Items[i + 2].Id" class="btn btn-outline-primary mt-2">Описание</a>*@
                                         </div>
                                     </div>

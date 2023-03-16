@@ -362,7 +362,7 @@ namespace CorallJewelry.Controllers
             }
             else if (action == "edit")
             {
-                AllExecutors.CatalogsExecutor.EditItem(idItem, nameCat, name, price, article, about);
+                AllExecutors.CatalogsExecutor.EditItem(idItem, nameCat, name, price, article, about, images);
             }
 
             return View("Items", AllExecutors.CatalogsExecutor.GetItems(id, nameCat));
