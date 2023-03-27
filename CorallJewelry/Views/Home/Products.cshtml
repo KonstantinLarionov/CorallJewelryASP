@@ -1,4 +1,8 @@
 ﻿@model CorallJewelry.Models.FrontModel.ProductsModel
+<head>
+    <script src="//code.jivo.ru/widget/vAnyCvQtOG" async></script>
+</head>
+
 <section class="mt-5">
     <div class="container-fluid ">
         <div class="row align-items-center mb-5 justify-content-center text-center">
@@ -53,47 +57,46 @@
                 </div>
             </div>
             <div class="col-xl-9">
-                @for (int i = 0; i < Model.Products.Count; i+=3)
+
+                @for (int i = 0; i < Model.Products.Count; i += 3)
                 {
-                <div class="row mt-2">
-                    <div class="col-xl">
-                        <div class="card shadow1dp" style="width: 16rem;">
+                    <div class="row mt-2">
+                        <div class="col-xl">
+                            <div class="card shadow1dp" style="width: 16rem;">
                                 <img class="card-img-top" src="~/products/@Model.Products[i].Images[0].Name" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">@Model.Products[i].Name</h5>
-                                <h6 class="card-text">@Model.Products[i].Price P</h6>
-                                <a href="~/Home/Product?id=@Model.Products[i].Id" class="btn btn-outline-primary mt-2">Описание</a>
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.Products[i].Name</h5>
+                                    <h6 class="card-text">@Model.Products[i].Price P</h6>
+                                    <a href="~/Home/Product?id=@Model.Products[i].Id" class="btn btn-outline-primary mt-2">Описание</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    @try
-                    {
-                    <div class="col-xl">
-                        <div class="card shadow1dp" style="width: 16rem;">
+                        @try
+                        {
+                            <div class="col-xl">
+                                <div class="card shadow1dp" style="width: 16rem;">
                                     <img class="card-img-top" src="~/products/@Model.Products[i + 1].Images[0].Name" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">@Model.Products[i + 1].Name</h5>
-                                <h6 class="card-text">@Model.Products[i + 1].Price P</h6>
-                                <a href="~/Home/Product?id=@Model.Products[i + 1].Id" class="btn btn-outline-primary mt-2">Описание</a>
+                                    <div class="card-body">
+                                        <h5 class="card-title">@Model.Products[i + 1].Name</h5>
+                                        <h6 class="card-text">@Model.Products[i + 1].Price P</h6>
+                                        <a href="~/Home/Product?id=@Model.Products[i + 1].Id" class="btn btn-outline-primary mt-2">Описание</a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-xl">
-                        <div class="card shadow1dp" style="width: 16rem;">
+                            <div class="col-xl">
+                                <div class="card shadow1dp" style="width: 16rem;">
                                     <img class="card-img-top" src="~/products/@Model.Products[i + 2].Images[0].Name" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">@Model.Products[i + 2].Name</h5>
-                                <h6 class="card-text">@Model.Products[i + 2].Price P</h6>
-                                <a href="~/Home/Product?id=@Model.Products[i + 2].Id" class="btn btn-outline-primary mt-2">Описание</a>
+                                    <div class="card-body">
+                                        <h5 class="card-title">@Model.Products[i + 2].Name</h5>
+                                        <h6 class="card-text">@Model.Products[i + 2].Price P</h6>
+                                        <a href="~/Home/Product?id=@Model.Products[i + 2].Id" class="btn btn-outline-primary mt-2">Описание</a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        }
+                        catch { }
                     </div>
-                    }
-                    catch { }
-                </div>
                 }
-
-
 
             </div>
         </div>
