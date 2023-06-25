@@ -13,6 +13,9 @@ using CorallJewelry.Controllers.Executors.Home;
 using System.Net;
 using afc_studio.Models.Entitys;
 using System.Net.Http;
+using System.Net.Mail;
+using CorallJewelry.Models.Helpers;
+using CorallJewelry.Models.Helpers.SocialApp.Services;
 
 namespace CorallJewelry.Controllers
 {
@@ -31,14 +34,6 @@ namespace CorallJewelry.Controllers
             Token = token;
             Chat = chat;
         }
-        
-        /*
-        public void SendMessage1(string mess) =>
-            HttpClient
-                .GetAsync($"https://api.telegram.org/bot{Token}/sendMessage?chat_id={Chat}&text={mess}")
-                .GetAwaiter()
-                .GetResult();
-        */
 
         public void SendMessage(string text, string chatId)
         {
@@ -47,6 +42,8 @@ namespace CorallJewelry.Controllers
                 var response = webClient.DownloadString("https://api.telegram.org/bot" + Token + "/sendMessage?chat_id=" + chatId + "&text=" + text);
             }
         }
+
+
     }
     public class HomeController : Controller
     {
@@ -105,13 +102,16 @@ namespace CorallJewelry.Controllers
         [HttpPost]
         public IActionResult Contact(string contact, string message)
         {
-            AllExecutors.ContactExecutor.SendRequest(contact, message);
+            //AllExecutors.ContactExecutor.SendRequest(contact, message);
 
             var telega = new Telegram("1001206813:AAFdrMx5RTZy71AKbBy5OVO6FHfyeXNBP4g");
-            telega.SendMessage("У вас новая заявка! Проверьте Панель администратора...", "1072967682");
-            telega.SendMessage("Ссылка в панель: https://korall56.com/Admin/Requests", "1072967682");
+            //telega.SendMessage("У вас новая заявка! Проверьте Панель администратора...", "1072967682");
+            //telega.SendMessage("Ссылка в панель: https://korall56.com/Admin/Requests", "1072967682");
 
-            return View(AllExecutors.ContactExecutor.GetModel());
+            EmailService emailService = new EmailService();
+            emailService.SendEmail(contact, message);
+
+            return View(AllExecutors.CatalogsExecutor.GetModel());
         }
 
         #region Service
